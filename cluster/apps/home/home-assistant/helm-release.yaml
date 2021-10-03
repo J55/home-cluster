@@ -31,7 +31,7 @@ spec:
       main:
         type: LoadBalancer
         externalIPs:
-          - "clabshires.${SECRET_DOMAIN}"
+          - "clabshires.com"
         externalTrafficPolicy: Local
     ingress:
       main:
@@ -62,13 +62,13 @@ spec:
       config:
         enabled: true
         existingClaim: home-assistant-config-v1
-    podAnnotations:
-      # backup.velero.io/backup-volumes: config
-      # pre.hook.backup.velero.io/container: fsfreeze
-      # pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/config"]'
-      # post.hook.backup.velero.io/container: fsfreeze
-      # post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/config"]'
-      secret.reloader.stakater.com/reload: "home-assistant"
+    # podAnnotations:
+    #   backup.velero.io/backup-volumes: config
+    #   pre.hook.backup.velero.io/container: fsfreeze
+    #   pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/config"]'
+    #   post.hook.backup.velero.io/container: fsfreeze
+    #   post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/config"]'
+    #   secret.reloader.stakater.com/reload: "home-assistant"
     addons:
       codeserver:
         enabled: true
@@ -108,11 +108,11 @@ spec:
       limits:
         memory: 4000Mi
     # additionalContainers:
-      # fsfreeze:
-      #   name: fsfreeze
-      #   image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
-      #   volumeMounts:
-      #     - name: config
-      #       mountPath: /config
-      #   securityContext:
-      #     privileged: true
+    #   fsfreeze:
+    #     name: fsfreeze
+    #     image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
+    #     volumeMounts:
+    #       - name: config
+    #         mountPath: /config
+    #     securityContext:
+    #       privileged: true
