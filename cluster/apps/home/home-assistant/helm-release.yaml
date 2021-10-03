@@ -61,7 +61,7 @@ spec:
     persistence:
       config:
         enabled: true
-        # existingClaim: home-assistant-config-v1
+        existingClaim: home-assistant-config
     # podAnnotations:
     #   backup.velero.io/backup-volumes: config
     #   pre.hook.backup.velero.io/container: fsfreeze
