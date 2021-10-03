@@ -1,0 +1,11 @@
+---
+creation_rules:
+  - path_regex: provision/.*\.sops\.ya?ml
+    unencrypted_regex: "^(kind)$"
+    pgp: >-
+      06588319109A209D639CCE51602B7725DFBDA31B
+  - path_regex: cluster/.*\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    pgp: >-
+      ED8F65FD9F30E887BE82A5A361425CB8C94EE488,
+      06588319109A209D639CCE51602B7725DFBDA31B
