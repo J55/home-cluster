@@ -22,9 +22,9 @@ spec:
       tag: 2021.9.7
     env:
       TZ: "America/New_York"
-    envFrom:
-      - secretRef:
-          name: home-assistant
+    # envFrom:
+    #   - secretRef:
+    #       name: home-assistant
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
     service:
