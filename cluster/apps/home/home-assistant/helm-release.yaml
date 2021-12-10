@@ -50,7 +50,7 @@ spec:
                 pathType: Prefix
         tls:
           - hosts:
-              - "hass.${SECRET_DOMAIN}"
+              - "hass.${SECRET_HOME_DOMAIN}"
     probes:
       liveness:
         enabled: false
