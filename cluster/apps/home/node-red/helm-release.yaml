@@ -22,7 +22,7 @@ spec:
   values:
     initContainers:
       npm-update-modules:
-        image: node:17-buster-slim@sha256:f1d93709258ae5882ba0f2e050973e0bd853be7de1ffba9ece0542eec4fa0f54
+        image: node:17-buster-slim@sha256:a316b46ecaacf148acedf0eb85e8e926dba29a753d4ead26b1145376dc57f6b3
         command: ["npm", "update", "--verbose"]
         workingDir: /data
         volumeMounts:
