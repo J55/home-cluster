@@ -51,6 +51,7 @@ spec:
         tls:
           - hosts:
               - "node-red.${SECRET_DOMAIN}"
+            secretName: "node-red-tls"
     persistence:
       config:
         enabled: true
