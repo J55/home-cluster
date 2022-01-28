@@ -25,7 +25,7 @@ spec:
       tag: 1.22.2
     env:
       TZ: America/New_York
-      ZIGBEE2MQTT_DATA: /dev
+      ZIGBEE2MQTT_DATA: /dev/bus/usb/001/003
     ingress:
       main:
         enabled: true
