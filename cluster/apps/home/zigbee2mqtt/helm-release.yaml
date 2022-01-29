@@ -25,7 +25,7 @@ spec:
       tag: 1.22.2
     env:
       TZ: America/New_York
-      ZIGBEE2MQTT_DATA: /dev
+      ZIGBEE2MQTT_DATA: /dev/bus/usb/001/003
     ingress:
       main:
         enabled: true
@@ -43,7 +43,7 @@ spec:
       config:
         enabled: true
         existingClaim: zigbee2mqtt-config-v1
-        mountPath: "/dev"
+        mountPath: "/dev/bus/usb/001/003"
     # These config values are not what is my current state of zigbee2mqtt
     # It's merely a guide for the initial start up on a fresh install
     # Everything after the first start is managed in the UI
@@ -58,7 +58,7 @@ spec:
         user: "${SECRET_MQTT_USERNAME}"
         password: "${SECRET_MQTT_PASSWORD}"
       serial:
-        port: "tcp://192.168.1.90:6638"
+        port: "/dev/bus/usb/001/003"
       advanced:
         log_output:
           - console
