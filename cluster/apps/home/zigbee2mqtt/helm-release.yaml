@@ -58,28 +58,11 @@ spec:
         user: "${SECRET_MQTT_USERNAME}"
         password: "${SECRET_MQTT_PASSWORD}"
       serial:
-        port: /dev/ttyUSB0
+        port: "tcp://192.168.1.90:6638"
       advanced:
         log_output:
           - console
-        network_key:
-          - 204
-          - 61
-          - 75
-          - 23
-          - 44
-          - 230
-          - 24
-          - 203
-          - 53
-          - 5
-          - 248
-          - 32
-          - 50
-          - 84
-          - 44
-          - 159
+        network_key: GENERATE
+        pan_id: GENERATE
       frontend:
         port: 8080
-      experimental:
-        new_api: true
