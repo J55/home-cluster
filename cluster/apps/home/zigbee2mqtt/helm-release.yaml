@@ -38,7 +38,7 @@ spec:
         tls:
           - hosts:
               - "zigbee2mqtt.${SECRET_DOMAIN}"
-            secretName: "zigbee2mqtt-tls"
+            secretName: zigbee2mqtt-tls
     persistence:
       config:
         enabled: true
