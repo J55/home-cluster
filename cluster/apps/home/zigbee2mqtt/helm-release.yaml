@@ -58,7 +58,7 @@ spec:
         user: "${SECRET_MQTT_USERNAME}"
         password: "${SECRET_MQTT_PASSWORD}"
       serial:
-        port: /dev/ttyUSB0 #"tcp://192.168.1.90:6638"
+        port: "tcp://192.168.0.242:1883"
       advanced:
         log_output:
           - console
