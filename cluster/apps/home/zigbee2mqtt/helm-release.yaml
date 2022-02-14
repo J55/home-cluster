@@ -25,7 +25,7 @@ spec:
       tag: 1.23.0
     env:
       TZ: America/New_York
-      ZIGBEE2MQTT_DATA: /dev/ttyUSB0
+      ZIGBEE2MQTT_DATA: /data
     ingress:
       main:
         enabled: true
@@ -43,10 +43,10 @@ spec:
       config:
         enabled: true
         existingClaim: zigbee2mqtt-config-v1
-        mountPath: "/dev/ttyUSB0"
+        mountPath: "/data"
     # These config values are not what is my current state of zigbee2mqtt
     # It's merely a guide for the initial start up on a fresh install
-    # Everything after the first start is managed in the UI "tcp://192.168.0.242:1883" "/dev/sda2"
+    # Everything after the first start is managed in the UI
     config:
       homeassistant: true
       device_options:
