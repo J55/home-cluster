@@ -46,7 +46,7 @@ spec:
         mountPath: "/data"
     # These config values are not what is my current state of zigbee2mqtt
     # It's merely a guide for the initial start up on a fresh install
-    # Everything after the first start is managed in the UI "tcp://192.168.0.242:1883"
+    # Everything after the first start is managed in the UI "tcp://192.168.0.242:1883" "/dev/sda2"
     config:
       homeassistant: true
       device_options:
@@ -58,7 +58,7 @@ spec:
         user: "${SECRET_MQTT_USERNAME}"
         password: "${SECRET_MQTT_PASSWORD}"
       serial:
-        port: "/dev/sda2"
+        port: "/dev/ttyUSB0"
       advanced:
         log_output:
           - console
