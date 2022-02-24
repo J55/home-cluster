@@ -3606,7 +3606,7 @@ spec:
                 - bitbucket
                 - harbor
                 - dockerhub
-                # - quay
+                - quay
                 - gcr
                 - nexus
                 - acr
