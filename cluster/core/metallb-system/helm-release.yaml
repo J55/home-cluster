@@ -29,6 +29,6 @@ spec:
           protocol: layer2
           addresses:
             - "${METALLB_LB_RANGE}"
-    speaker:
-      frr:
-        enabled: false
+    # speaker:
+    #   frr:
+    #     enabled: false
