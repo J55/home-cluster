@@ -5,4 +5,4 @@ resources:
   - home-assistant
   - mosquitto
   - node-red
-  # - zigbee2mqtt
+  - zigbee2mqtt
