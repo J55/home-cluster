@@ -23,10 +23,10 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs:
+        # externalIPs:
           # - "${SVC_MOSQUITTO_ADDR}"
-        # loadBalancerIP:
-          # - "${SVC_MOSQUITTO_ADDR}"
+        loadBalancerIP:
+          - "${SVC_MOSQUITTO_ADDR}"
         externalTrafficPolicy: Local
     auth:
       enabled: true
