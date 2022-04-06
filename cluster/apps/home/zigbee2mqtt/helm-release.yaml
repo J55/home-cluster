@@ -58,8 +58,7 @@ spec:
         user: "${SECRET_MQTT_USERNAME}"
         password: "${SECRET_MQTT_PASSWORD}"
       serial:
-        port: /dev/ttyACM0
-        adapter: deconz
+        port: /dev/ttyUSB0
       advanced:
         log_output:
           - console
