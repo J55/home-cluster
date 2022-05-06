@@ -47,7 +47,7 @@ spec:
       usb:
         enabled: true
         type: hostPath
-        hostPath: /dev/ttyUSB0
+        hostPath: "/dev/ttyUSB0"
         # hostPathType: CharDevice
     # These config values are not what is my current state of zigbee2mqtt
     # It's merely a guide for the initial start up on a fresh install
@@ -63,7 +63,7 @@ spec:
         user: "${SECRET_MQTT_USERNAME}"
         password: "${SECRET_MQTT_PASSWORD}"
       serial:
-        port: /dev/ttyUSB.CC2531-01
+        port: "/dev/ttyUSB.CC2531-01"
       advanced:
         log_output:
           - console
