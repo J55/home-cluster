@@ -27,8 +27,6 @@ spec:
           env:
             - name: vip_arp
               value: "true"
-            - name: vip_interface
-              value: "{{ kubevip_interface }}"
             - name: port
               value: "6443"
             - name: vip_cidr
@@ -65,11 +63,11 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                - key: node-role.kubernetes.io/master
-                  operator: Exists
+                  - key: node-role.kubernetes.io/master
+                    operator: Exists
               - matchExpressions:
-                - key: node-role.kubernetes.io/control-plane
-                  operator: Exists
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: Exists
       tolerations:
         - effect: NoSchedule
           operator: Exists
