@@ -5,17 +5,16 @@ metadata:
   name: home-assistant
   namespace: home
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: home-assistant
-      version: 13.3.0
+      chart: kah-common-chart
+      version: 1.1.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
         namespace: flux-system
-      interval: 5m
+      interval: 15m
   install:
     createNamespace: true
     remediation:
@@ -24,22 +23,26 @@ spec:
     remediation:
       retries: 5
   values:
+    global:
+      nameOverride: *app
     image:
-      repository: ghcr.io/home-assistant/home-assistant
-      tag: 2022.3.8
+      repository: ghcr.io/onedr0p/home-assistant
+      tag: 2022.7.2@sha256:807a7400ba20ffcdb8c800e444dbdd451d5f8cc0c44826e1470c8ec7a683882f
     env:
       TZ: "${TIMEZONE}"
+      PYTHONUSERBASE: /config/deps
     # envFrom:
     #   - secretRef:
-    #       name: home-assistant
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
+    #       name: *app
     service:
       main:
         type: LoadBalancer
-        externalIPs:
-          # - "${SVC_HOME_ASSISTANT_ADDR}"
+        # externalIPs:
+        #   - "${SVC_HOME_ASSISTANT_ADDR}"
         externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8123
     ingress:
       main:
         enabled: true
@@ -47,9 +50,6 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
           external-dns/is-public: "true"
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "home-assistant"
-          cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
           - host: "hass.${SECRET_DOMAIN}"
             paths:
@@ -66,25 +66,27 @@ spec:
         enabled: false
       startup:
         enabled: false
+    # podSecurityContext:
+    #   runAsUser: 568
+    #   runAsGroup: 568
+    #   fsGroup: 568
+    #   fsGroupChangePolicy: "OnRootMismatch"
+    #   supplementalGroups:
+    #     - 100
     persistence:
       config:
         enabled: true
         existingClaim: home-assistant-config-v1
     # podAnnotations:
-    #   backup.velero.io/backup-volumes: config
-    #   pre.hook.backup.velero.io/container: fsfreeze
-    #   pre.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--freeze", "/config"]'
-    #   post.hook.backup.velero.io/container: fsfreeze
-    #   post.hook.backup.velero.io/command: '["/sbin/fsfreeze", "--unfreeze", "/config"]'
-    #   secret.reloader.stakater.com/reload: "home-assistant"
+    #   secret.reloader.stakater.com/reload: *app
     # addons:
     #   codeserver:
     #     enabled: true
     #     image:
-    #       repository: ghcr.io/k8s-at-home/code-server
-    #       tag: v3.12.0
-    #     git:
-    #       deployKeySecret: code-server
+    #       repository: docker.io/codercom/code-server
+    #       tag: 4.4.0
+    #     env:
+    #       TZ: "${TIMEZONE}"
     #     workingDir: "/config"
     #     args:
     #       - --auth
@@ -93,34 +95,28 @@ spec:
     #       - "/config/.vscode"
     #       - --extensions-dir
     #       - "/config/.vscode"
-    #     ingress:
-    #       enabled: true
-    #       ingressClassName: "traefik"
-    #       annotations:
-    #         traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    #       hosts:
-    #         - host: "hass-config.${SECRET_HOME_DOMAIN}"
-    #           paths:
-    #             - path: /
-    #               pathType: Prefix
-    #       tls:
-    #         - hosts:
-    #             - "hass-config.${SECRET_HOME_DOMAIN}"
-    #     volumeMounts:
-    #       - name: config
-    #         mountPath: /config
+        # ingress:
+        #   enabled: true
+        #   ingressClassName: "nginx"
+        #   hosts:
+        #     - host: &host-release-code "{{ .Release.Name }}-code.${SECRET_PUBLIC_DOMAIN}"
+        #       paths:
+        #         - path: /
+        #           pathType: Prefix
+        #     - host: &host-custom-code "hass-code.${SECRET_PUBLIC_DOMAIN}"
+        #       paths:
+        #         - path: /
+        #           pathType: Prefix
+        #   tls:
+        #     - hosts:
+        #         - *host-release-code
+        #         - *host-custom-code
+        # volumeMounts:
+        #   - name: config
+        #     mountPath: /config
     resources:
       requests:
-        cpu: 100m
+        cpu: 10m
         memory: 100Mi
       limits:
-        memory: 4000Mi
-    # additionalContainers:
-    #   fsfreeze:
-    #     name: fsfreeze
-    #     image: ghcr.io/k8s-at-home/fsfreeze:v2.37-r0
-    #     volumeMounts:
-    #       - name: config
-    #         mountPath: /config
-    #     securityContext:
-    #       privileged: true
+        memory: 750Mi
