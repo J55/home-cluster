@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   # - hajimari
   # - home-assistant
-  - mosquitto
-  - namespace.yaml
+  # - mosquitto
+  # - namespace.yaml
   # - node-red
-  - zigbee2mqtt
+  # - zigbee2mqtt
