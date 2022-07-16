@@ -7,7 +7,7 @@ resources:
   - emqx-charts.yaml
   - external-dns.yaml
   - hajimari.yaml
-  - grafana.yaml
+  # - grafana.yaml
   - ingress-nginx.yaml
   - jetstack.yaml
   - k8s-at-home.yaml
