@@ -4,7 +4,8 @@ kind: Kustomization
 resources:
   - hajimari
   - home-assistant
-  - mosquitto
+  # - mosquitto
+  # - emqx
   - namespace.yaml
   - node-red
   # - zigbee2mqtt
