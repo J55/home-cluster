@@ -37,8 +37,8 @@ spec:
     service:
       main:
         type: LoadBalancer
-        externalIPs:
-          # - "${SVC_HOME_ASSISTANT_ADDR}"
+        LoadBalancerIP:
+          - "${SVC_HOME_ASSISTANT_ADDR}"
         externalTrafficPolicy: Local
     ingress:
       main:
@@ -98,17 +98,17 @@ spec:
     #       ingressClassName: "nginx"
     #       annotations:
     #       hosts:
-    #         - host: "hass-config.${SECRET_HOME_DOMAIN}"
+    #         - host: "hass-config.${SECRET_DOMAIN}"
     #           paths:
     #             - path: /
     #               pathType: Prefix
     #       tls:
     #         - hosts:
-    #             - "hass-config.${SECRET_HOME_DOMAIN}"
+    #             - "hass-config.${SECRET_DOMAIN}"
     #     volumeMounts:
     #       - name: config
     #         mountPath: /config
-    resources:
+    # resources:
       requests:
         cpu: 100m
         memory: 100Mi
