@@ -47,7 +47,7 @@ spec:
           - "emqx.${SECRET_DOMAIN}"
         tls:
           - hosts:
-              - *host
+              - "emqx.${SECRET_DOMAIN}"
     metrics:
       enabled: false
     persistence:
