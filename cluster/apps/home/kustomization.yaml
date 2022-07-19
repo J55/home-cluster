@@ -5,7 +5,7 @@ resources:
   - hajimari
   - home-assistant
   # - mosquitto
-  # - emqx
+  - emqx
   - namespace.yaml
   - node-red
   # - zigbee2mqtt
