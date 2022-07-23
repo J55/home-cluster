@@ -7,4 +7,4 @@ resources:
   - home
   - kube-system
   - networking
-  # - system-upgrade
+  - system-upgrade
