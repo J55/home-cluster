@@ -28,7 +28,7 @@ spec:
       namespace: home
   values:
     image:
-      repository: docker.io/koenkk/zigbee2mqtt
+      repository: ghcr.io/koenkk/zigbee2mqtt
       tag: 1.26.0
     env:
       TZ: "${TIMEZONE}"
