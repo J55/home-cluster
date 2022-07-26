@@ -54,7 +54,7 @@ spec:
       usb:
         enabled: true
         type: hostPath
-        hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
+        hostPath: /dev/ttyUSB0
         hostPathType: CharDevice
     # These config values are not what is my current state of zigbee2mqtt
     # It's merely a guide for the initial start up on a fresh install
@@ -70,7 +70,7 @@ spec:
         user: "${SECRET_MQTT_USERNAME}"
         password: "${SECRET_MQTT_PASSWORD}"
       serial:
-        port: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
+        port: /dev/ttyUSB0
       advanced:
         log_output:
           - console
