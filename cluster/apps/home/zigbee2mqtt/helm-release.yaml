@@ -31,34 +31,29 @@ spec:
       repository: ghcr.io/koenkk/zigbee2mqtt
       tag: 1.26.0
     env:
-      TZ: "${TIMEZONE}"
+      TZ: '${TIMEZONE}'
       ZIGBEE2MQTT_DATA: /data
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        ingressClassName: 'nginx'
+        annotations:
+          cert-manager.io/cluster-issuer: 'letsencrypt-production'
         hosts:
-          - host: "zigbee2mqtt.${SECRET_DOMAIN}"
+          - host: 'zigbee2mqtt.${SECRET_DOMAIN}'
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "zigbee2mqtt.${SECRET_DOMAIN}"
-            secretName: zigbee2mqtt-tls
+              - 'zigbee2mqtt.${SECRET_DOMAIN}'
+            secretName: 'zigbee2mqtt-tls'
+
     persistence:
       config:
         enabled: true
         existingClaim: zigbee2mqtt-config-v1
-        mountPath: "/data"
-      usb:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/ttyUSB0
-        hostPathType: CharDevice
-    # These config values are not what is my current state of zigbee2mqtt
-    # It's merely a guide for the initial start up on a fresh install
-    # Everything after the first start is managed in the UI
+        mountPath: '/data'
     config:
       homeassistant: true
       device_options:
@@ -66,15 +61,30 @@ spec:
       permit_join: false
       mqtt:
         base_topic: zigbee2mqtt
-        server: "tcp://192.168.0.242:1883"
-        user: "${SECRET_MQTT_USERNAME}"
-        password: "${SECRET_MQTT_PASSWORD}"
+        server: 'tcp://192.168.0.242:1883'
+        user: '${SECRET_MQTT_USERNAME}'
+        password: '${SECRET_MQTT_PASSWORD}'
       serial:
         port: /dev/ttyUSB0
       advanced:
         log_output:
           - console
-        network_key: GENERATE
-        pan_id: GENERATE
+        network_key:
+          - 204
+          - 61
+          - 75
+          - 23
+          - 44
+          - 230
+          - 24
+          - 203
+          - 53
+          - 5
+          - 248
+          - 32
+          - 50
+          - 84
+          - 44
+          - 159
       frontend:
         port: 8080
