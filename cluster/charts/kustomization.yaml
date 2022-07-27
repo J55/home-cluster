@@ -14,5 +14,6 @@ resources:
   - k8s-gateway.yaml
   - metallb.yaml
   - metrics-server.yaml
+  - node-feature-discovery.yaml
   - stakater.yaml
   - weaveworks-kured.yaml
