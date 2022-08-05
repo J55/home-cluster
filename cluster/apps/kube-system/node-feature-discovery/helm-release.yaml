@@ -22,6 +22,7 @@ spec:
     remediation:
       retries: 5
   values:
+    master.replicaCount: 2
     nodeFeatureRule:
       createCRD: false
     worker:
