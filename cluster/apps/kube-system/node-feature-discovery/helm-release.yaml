@@ -60,3 +60,9 @@ spec:
               matchOn:
                 - usbId:
                     vendor: ["1a6e", "18d1"]
+            - name: zigbee
+              matchOn:
+                - usbId:
+                    class: ["00"]
+                    vendor: ["10c4"]
+                    device: ["ea60"]
