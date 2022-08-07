@@ -19,6 +19,7 @@ spec:
   values:
     image:
       repository: tenstartups/ser2sock
+      tag: armhf
       imagePullPolicy: IfNotPresent
     env:
       TZ: "${TIMEZONE}"
