@@ -7,5 +7,4 @@ resources:
   - emqx
   - namespace.yaml
   - node-red
-  - ser2sock
   - zigbee2mqtt
