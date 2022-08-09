@@ -22,15 +22,8 @@ spec:
     remediation:
       retries: 5
   values:
-    master.replicaCount: 2
     nodeFeatureRule:
       createCRD: false
-    master:
-      tolerations:
-        - key: node-role.kubernetes.io/control-plane
-          operator: Exists
-        - key: node-role.kubernetes.io/master
-          operator: Exists
     worker:
       annotations:
         configmap.reloader.stakater.com/reload: node-feature-discovery-worker-conf
