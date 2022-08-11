@@ -51,13 +51,13 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "resistor-nodes"
         hosts:
-          - host: "node-red.${SECRET_DOMAIN}"
+          - host: &host "node-red.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "node-red.${SECRET_DOMAIN}"
+              - *host
             secretName: "node-red-tls"
     persistence:
       config:

@@ -51,13 +51,13 @@ spec:
           hajimari.io/icon: "home-assistant"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         hosts:
-          - host: "hass.${SECRET_DOMAIN}"
+          - host: &host "hass.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "hass.${SECRET_DOMAIN}"
+              - *host
             secretName: "hass-tls"
     probes:
       liveness:
@@ -89,13 +89,13 @@ spec:
           ingressClassName: "nginx"
           annotations:
           hosts:
-            - host: "hass-config.${SECRET_DOMAIN}"
+            - host: &host "hass-config.${SECRET_DOMAIN}"
               paths:
                 - path: /
                   pathType: Prefix
           tls:
             - hosts:
-                - "hass-config.${SECRET_DOMAIN}"
+                - *host
         volumeMounts:
           - name: config
             mountPath: /config
