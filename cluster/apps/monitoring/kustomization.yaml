@@ -5,5 +5,5 @@ resources:
   - goldilocks
   # - grafana
   - kube-prometheus-stack
-  - thanos
+  # - thanos
   - namespace.yaml
