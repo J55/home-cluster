@@ -5,15 +5,17 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 39.8.0
+      version: 39.9.0
       sourceRef:
         kind: HelmRepository
-        name: prometheus-community
+        name: prometheus-community-charts
         namespace: flux-system
+      interval: 5m
   install:
     createNamespace: true
     remediation:
@@ -22,6 +24,11 @@ spec:
     remediation:
       retries: 5
   values:
+    fullnameOverride: prom-stack
+    defaultRules:
+      enabled: true
+      rules:
+        kubeProxy: false
     alertmanager:
       config:
         global:
@@ -92,36 +99,19 @@ spec:
           - hosts:
               - *host
       alertmanagerSpec:
-        replicas: 3
-        podAntiAffinity: hard
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: "local-path"
               resources:
                 requests:
                   storage: 1Gi
     kube-state-metrics:
-      metricLabelsAllowlist:
-        - "persistentvolumeclaims=[*]"
-      prometheus:
-        monitor:
-          enabled: true
-          relabelings:
-            - action: replace
-              regex: (.*)
-              replacement: $1
-              sourceLabels:
-                - __meta_kubernetes_pod_node_name
-              targetLabel: kubernetes_node
+      fullnameOverride: kube-state-metrics
+    prometheus-node-exporter:
+      fullnameOverride: node-exporter
     grafana:
       enabled: false
       forceDeployDashboards: true
-      sidecar:
-        dashboards:
-          multicluster:
-            etcd:
-              enabled: true
     kubelet:
       enabled: true
       serviceMonitor:
@@ -134,23 +124,15 @@ spec:
       enabled: true
     kubeControllerManager:
       enabled: true
-      endpoints:
-        - 192.168.0.100
-        - 192.168.0.101
-        - 192.168.0.102
+      service:
+        enabled: true
+        port: 10257
+        targetPort: 10257
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeScheduler:
-      enabled: true
-      endpoints:
-        - 192.168.0.100
-        - 192.168.0.101
-        - 192.168.0.102
-    kubeProxy:
-      enabled: true
-      endpoints:
-        - 192.168.0.100
-        - 192.168.0.101
-        - 192.168.0.102
-    kubeEtcd:
       enabled: true
       endpoints:
         - 192.168.0.100
@@ -158,8 +140,25 @@ spec:
         - 192.168.0.102
       service:
         enabled: true
-        port: 2381
-        targetPort: 2381
+        port: 10259
+        targetPort: 10259
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
+    kubeProxy:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    prometheusOperator:
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+          limits:
+            cpu: 200m
+            memory: 100Mi
     prometheus:
       ingress:
         enabled: true
@@ -189,15 +188,12 @@ spec:
       prometheusSpec:
         replicas: 3
         replicaExternalLabelName: __replica__
-        externalLabels:
-          cluster: home-cluster
-        podAntiAffinity: hard
         retentionSize: "6GB"
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
-        retention: 2d
+        retention: 12h
         enableAdminAPI: true
         walCompression: true
         storageSpec:
