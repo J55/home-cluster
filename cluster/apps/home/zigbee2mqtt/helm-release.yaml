@@ -39,6 +39,9 @@ spec:
         ingressClassName: 'nginx'
         annotations:
           cert-manager.io/cluster-issuer: 'letsencrypt-production'
+          hajimari.io/enable: "true"
+          hajimari.io/icon: zigbee
+          hajimari.io/appName: Zigbee2MQTT
         hosts:
           - host: 'zigbee2mqtt.${SECRET_DOMAIN}'
             paths:
