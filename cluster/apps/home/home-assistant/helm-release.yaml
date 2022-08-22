@@ -25,8 +25,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/onedr0p/home-assistant
-      tag: 2022.8.6@sha256:3c3f508b3b79383bef875f79c45d688a59c945a0f4aa93ffeacf76bc84de81e2
+      repository: homeassistant/home-assistant
+      tag: 2022.8.6
     env:
       TZ: "${TIMEZONE}"
     envFrom:
