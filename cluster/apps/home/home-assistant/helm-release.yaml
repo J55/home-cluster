@@ -29,9 +29,9 @@ spec:
       tag: 2022.8.6
     env:
       TZ: "${TIMEZONE}"
-    envFrom:
-      - secretRef:
-          name: *app
+    # envFrom:
+    #   - secretRef:
+    #       name: *app
     hostNetwork: true
     dnsPolicy: ClusterFirstWithHostNet
     service:
