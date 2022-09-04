@@ -43,6 +43,7 @@ spec:
         pathType: Prefix
         annotations:
           nginx.ingress.kubernetes.io/whitelist-source-range: ""
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
           - "emqx.${SECRET_DOMAIN}"
         tls:
