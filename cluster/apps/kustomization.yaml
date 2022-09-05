@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - default
   - flux-system
-  - home
+  # - home
   - kube-system
-  - monitoring
+  # - monitoring
   - networking
   - system-upgrade
