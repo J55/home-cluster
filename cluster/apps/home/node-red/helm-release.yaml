@@ -51,6 +51,8 @@ spec:
       hajimari.io/enable: "true"
       hajimari.io/icon: resistor-nodes
       hajimari.io/appName: Node-RED
+    securityContext:
+      privileged: true
     persistence:
       config:
         enabled: true
