@@ -63,6 +63,16 @@ spec:
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+              - rpinode
+            topologyKey: "kubernetes.io/hostname"
     resources:
       requests:
         cpu: 10m
