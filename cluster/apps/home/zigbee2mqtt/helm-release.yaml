@@ -71,7 +71,7 @@ spec:
       permit_join: false
       mqtt:
         base_topic: zigbee2mqtt
-        server: 'tcp://192.168.0.242:1883'
+        server: 'tcp://192.168.0.241:1883'
         user: '${SECRET_MQTT_USERNAME}'
         password: '${SECRET_MQTT_PASSWORD}'
       serial:
