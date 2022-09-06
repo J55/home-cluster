@@ -64,7 +64,6 @@ spec:
         enabled: true
         existingClaim: node-red-config-v1
         mountPath: "/data"
-    nodeName: rpinode0
     resources:
       requests:
         memory: 100Mi
