@@ -2,18 +2,17 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: home-assistant
+  name: &app home-assistant
   namespace: home
 spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: &app home-assistant
-      version: 13.4.2
+      chart: app-template
+      version: 0.2.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-charts
         namespace: flux-system
       interval: 5m
   install:
@@ -23,23 +22,26 @@ spec:
   upgrade:
     remediation:
       retries: 5
+  dependsOn:
+    - name: emqx
+      namespace: home
   values:
     image:
-      repository: homeassistant/home-assistant
-      tag: 2022.9.0
+      repository: ghcr.io/homeassistant/home-assistant
+      tag: 2022.9.6
     env:
       TZ: "${TIMEZONE}"
     envFrom:
       - secretRef:
           name: *app
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
     service:
       main:
         type: LoadBalancer
-        externalIPs:
-          - "${SVC_HOME_ASSISTANT_ADDR}"
+        externalIPs: ["${SVC_HOME_ASSISTANT_ADDR}"]
         externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 8123
     ingress:
       main:
         enabled: true
@@ -67,6 +69,13 @@ spec:
         enabled: false
       startup:
         enabled: false
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 100
     persistence:
       config:
         enabled: true
