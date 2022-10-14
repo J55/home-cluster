@@ -5,26 +5,35 @@ metadata:
   name: node-red
   namespace: home
 spec:
-  releaseName: node-red
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: node-red
-      version: 10.3.2
+      chart: app-template
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
     image:
       repository: nodered/node-red
-      tag: 3.0.2-18-minimal
+      tag: 3.0.2
     env:
-      TZ: "America/New_York"
+      TZ: "${TIMEZONE}"
       NODE_RED_ENABLE_PROJECTS: "true"
       NODE_RED_ENABLE_SAFE_MODE: "false"
+    service:
+      main:
+        ports:
+          http:
+            port: 1880
     ingress:
       main:
         enabled: true
@@ -42,6 +51,12 @@ spec:
           - hosts:
               - *host
             secretName: "node-red-tls"
+    podSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+      supplementalGroups:
+        - 1000
     persistence:
       config:
         enabled: true
