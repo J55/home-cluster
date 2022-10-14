@@ -22,7 +22,7 @@ spec:
       repository: nodered/node-red
       tag: 3.0.2-18-minimal
     env:
-      TZ: "America/New_York"
+      TZ: "${TIMEZONE}"
       NODE_RED_ENABLE_PROJECTS: "true"
       NODE_RED_ENABLE_SAFE_MODE: "false"
     ingress:
