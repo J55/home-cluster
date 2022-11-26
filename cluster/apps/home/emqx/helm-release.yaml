@@ -45,10 +45,10 @@ spec:
           nginx.ingress.kubernetes.io/whitelist-source-range: ""
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
-          - "emqx.${SECRET_DOMAIN}"
+          - &host "emqx.${SECRET_DOMAIN}"
         tls:
           - hosts:
-              - "emqx.${SECRET_DOMAIN}"
+              - *host
     metrics:
       enabled: false
     persistence:
