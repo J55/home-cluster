@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: emqx
-      version: 5.0.3
+      version: 5.0.11
       sourceRef:
         kind: HelmRepository
         name: emqx-charts
@@ -45,28 +45,28 @@ spec:
           nginx.ingress.kubernetes.io/whitelist-source-range: ""
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
-          - "emqx.${SECRET_DOMAIN}"
+          - &host "emqx.${SECRET_PUBLIC_DOMAIN}"
         tls:
           - hosts:
-              - "emqx.${SECRET_DOMAIN}"
+              - *host
     metrics:
       enabled: false
     persistence:
       enabled: true
       storageClass: local-path
       size: 100Mi
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values:
-                      - emqx
-              topologyKey: kubernetes.io/hostname
+    # affinity:
+    #   podAntiAffinity:
+    #     preferredDuringSchedulingIgnoredDuringExecution:
+    #       - weight: 100
+    #         podAffinityTerm:
+    #           labelSelector:
+    #             matchExpressions:
+    #               - key: app.kubernetes.io/name
+    #                 operator: In
+    #                 values:
+    #                   - emqx
+    #           topologyKey: kubernetes.io/hostname
     resources:
       requests:
         cpu: 10m
