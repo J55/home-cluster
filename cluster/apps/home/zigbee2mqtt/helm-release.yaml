@@ -69,7 +69,7 @@ spec:
           nodeSelectorTerms:
             - matchExpressions:
                 - {
-                  key: "feature.node.kubernetes.io/zigbee",
+                  key: "feature.node.kubernetes.io/custom-zigbee",
                   operator: In,
                   values: ["true"],
                 }
