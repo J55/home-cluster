@@ -12,9 +12,8 @@ spec:
       version: 5.0.11
       sourceRef:
         kind: HelmRepository
-        name: emqx-charts
+        name: emqx
         namespace: flux-system
-      interval: 15m
   install:
     createNamespace: true
     remediation:
@@ -30,6 +29,8 @@ spec:
     emqxConfig:
       EMQX_ALLOW_ANONYMOUS: "false"
       EMQX_AUTH__MNESIA__PASSWORD_HASH: plain
+      EMQX_AUTH__USER__1__USERNAME: ${SECRET_MQTT_USER}
+      EMQX_AUTH__USER__1__PASSWORD: ${SECRET_MQTT_PASSWORD}
     service:
       type: LoadBalancer
       externalIPs:
@@ -41,9 +42,9 @@ spec:
         ingressClassName: nginx
         path: /
         pathType: Prefix
-        annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: ""
-          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        # annotations:
+        #   nginx.ingress.kubernetes.io/whitelist-source-range: ""
+        #   external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
         hosts:
           - &host "emqx.${SECRET_PUBLIC_DOMAIN}"
         tls:
@@ -55,18 +56,17 @@ spec:
       enabled: true
       storageClass: local-path
       size: 100Mi
-    # affinity:
-    #   podAntiAffinity:
-    #     preferredDuringSchedulingIgnoredDuringExecution:
-    #       - weight: 100
-    #         podAffinityTerm:
-    #           labelSelector:
-    #             matchExpressions:
-    #               - key: app.kubernetes.io/name
-    #                 operator: In
-    #                 values:
-    #                   - emqx
-    #           topologyKey: kubernetes.io/hostname
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values: ["emqx"]
+              topologyKey: kubernetes.io/hostname
     resources:
       requests:
         cpu: 10m
@@ -78,11 +78,3 @@ spec:
       kind: Secret
       name: emqx-config
       valuesKey: admin_password
-    - targetPath: emqxConfig.EMQX_AUTH__USER__1__USERNAME
-      kind: Secret
-      name: emqx-config
-      valuesKey: user_1_username
-    - targetPath: emqxConfig.EMQX_AUTH__USER__1__PASSWORD
-      kind: Secret
-      name: emqx-config
-      valuesKey: user_1_password
