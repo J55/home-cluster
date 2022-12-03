@@ -73,6 +73,11 @@ spec:
                   operator: In,
                   values: ["true"],
                 }
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
     config:
       homeassistant: true
       device_options:
