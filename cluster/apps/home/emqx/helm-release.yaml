@@ -12,7 +12,7 @@ spec:
       version: 5.0.11
       sourceRef:
         kind: HelmRepository
-        name: emqx
+        name: emqx-charts
         namespace: flux-system
   install:
     createNamespace: true
