@@ -5,6 +5,6 @@ resources:
   - hajimari
   - home-assistant
   - emqx
-  - namespace.yaml
+  - ./namespace.yaml
   - node-red
   - zigbee2mqtt
