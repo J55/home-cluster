@@ -30,7 +30,7 @@ spec:
     fullnameOverride: *app
     image:
       repository: koenkk/zigbee2mqtt
-      tag: 1.28.2
+      tag: 1.28.4
     env:
       TZ: "${TIMEZONE}"
       ZIGBEE2MQTT_DATA: /data
@@ -79,7 +79,7 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
-        # hostPathType: CharDevice
+        hostPathType: CharDevice
     # nodeSelector:
     #   feature.node.kubernetes.io/custom-zigbee: "true"
     resources:
