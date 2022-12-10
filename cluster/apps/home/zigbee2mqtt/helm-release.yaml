@@ -55,8 +55,11 @@ spec:
       main:
         enabled: true
         ingressClassName: "nginx"
-        # annotations:
-        #   auth.home.arpa/enabled: "true"
+        annotations:
+          cert-manager.io/cluster-issuer: 'letsencrypt-production'
+          hajimari.io/enable: "true"
+          hajimari.io/icon: zigbee
+          hajimari.io/appName: Zigbee2MQTT
         hosts:
           - host: &host "zigbee2mqtt.${SECRET_DOMAIN}"
             paths:
