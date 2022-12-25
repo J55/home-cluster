@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - cert-manager
   # - descheduler
-  # - kured
   - metrics-server
   - ./namespace.yaml
   - node-feature-discovery
