@@ -10,7 +10,7 @@ resources:
   - ./emqx-charts.yaml
   - ./external-dns.yaml
   - ./fairwinds.yaml
-  - ./grafana-charts.yaml
+  - ./grafana.yaml
   - ./hajimari.yaml
   - ./ingress-nginx.yaml
   - ./jetstack.yaml
