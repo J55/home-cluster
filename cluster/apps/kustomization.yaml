@@ -8,5 +8,5 @@ resources:
   - kube-system
   - monitoring
   - networking
-  - rook-ceph
+  # - rook-ceph
   # - system-upgrade
