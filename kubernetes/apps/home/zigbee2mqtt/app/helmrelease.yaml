@@ -58,24 +58,16 @@ metadata:
       ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
       ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto.default.svc.cluster.local
       ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
-      ZIGBEE2MQTT_CONFIG_MQTT_USER:
-        valueFrom:
-          secretKeyRef:
-            name: mosquitto-secret
-            key: username
-      ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: mosquitto-secret
-            key: password
+      ZIGBEE2MQTT_CONFIG_MQTT_USER: "${SECRET_MQTT_USERNAME}"
+      ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD: "${SECRET_MQTT_PASSWORD}"
       ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
       ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
       ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: "false"
-      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220719081347-if00
-      ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
-    envFrom:
-      - secretRef:
-          name: zigbee2mqtt-secret
+      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
+      ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: CharDevice
+    # envFrom:
+    #   - secretRef:
+    #       name: zigbee2mqtt-secret
     service:
       main:
         ports:
@@ -128,44 +120,44 @@ metadata:
       usb:
         enabled: true
         type: hostPath
-        hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220719081347-if00
-
+        hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
+        hostPathType: CharDevice
     resources:
       requests:
         cpu: 10m
         memory: 100Mi
       limits:
         memory: 500Mi
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                # - key: feature.node.kubernetes.io/usb-02_0451_16a8.present
-                - key: feature.node.kubernetes.io/usb-02_1a86_55d4.present
-                  operator: In
-                  values:
-                    - "true"
-    sidecars:
-      exporter:
-        image: ghcr.io/kpetremann/mqtt-exporter:1.0.5
-        imagePullPolicy: IfNotPresent
-        env:
-          - { name: LOG_LEVEL, value: DEBUG }
-          - { name: LOG_MQTT_MESSAGE, value: "True" }
-          - { name: MQTT_ADDRESS, value: mosquitto.default.svc.cluster.local }
-          - { name: MQTT_TOPIC, value: "zigbee2mqtt/#" }
-          - { name: MQTT_V5_PROTOCOL, value: "True" }
-          - { name: PROMETHEUS_PORT, value: "8080" }
-          - { name: PROMETHEUS_PREFIX, value: zigbee2mqtt_ }
-          - { name: ZIGBEE2MQTT_AVAILABILITY, value: "True" }
-          - name: MQTT_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: mosquitto-secret
-                key: username
-          - name: MQTT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mosquitto-secret
-                key: password
+    # affinity:
+    #   nodeAffinity:
+    #     requiredDuringSchedulingIgnoredDuringExecution:
+    #       nodeSelectorTerms:
+    #         - matchExpressions:
+    #             # - key: feature.node.kubernetes.io/usb-02_0451_16a8.present
+    #             - key: feature.node.kubernetes.io/usb-02_1a86_55d4.present
+    #               operator: In
+    #               values:
+    #                 - "true"
+    # sidecars:
+    #   exporter:
+    #     image: ghcr.io/kpetremann/mqtt-exporter:1.0.5
+    #     imagePullPolicy: IfNotPresent
+    #     env:
+    #       - { name: LOG_LEVEL, value: DEBUG }
+    #       - { name: LOG_MQTT_MESSAGE, value: "True" }
+    #       - { name: MQTT_ADDRESS, value: mosquitto.default.svc.cluster.local }
+    #       - { name: MQTT_TOPIC, value: "zigbee2mqtt/#" }
+    #       - { name: MQTT_V5_PROTOCOL, value: "True" }
+    #       - { name: PROMETHEUS_PORT, value: "8080" }
+    #       - { name: PROMETHEUS_PREFIX, value: zigbee2mqtt_ }
+    #       - { name: ZIGBEE2MQTT_AVAILABILITY, value: "True" }
+    #       - name: MQTT_USERNAME
+    #         valueFrom:
+    #           secretKeyRef:
+    #             name: mosquitto-secret
+    #             key: username
+    #       - name: MQTT_PASSWORD
+    #         valueFrom:
+    #           secretKeyRef:
+    #             name: mosquitto-secret
+    #             key: password
