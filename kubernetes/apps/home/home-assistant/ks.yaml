@@ -6,8 +6,6 @@ metadata:
   name: cluster-apps-home-assistant
   namespace: flux-system
 spec:
-  # dependsOn:
-  #  - name: cluster-apps-rook-ceph-cluster
   path: ./kubernetes/apps/home/home-assistant/app
   prune: true
   sourceRef:

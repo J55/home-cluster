@@ -43,8 +43,6 @@ spec:
       tag: 2023.3.2
     env:
       TZ: America/New_York
-      # POSTGRES_HOST: postgres-rw.default.svc.cluster.local
-      # POSTGRES_DB: home_assistant
     envFrom:
       - secretRef:
           name: *app
