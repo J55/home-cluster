@@ -3,9 +3,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: zigbee2mqtt
-  namespace: default
-spec:
+  name: &app zigbee2mqtt
+  namespace: home
   interval: 15m
   chart:
     spec:
@@ -35,7 +34,7 @@ spec:
       repository: ghcr.io/koenkk/zigbee2mqtt
       tag: 1.30.2
     env:
-      TZ: America/New_York
+      TZ: Pacific/Auckland
       ZIGBEE2MQTT_DATA: /config
       ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
       ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: "false"
@@ -52,7 +51,7 @@ spec:
       ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: "true"
       ZIGBEE2MQTT_CONFIG_EXPERIMENTAL_NEW_API: "true"
       ZIGBEE2MQTT_CONFIG_FRONTEND_PORT: &port 80
-      ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee2mqtt.devbu.io
+      ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee2mqtt.${SECRET_DOMAIN}
       ZIGBEE2MQTT_CONFIG_HOMEASSISTANT: "true"
       ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: "true"
       ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
@@ -72,7 +71,8 @@ spec:
       ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
       ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
       ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: "false"
-      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: tcp://192.168.1.90:6638
+      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220719081347-if00
+      ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
     envFrom:
       - secretRef:
           name: zigbee2mqtt-secret
@@ -102,30 +102,50 @@ spec:
             10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
           hajimari.io/icon: mdi:zigbee
         hosts:
-          - host: &host "{{ .Release.Name }}.devbu.io"
+          - host: &host "zigbee2mqtt.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
+    securityContext:
+      privileged: true
     podSecurityContext:
-      runAsUser: 568
-      runAsGroup: 568
-      fsGroup: 568
-      fsGroupChangePolicy: OnRootMismatch
+      # runAsUser: 568
+      # runAsGroup: 568
+      # fsGroup: 568
+      # fsGroupChangePolicy: OnRootMismatch
+      supplementalGroups:
+        - 20 # dialout for /dev/ttyUSB0
     volumeClaimTemplates:
       - name: config
         mountPath: /config
         accessMode: ReadWriteOnce
         size: 1Gi
         storageClass: ceph-block
+    persistence:
+      usb:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20220719081347-if00
+
     resources:
       requests:
         cpu: 10m
         memory: 100Mi
       limits:
         memory: 500Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                # - key: feature.node.kubernetes.io/usb-02_0451_16a8.present
+                - key: feature.node.kubernetes.io/usb-02_1a86_55d4.present
+                  operator: In
+                  values:
+                    - "true"
     sidecars:
       exporter:
         image: ghcr.io/kpetremann/mqtt-exporter:1.0.5
