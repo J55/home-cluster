@@ -38,7 +38,7 @@ spec:
       EMQX_AUTH__USER__1__PASSWORD: ${SECRET_MQTT_PASSWORD}
     service:
       type: LoadBalancer
-      loadBalancerIP: ["${SVC_EMQX_ADDR}"]
+      loadBalancerIP: [$SVC_EMQX_ADDR]
       externalTrafficPolicy: Local
     ingress:
       dashboard:
