@@ -4,7 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: zigbee2mqtt-exporter-rules
-  namespace: default
+  namespace: home
 spec:
   groups:
     - name: zigbee2mqtt-exporter.rules
