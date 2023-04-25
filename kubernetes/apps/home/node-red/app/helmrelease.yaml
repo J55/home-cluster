@@ -34,9 +34,6 @@ spec:
       TZ: "${TIMEZONE}"
       NODE_RED_ENABLE_SAFE_MODE: "false"
       NODE_RED_ENABLE_PROJECTS: "true"
-    envFrom:
-      - secretRef:
-          name: node-red-secret
     service:
       main:
         ports:
@@ -56,11 +53,11 @@ spec:
         tls:
           - hosts:
               - *host
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: "OnRootMismatch"
+    # podSecurityContext:
+    #   runAsUser: 1000
+    #   runAsGroup: 1000
+    #   fsGroup: 1000
+    #   fsGroupChangePolicy: "OnRootMismatch"
     volumeClaimTemplates:
       - name: config
         mountPath: /data
