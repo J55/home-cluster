@@ -58,8 +58,8 @@ spec:
       enabled: false
     persistence:
       enabled: true
-      storageClass: local-path
-      size: 100Mi
+      storageClassName: local-path
+      size: 250Mi
     affinity:
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
@@ -71,12 +71,12 @@ spec:
                     operator: In
                     values: ["emqx"]
               topologyKey: kubernetes.io/hostname
-    resources:
-      requests:
-        cpu: 100m
-        memory: 150Mi
-      limits:
-        memory: 512Mi
+    # resources:
+    #   requests:
+    #     cpu: 100m
+    #     memory: 150Mi
+    #   limits:
+    #     memory: 512Mi
   valuesFrom:
     - targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
       kind: Secret
