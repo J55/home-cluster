@@ -58,7 +58,7 @@ spec:
       enabled: false
     persistence:
       enabled: true
-      storageClass: ""
+      storageClass: local-path
       size: 100Mi
     affinity:
       podAntiAffinity:
