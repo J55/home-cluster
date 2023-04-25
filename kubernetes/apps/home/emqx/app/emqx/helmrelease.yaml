@@ -38,7 +38,7 @@ spec:
       EMQX_AUTH__USER__1__PASSWORD: ${SECRET_MQTT_PASSWORD}
     service:
       type: LoadBalancer
-      loadBalancerIP: '${SVC_EMQX_ADDR}'
+      loadBalancerIP: ${SVC_EMQX_ADDR}
       externalTrafficPolicy: Local
     ingress:
       dashboard:
@@ -60,34 +60,25 @@ spec:
       enabled: true
       storageClass: local-path
       size: 100Mi
-    # affinity:
-    #   podAntiAffinity:
-    #     preferredDuringSchedulingIgnoredDuringExecution:
-    #       - weight: 100
-    #         podAffinityTerm:
-    #           labelSelector:
-    #             matchExpressions:
-    #               - key: app.kubernetes.io/name
-    #                 operator: In
-    #                 values:
-    #                   - emqx
-    #           topologyKey: kubernetes.io/hostname
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values: ["emqx"]
+              topologyKey: kubernetes.io/hostname
     resources:
       requests:
-        cpu: 10m
+        cpu: 100m
         memory: 150Mi
       limits:
         memory: 512Mi
   valuesFrom:
-    - targetPath: emqxConfig.EMQX_ADMIN_PASSWORD
+    - targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
       kind: Secret
       name: emqx-config
       valuesKey: admin_password
-    - targetPath: emqxConfig.EMQX_AUTH__USER__1__USERNAME
-      kind: Secret
-      name: emqx-config
-      valuesKey: user_1_username
-    - targetPath: emqxConfig.EMQX_AUTH__USER__1__PASSWORD
-      kind: Secret
-      name: emqx-config
-      valuesKey: user_1_password
