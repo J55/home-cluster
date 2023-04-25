@@ -6,5 +6,5 @@ resources:
   - ./emqx/ks.yaml
   - ./hajimari/ks.yaml
   - ./home-assistant/ks.yaml
-  # - ./node-red/ks.yaml
+  - ./node-red/ks.yaml
   # - ./zigbee2mqtt/ks.yaml

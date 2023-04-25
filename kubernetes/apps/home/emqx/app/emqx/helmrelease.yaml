@@ -60,25 +60,34 @@ spec:
       enabled: true
       storageClass: local-path
       size: 100Mi
-    affinity:
-      podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/name
-                    operator: In
-                    values: ["emqx"]
-              topologyKey: kubernetes.io/hostname
+    # affinity:
+    #   podAntiAffinity:
+    #     preferredDuringSchedulingIgnoredDuringExecution:
+    #       - weight: 100
+    #         podAffinityTerm:
+    #           labelSelector:
+    #             matchExpressions:
+    #               - key: app.kubernetes.io/name
+    #                 operator: In
+    #                 values:
+    #                   - emqx
+    #           topologyKey: kubernetes.io/hostname
     resources:
       requests:
-        cpu: 100m
+        cpu: 10m
         memory: 150Mi
       limits:
         memory: 512Mi
   valuesFrom:
     - targetPath: emqxConfig.EMQX_DASHBOARD__DEFAULT_PASSWORD
       kind: Secret
-      name: emqx-config
-      valuesKey: admin_password
+      name: emqx=config
+      valuesKey: ADMIN_PASSWORD
+    - targetPath: emqxConfig.EMQX_AUTH__USER__1__USERNAME
+      kind: Secret
+      name: emqx=config
+      valuesKey: USER_1_USERNAME
+    - targetPath: emqxConfig.EMQX_AUTH__USER__1__PASSWORD
+      kind: Secret
+      name: emqx=config
+      valuesKey: USER_1_PASSWORD
