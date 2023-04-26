@@ -97,8 +97,8 @@ spec:
         tls:
           - hosts:
               - *host
-    securityContext:
-      privileged: true
+    # securityContext:
+    #   privileged: true
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
