@@ -33,7 +33,7 @@ spec:
       tag: 1.30.3
     env:
       TZ: "${TIMEZONE}"
-      ZIGBEE2MQTT_DATA: /data
+      ZIGBEE2MQTT_DATA: /config
     service:
       main:
         ports:
