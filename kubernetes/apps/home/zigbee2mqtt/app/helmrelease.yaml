@@ -1,9 +1,9 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: zigbee2mqtt
+  name: &app zigbee2mqtt
   namespace: home
 spec:
   interval: 15m
@@ -15,7 +15,7 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 2
+  maxHistory: 3
   install:
     createNamespace: true
     remediation:
@@ -27,70 +27,39 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      type: statefulset
-      annotations:
-        reloader.stakater.com/auto: "true"
+    fullnameOverride: *app
     image:
-      repository: ghcr.io/koenkk/zigbee2mqtt
+      repository: koenkk/zigbee2mqtt
       tag: 1.30.3
     env:
-      TZ: ${TIMEZONE}
-      ZIGBEE2MQTT_DATA: /config
-      ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
-      ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: "false"
-      ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_TRIGGERS: "false"
-      ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_STATUS_TOPIC: homeassistant/status
-      ZIGBEE2MQTT_CONFIG_ADVANCED_LAST_SEEN: ISO_8601
-      ZIGBEE2MQTT_CONFIG_ADVANCED_LEGACY_API: "false"
-      ZIGBEE2MQTT_CONFIG_ADVANCED_LEGACY_AVAILABILITY_PAYLOAD: "false"
-      ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_LEVEL: info # debug
-      ZIGBEE2MQTT_CONFIG_ADVANCED_LOG_OUTPUT: '["console"]'
-      ZIGBEE2MQTT_CONFIG_AVAILABILITY_ACTIVE_TIMEOUT: 60
-      ZIGBEE2MQTT_CONFIG_AVAILABILITY_PASSIVE_TIMEOUT: 2000
-      ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_LEGACY: "false"
-      ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: "true"
-      ZIGBEE2MQTT_CONFIG_EXPERIMENTAL_NEW_API: "true"
-      ZIGBEE2MQTT_CONFIG_FRONTEND_PORT: &port 8080
-      ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee2mqtt.${SECRET_DOMAIN}
-      ZIGBEE2MQTT_CONFIG_HOMEASSISTANT: "true"
-      ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: "true"
-      ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
-      ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
-      ZIGBEE2MQTT_CONFIG_MQTT_SERVER: ${SVC_MQTT_ADDR}
-      ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
-      ZIGBEE2MQTT_CONFIG_MQTT_USER:
-        valueFrom:
-          secretKeyRef:
-            name: mosquitto-secret
-            key: username
-      ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: mosquitto-secret
-            key: password
-      ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
-      ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
-      ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: "false"
-      ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
-    # envFrom:
-    #   - secretRef:
-    #       name: zigbee2mqtt-secret
+      TZ: "${TIMEZONE}"
+      ZIGBEE2MQTT_DATA: /data
     service:
       main:
         ports:
           http:
-            port: 8080
+            port: &port 8080
+          metrics:
+            enabled: true
+            port: 80
+    serviceMonitor:
+      main:
+        enabled: true
+        endpoints:
+          - port: metrics
+            scheme: http
+            path: /metrics
+            interval: 1m
+            scrapeTimeout: 10s
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: "nginx"
         annotations:
-          nginx.ingress.kubernetes.io/whitelist-source-range: |
-            10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+          auth.home.arpa/enabled: "true"
           hajimari.io/icon: mdi:zigbee
         hosts:
-          - host: &host "zigbee2mqtt.${SECRET_DOMAIN}"
+          - host: &host "zigbee.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -99,26 +68,27 @@ spec:
               - *host
     securityContext:
       privileged: true
-    podSecurityContext:
-      runAsUser: 1000
-      runAsGroup: 1000
-      fsGroup: 1000
-      fsGroupChangePolicy: OnRootMismatch
+    persistence:
+      config:
+        enabled: true
+        existingClaim: zigbee2mqtt-config
+        mountPath: "/data"
+      usb:
+        enabled: true
+        type: hostPath
+        hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
+        hostPathType: CharDevice
+    nodeSelector:
+      feature.node.kubernetes.io/custom-zigbee: "true"
     volumeClaimTemplates:
       - name: config
         mountPath: /config
         accessMode: ReadWriteOnce
         size: 1Gi
         storageClass: local-path
-    persistence:
-      usb:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
-        hostPathType: CharDevice
     resources:
       requests:
-        cpu: 10m
         memory: 100Mi
+        cpu: 100m
       limits:
-        memory: 500Mi
+        memory: 700Mi
