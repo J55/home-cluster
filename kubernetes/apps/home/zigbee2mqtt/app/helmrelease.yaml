@@ -33,7 +33,7 @@ spec:
       tag: 1.30.3
     env:
       TZ: "${TIMEZONE}"
-      ZIGBEE2MQTT_DATA: /config
+      ZIGBEE2MQTT_DATA: /data
     service:
       main:
         ports:
@@ -69,19 +69,17 @@ spec:
     securityContext:
       privileged: true
     persistence:
+      config:
+        enabled: true
+        existingClaim: zigbee2mqtt-config
+        mountPath: "/data"
       usb:
         enabled: true
         type: hostPath
         hostPath: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
-        # hostPathType: CharDevice
+        hostPathType: CharDevice
     # nodeSelector:
     #   feature.node.kubernetes.io/custom-zigbee: "true"
-    volumeClaimTemplates:
-      - name: config
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: local-path
     resources:
       requests:
         memory: 100Mi

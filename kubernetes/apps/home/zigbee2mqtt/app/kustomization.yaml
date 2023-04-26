@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: home
 resources:
   - ./helmrelease.yaml
+  - ./volume.yaml
   # - ./prometheusrule.yaml
 patchesStrategicMerge:
   - ./patches/env.yaml
