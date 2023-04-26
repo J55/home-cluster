@@ -5,7 +5,8 @@ kind: Kustomization
 namespace: home
 resources:
   - ./helmrelease.yaml
-  - ./volume.yaml
   # - ./prometheusrule.yaml
-patchesStrategicMerge:
-  - ./patches/env.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/name: zigbee2mqtt
+      app.kubernetes.io/instance: zigbee2mqtt
