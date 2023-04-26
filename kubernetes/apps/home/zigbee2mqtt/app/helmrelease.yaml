@@ -35,7 +35,7 @@ spec:
       repository: ghcr.io/koenkk/zigbee2mqtt
       tag: 1.30.3
     env:
-      TZ: Pacific/Auckland
+      TZ: ${TIMEZONE}
       ZIGBEE2MQTT_DATA: /config
       ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
       ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: "false"
@@ -59,13 +59,20 @@ spec:
       ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
       ZIGBEE2MQTT_CONFIG_MQTT_SERVER: ${SVC_MQTT_ADDR}
       ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
-      ZIGBEE2MQTT_CONFIG_MQTT_USER: "${SECRET_MQTT_USERNAME}"
-      ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD: "${SECRET_MQTT_PASSWORD}"
+      ZIGBEE2MQTT_CONFIG_MQTT_USER:
+        valueFrom:
+          secretKeyRef:
+            name: mosquitto-secret
+            key: username
+      ZIGBEE2MQTT_CONFIG_MQTT_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: mosquitto-secret
+            key: password
       ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
       ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
       ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: "false"
       ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
-      # ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: CharDevice
     # envFrom:
     #   - secretRef:
     #       name: zigbee2mqtt-secret
@@ -74,18 +81,6 @@ spec:
         ports:
           http:
             port: *port
-          metrics:
-            enabled: true
-            port: 8080
-    serviceMonitor:
-      main:
-        enabled: true
-        endpoints:
-          - port: metrics
-            scheme: http
-            path: /metrics
-            interval: 1m
-            scrapeTimeout: 10s
     ingress:
       main:
         enabled: true
@@ -104,13 +99,6 @@ spec:
               - *host
     securityContext:
       privileged: true
-    podSecurityContext:
-      # runAsUser: 568
-      # runAsGroup: 568
-      # fsGroup: 568
-      # fsGroupChangePolicy: OnRootMismatch
-      supplementalGroups:
-        - 20 # dialout for /dev/ttyUSB0
     volumeClaimTemplates:
       - name: config
         mountPath: /config
@@ -129,36 +117,3 @@ spec:
         memory: 100Mi
       limits:
         memory: 500Mi
-    # affinity:
-    #   nodeAffinity:
-    #     requiredDuringSchedulingIgnoredDuringExecution:
-    #       nodeSelectorTerms:
-    #         - matchExpressions:
-    #             # - key: feature.node.kubernetes.io/usb-02_0451_16a8.present
-    #             - key: feature.node.kubernetes.io/usb-02_1a86_55d4.present
-    #               operator: In
-    #               values:
-    #                 - "true"
-    # sidecars:
-    #   exporter:
-    #     image: ghcr.io/kpetremann/mqtt-exporter:1.0.5
-    #     imagePullPolicy: IfNotPresent
-    #     env:
-    #       - { name: LOG_LEVEL, value: DEBUG }
-    #       - { name: LOG_MQTT_MESSAGE, value: "True" }
-    #       - { name: MQTT_ADDRESS, value: mosquitto.default.svc.cluster.local }
-    #       - { name: MQTT_TOPIC, value: "zigbee2mqtt/#" }
-    #       - { name: MQTT_V5_PROTOCOL, value: "True" }
-    #       - { name: PROMETHEUS_PORT, value: "8080" }
-    #       - { name: PROMETHEUS_PREFIX, value: zigbee2mqtt_ }
-    #       - { name: ZIGBEE2MQTT_AVAILABILITY, value: "True" }
-    #       - name: MQTT_USERNAME
-    #         valueFrom:
-    #           secretKeyRef:
-    #             name: mosquitto-secret
-    #             key: username
-    #       - name: MQTT_PASSWORD
-    #         valueFrom:
-    #           secretKeyRef:
-    #             name: mosquitto-secret
-    #             key: password
