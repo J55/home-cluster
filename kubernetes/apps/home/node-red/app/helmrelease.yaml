@@ -28,8 +28,8 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
     image:
-      repository: nodered/node-red
-      tag: 3.0.2-18-minimal
+      repository: ghcr.io/k8s-at-home/node-red
+      tag: v3.0.2
     env:
       TZ: "${TIMEZONE}"
       NODE_RED_ENABLE_SAFE_MODE: "false"
@@ -53,8 +53,11 @@ spec:
         tls:
           - hosts:
               - *host
-    securityContext:
-      privileged: true
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
     volumeClaimTemplates:
       - name: config
         mountPath: /data
