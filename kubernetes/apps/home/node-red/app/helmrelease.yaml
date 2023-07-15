@@ -53,6 +53,8 @@ spec:
         tls:
           - hosts:
               - *host
+    securityContext:
+      privileged: true
     volumeClaimTemplates:
       - name: config
         mountPath: /data
