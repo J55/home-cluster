@@ -53,8 +53,6 @@ spec:
         tls:
           - hosts:
               - *host
-    podSecurityContext:
-      privileged: true
     volumeClaimTemplates:
       - name: config
         mountPath: /data
