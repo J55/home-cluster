@@ -1,0 +1,91 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: home-assistant-code
+  namespace: home
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.5.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 2
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: home-assistant
+      namespace: home
+  values:
+    defaultPodOptions:
+      nodeSelector:
+        nodo.feature.node.kubernetes.io/rflink: "true"
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.20.1@sha256:94e705de31ca2e6d0c28fec83f004c4159c037338c485ca0b60bba7e90bde8f9
+            env:
+              TZ: ${TIMEZONE}
+              GIT_SSH_COMMAND: "ssh -i /config/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+            args:
+              - --auth
+              - "none"
+              - --user-data-dir
+              - "/config/.vscode"
+              - --extensions-dir
+              - "/config/.vscode"
+              - "--port"
+              - "8888"
+              - /config
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 1Gi
+        pod:
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            fsGroup: 0
+            fsGroupChangePolicy: OnRootMismatch
+    service:
+      main:
+        ports:
+          http:
+            port: 8888
+    ingress:
+      main:
+        enabled: true
+        className: nginx
+        hosts:
+          - host: &host hass-code.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+    persistence:
+      config:
+        enabled: true
+        existingClaim: home-assistant

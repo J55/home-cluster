@@ -1,13 +1,11 @@
 ---
-# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/kustomization.json
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: home
 resources:
   - ./helmrelease.yaml
   - ./secret.sops.yaml
-patchesStrategicMerge:
-  - ./patches/addons.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: home-assistant
