@@ -47,17 +47,12 @@ spec:
               startup:
                 enabled: false
             securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              priveleged: true
             resources:
               requests:
                 cpu: 10m
               limits:
-                memory: 1Gi
-        pod:
-          securityContext:
-            priveleged: true
+                memory: 5Gi
     service:
       main:
         type: LoadBalancer
