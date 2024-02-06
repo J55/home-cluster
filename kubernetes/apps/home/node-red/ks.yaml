@@ -7,9 +7,6 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: home
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
   path: ./kubernetes/apps/home/node-red/app
   prune: true
   sourceRef:
