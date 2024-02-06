@@ -5,7 +5,3 @@ kind: Kustomization
 namespace: home
 resources:
   - ./helmrelease.yaml
-labels:
-  - pairs:
-      app.kubernetes.io/name: node-red
-      app.kubernetes.io/instance: node-red
