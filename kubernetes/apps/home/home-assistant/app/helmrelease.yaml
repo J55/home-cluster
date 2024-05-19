@@ -39,6 +39,11 @@ spec:
             envFrom:
               - secretRef:
                   name: *app
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            #   priveleged: true
             probes:
               liveness:
                 enabled: false
@@ -46,8 +51,6 @@ spec:
                 enabled: false
               startup:
                 enabled: false
-            securityContext:
-              priveleged: true
             resources:
               requests:
                 cpu: 10m
