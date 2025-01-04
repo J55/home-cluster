@@ -33,7 +33,7 @@ spec:
           main:
             image:
               repository: docker.io/nodered/node-red
-              tag: 4.0.2-22-minimal
+              tag: 4.0.8
             env:
               TZ: "${TIMEZONE}"
               FLOWS: flows.json
