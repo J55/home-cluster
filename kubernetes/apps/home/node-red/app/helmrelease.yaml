@@ -5,7 +5,7 @@ kind: HelmRelease
 metadata:
   name: node-red
   namespace: home
-spec:
+sspec:
   interval: 30m
   chart:
     spec:
@@ -15,31 +15,27 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  maxHistory: 2
   install:
-    createNamespace: true
-    crds: CreateReplace
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
     cleanupOnFail: true
-    crds: CreateReplace
     remediation:
-      retries: 5
-  uninstall:
-    keepHistory: false
+      strategy: rollback
+      retries: 3
   values:
     controllers:
-      main:
+      node-red:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          node-red:
+          app:
             image:
               repository: docker.io/nodered/node-red
-              tag: 4.0.8
-              pullPolicy: IfNotPresent
+              tag: 4.0.8@sha256:871225abb46d62e434c75c73ec264c406ae1d0ea09b365ed9ffa122fdc327879
             env:
-              TZ: "${TIMEZONE}"
+              TZ: ${TIMEZONE}
               FLOWS: flows.json
               NODE_RED_ENABLE_PROJECTS: "true"
               NODE_RED_ENABLE_SAFE_MODE: "false"
