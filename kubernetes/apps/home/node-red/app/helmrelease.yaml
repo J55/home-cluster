@@ -1,6 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: node-red
@@ -10,16 +10,19 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.5.0
+      version: 3.6.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   install:
     createNamespace: true
+    crds: CreateReplace
     remediation:
       retries: 5
   upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
     remediation:
       retries: 5
   uninstall:
@@ -30,10 +33,11 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          node-red:
             image:
               repository: docker.io/nodered/node-red
-              tag: 4.0.8@sha256:871225abb46d62e434c75c73ec264c406ae1d0ea09b365ed9ffa122fdc327879
+              tag: 4.0.8
+              pullPolicy: IfNotPresent
             env:
               TZ: "${TIMEZONE}"
               FLOWS: flows.json
@@ -56,7 +60,8 @@ spec:
             podSecurityContext:
               privileged: true
     service:
-      main:
+      node-red:
+        controller: main
         ports:
           http:
             port: 1880
