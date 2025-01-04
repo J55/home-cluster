@@ -33,7 +33,7 @@ sspec:
           app:
             image:
               repository: docker.io/nodered/node-red
-              tag: 4.0.8@sha256:871225abb46d62e434c75c73ec264c406ae1d0ea09b365ed9ffa122fdc327879
+              tag: 4.0.8
             env:
               TZ: ${TIMEZONE}
               FLOWS: flows.json
