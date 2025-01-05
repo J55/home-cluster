@@ -95,16 +95,20 @@ spec:
             port: 8080
     ingress:
       app:
-        className: internal
+        className: "nginx"
         annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+          nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+          hajimari.io/icon: mdi:zigbee
         hosts:
-          - host: zigbee2mqtt.${SECRET_DOMAIN}
+          - host: &host "zigbee2mqtt.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
-                  identifier: app
+                  name: main
                   port: http
+        tls:
+          - hosts:
+              - *host
     persistence:
       data:
         existingClaim: config-zigbee2mqtt-0
