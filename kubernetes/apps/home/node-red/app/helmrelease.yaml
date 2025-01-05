@@ -4,7 +4,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: node-red
-  namespace: home
 spec:
   interval: 30m
   chart:
@@ -15,7 +14,6 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 2
   install:
     remediation:
       retries: 3
@@ -33,8 +31,6 @@ spec:
             runAsGroup: 568
             fsGroup: 568
             fsGroupChangePolicy: "OnRootMismatch"
-        annotations:
-          reloader.stakater.com/auto: "true"
         containers:
           app:
             image:
@@ -42,27 +38,23 @@ spec:
               tag: 4.0.8
             env:
               TZ: ${TIMEZONE}
-              FLOWS: flows.json
-              NODE_RED_ENABLE_PROJECTS: "true"
               NODE_RED_ENABLE_SAFE_MODE: "false"
+              NODE_RED_ENABLE_PROJECTS: "true"
             probes:
               liveness:
-                enabled: false
+                enabled: true
               readiness:
-                enabled: false
-              startup:
-                enabled: false
+                enabled: true
             resources:
               requests:
                 cpu: 22m
                 memory: 164M
               limits:
                 memory: 262M
-            # podSecurityContext:
-            #   privileged: true
     service:
       app:
         controller: node-red
+        ipFamilyPolicy: PreferDualStack
         ports:
           http:
             port: 1880
@@ -79,9 +71,6 @@ spec:
                 service:
                   name: main
                   port: http
-        tls:
-          - hosts:
-              - *host
     persistence:
       config:
         enabled: true
