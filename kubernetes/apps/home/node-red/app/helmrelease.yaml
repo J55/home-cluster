@@ -27,6 +27,12 @@ spec:
   values:
     controllers:
       node-red:
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -52,8 +58,8 @@ spec:
                 memory: 164M
               limits:
                 memory: 262M
-            podSecurityContext:
-              privileged: true
+            # podSecurityContext:
+            #   privileged: true
     service:
       node-red:
         controller: main
