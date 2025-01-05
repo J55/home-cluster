@@ -99,6 +99,12 @@ spec:
         tls:
           - hosts:
               - *host
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: local-path
     persistence:
       config:
         enabled: true
