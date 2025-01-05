@@ -97,9 +97,9 @@ spec:
       app:
         className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         hosts:
-          - host: zigbee2mqtt.${SECRET_DOMAIN}"
+          - host: zigbee2mqtt.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
