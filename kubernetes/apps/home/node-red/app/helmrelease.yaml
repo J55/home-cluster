@@ -61,13 +61,13 @@ spec:
             # podSecurityContext:
             #   privileged: true
     service:
-      node-red:
-        controller: main
+      app:
+        controller: node-red
         ports:
           http:
             port: 1880
     ingress:
-      main:
+      app:
         enabled: true
         className: "nginx"
         annotations:
