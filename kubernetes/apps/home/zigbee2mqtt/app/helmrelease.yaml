@@ -29,7 +29,7 @@ spec:
   values:
     defaultPodOptions:
     nodeSelector:
-      kubernetes.io/hostname=rpinode0
+      sonoff.feature.node.kubernetes.io/zigbee: "true"
     controller:
       type: statefulset
       annotations:
