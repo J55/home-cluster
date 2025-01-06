@@ -1,62 +1,68 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
-apiVersion: helm.toolkit.fluxcd.io/v2
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: node-red
+  namespace: home
 spec:
   interval: 30m
   chart:
     spec:
       chart: app-template
-      version: 3.6.0
-      interval: 30m
+      version: 2.5.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
   install:
+    createNamespace: true
     remediation:
-      retries: 3
+      retries: 5
   upgrade:
-    cleanupOnFail: true
     remediation:
-      strategy: rollback
-      retries: 3
+      retries: 5
+  uninstall:
+    keepHistory: false
   values:
     controllers:
-      node-red:
+      main:
         annotations:
           reloader.stakater.com/auto: "true"
-        pod:
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-            fsGroupChangePolicy: "OnRootMismatch"
         containers:
-          app:
+          main:
             image:
               repository: docker.io/nodered/node-red
-              tag: 4.0.8
-            envFrom:
-              TZ: ${TIMEZONE}
-              NODE_RED_ENABLE_SAFE_MODE: "false"
+              tag: 4.0.2@sha256:fa8fbcf2ddc1e1b2cdea3c1e6d027413f583956fc499289c432650a3ea03c10b
+            env:
+              TZ: "${TIMEZONE}"
+              FLOWS: flows.json
               NODE_RED_ENABLE_PROJECTS: "true"
+              NODE_RED_ENABLE_SAFE_MODE: "false"
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
             resources:
               requests:
                 cpu: 22m
-                memory: 128Mi
+                memory: 164M
               limits:
-                memory: 512Mi
+                cpu: 300m
+                memory: 262M
+            podSecurityContext:
+              privileged: true
     service:
-      app:
-        controller: node-red
+      main:
         ports:
           http:
             port: 1880
     ingress:
-      app:
+      main:
+        enabled: true
         className: "nginx"
         annotations:
           hajimari.io/icon: mdi:sitemap
@@ -65,15 +71,14 @@ spec:
             paths:
               - path: /
                 service:
-                  identifier: app
+                  name: main
                   port: http
         tls:
           - hosts:
               - *host
     persistence:
-      data:
+      config:
+        enabled: true
         existingClaim: config-node-red-0
-        advancedMounts:
-          node-red:
-            app:
-              - path: /data
+        globalMounts:
+          - path: /data
