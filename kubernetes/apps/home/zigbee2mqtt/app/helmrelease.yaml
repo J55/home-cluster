@@ -27,6 +27,9 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    defaultPodOptions:
+    nodeSelector:
+      sonoff.feature.node.kubernetes.io/zigbee: "true"
     controller:
       type: statefulset
       annotations:
