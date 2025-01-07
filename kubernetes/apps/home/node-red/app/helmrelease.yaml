@@ -6,11 +6,11 @@ metadata:
   name: node-red
   namespace: home
 spec:
-  interval: 30m
+  interval: 15m
   chart:
     spec:
       chart: app-template
-      version: 2.5.0
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -22,39 +22,18 @@ spec:
   upgrade:
     remediation:
       retries: 5
-  uninstall:
-    keepHistory: false
   values:
-    controllers:
-      main:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          main:
-            image:
-              repository: docker.io/nodered/node-red
-              tag: 4.0.2@sha256:fa8fbcf2ddc1e1b2cdea3c1e6d027413f583956fc499289c432650a3ea03c10b
-            env:
-              TZ: "${TIMEZONE}"
-              FLOWS: flows.json
-              NODE_RED_ENABLE_PROJECTS: "true"
-              NODE_RED_ENABLE_SAFE_MODE: "false"
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
-            resources:
-              requests:
-                cpu: 22m
-                memory: 164M
-              limits:
-                cpu: 300m
-                memory: 262M
-            podSecurityContext:
-              privileged: true
+    controller:
+      type: statefulset
+      annotations:
+        reloader.stakater.com/auto: "true"
+    image:
+      repository: docker.io/nodered/node-red
+      tag: 3.1.3
+    env:
+      TZ: "${TIMEZONE}"
+      NODE_RED_ENABLE_SAFE_MODE: "false"
+      NODE_RED_ENABLE_PROJECTS: "true"
     service:
       main:
         ports:
@@ -63,22 +42,28 @@ spec:
     ingress:
       main:
         enabled: true
-        className: "nginx"
+        ingressClassName: nginx
         annotations:
           hajimari.io/icon: mdi:sitemap
         hosts:
           - host: &host "node-red.${SECRET_DOMAIN}"
             paths:
               - path: /
-                service:
-                  name: main
-                  port: http
+                pathType: Prefix
         tls:
           - hosts:
               - *host
-    persistence:
-      config:
-        enabled: true
-        existingClaim: config-node-red-0
-        globalMounts:
-          - path: /data
+    podSecurityContext:
+      privileged: true
+    volumeClaimTemplates:
+      - name: config
+        mountPath: /data
+        accessMode: ReadWriteOnce
+        size: 2Gi
+        storageClass: local-path
+    resources:
+      requests:
+        cpu: 22m
+        memory: 164M
+      limits:
+        memory: 262M
