@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.3.2
+      version: 2.5.0
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -33,7 +33,7 @@ spec:
           init-config:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.18
+              tag: 2.0.20@sha256:91ac91904ce5f43fb62011a2b93ff87cf6029df6895b47c8284891e2478a9c00
             command: ["/bin/sh", "-c"]
             args:
               - |
@@ -44,7 +44,7 @@ spec:
           app:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.18
+              tag: 2.0.20@sha256:91ac91904ce5f43fb62011a2b93ff87cf6029df6895b47c8284891e2478a9c00
             probes:
               liveness:
                 enabled: true
