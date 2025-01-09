@@ -1,6 +1,6 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
-apiVersion: helm.toolkit.fluxcd.io/v2
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: mosquitto
@@ -26,86 +26,55 @@ spec:
     keepHistory: false
   values:
     controllers:
-      mosquitto:
+      main:
         annotations:
           reloader.stakater.com/auto: "true"
         initContainers:
           init-config:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.20@sha256:91ac91904ce5f43fb62011a2b93ff87cf6029df6895b47c8284891e2478a9c00
+              tag: 2.0.20
+              pullPolicy: IfNotPresent
             command: ["/bin/sh", "-c"]
-            args:
-              - |
-                cp /tmp/secret/mosquitto_pwd /mosquitto/external_config/;
-                chmod 600 /mosquitto/external_config/mosquitto_pwd;
-                mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd;
+            args: ["cp /tmp/secret/* /mosquitto/external_config/ && mosquitto_passwd -U /mosquitto/external_config/mosquitto_pwd"]
         containers:
-          app:
+          main:
             image:
               repository: public.ecr.aws/docker/library/eclipse-mosquitto
-              tag: 2.0.20@sha256:91ac91904ce5f43fb62011a2b93ff87cf6029df6895b47c8284891e2478a9c00
-            probes:
-              liveness:
-                enabled: true
-              readiness:
-                enabled: true
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+              tag: 2.0.20
             resources:
               requests:
-                cpu: 10m
+                cpu: 5m
               limits:
-                memory: 64Mi
-        pod:
-          securityContext:
-            runAsUser: 65534
-            runAsGroup: 65534
-            runAsNonRoot: true
-            fsGroup: 65534
-            fsGroupChangePolicy: OnRootMismatch
+                memory: 16Mi
     service:
-      app:
-        controller: mosquitto
+      main:
         type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: mqtt.${SECRET_DOMAIN}
-        externalIPs: ["${SVC_MQTT_ADDR}"]
-        externalTrafficPolicy: Local
+        loadBalancerIP: "${SVC_MQTT_ADDR}"
         ports:
-          mqtt:
-            primary: true
+          http:
             port: 1883
     persistence:
+      data:
+        enabled: true
+        existingClaim: config-mosquitto-0
       config-file:
         type: configMap
-        name: mosquitto-configmap
+        name: mosquitto-configmap # overriden by kustomizeconfig
         advancedMounts:
-          mosquitto:
-            app:
+          main:
+            main:
               - path: /mosquitto/config/mosquitto.conf
                 subPath: mosquitto.conf
-                readOnly: true
-      data:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 512Mi
-        storageClass: local-hostpath
-        advancedMounts:
-          mosquitto:
-            app:
-              - path: /data
-      mosquitto-secret:
+      secret-file:
         type: secret
         name: mosquitto-secret
         advancedMounts:
-          mosquitto:
+          main:
             init-config:
-              - path: /tmp/secret/mosquitto_pwd
-                subPath: mosquitto_pwd
-                readOnly: true
+              - path: /tmp/secret
       external-config:
         type: emptyDir
         globalMounts:
