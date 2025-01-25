@@ -87,14 +87,11 @@ spec:
         enabled: true
         className: internal
         annotations:
-          nginx.ingress.kubernetes.io/auth-method: GET
-          nginx.ingress.kubernetes.io/auth-url: http://authelia.default.svc.cluster.local.:8888/api/verify
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.${SECRET_EXTERNAL_DOMAIN}?rm=$request_method
-          nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
-          nginx.ingress.kubernetes.io/auth-snippet: proxy_set_header X-Forwarded-Method $request_method;
+          hajimari.io/enable: "true"
+          hajimari.io/appName: "ZWave JS UI"
           hajimari.io/icon: mdi:z-wave
         hosts:
-          - host: &host "zwave.${SECRET_EXTERNAL_DOMAIN}"
+          - host: &host "zwave.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
@@ -107,7 +104,9 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: *app
+        accessMode: ReadWriteOnce
+        size: 256Mi
+        storageClass: local-path
         globalMounts:
           - path: /usr/src/app/store
       usb:
