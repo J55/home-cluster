@@ -72,16 +72,7 @@ spec:
             port: *port
           websocket:
             port: 3000
-    serviceMonitor:
-      app:
-        serviceName: *app
-        enabled: false # requires https://github.com/kvaster/zwavejs-prom
-        endpoints:
-          - port: http
-            scheme: http
-            path: /metrics
-            interval: 1m
-            scrapeTimeout: 10s
+
     ingress:
       app:
         enabled: true
