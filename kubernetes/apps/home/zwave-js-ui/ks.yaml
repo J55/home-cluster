@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: zwave-js-ui
   dependsOn:
     - name: cluster-apps-node-feature-discovery
-  path: ./kubernetes/apps/default/zwave-js-ui/app
+  path: ./kubernetes/apps/home/zwave-js-ui/app
   prune: true
   sourceRef:
     kind: GitRepository
