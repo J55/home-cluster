@@ -32,8 +32,8 @@ spec:
         containers:
           main:
             image:
-              repository: homeassistant/home-assistant
-              tag: 2025.3.4@sha256:5d510569a2ceaa2fa8f8a34b91bddd36f5f7f03e4cb23e942f245e4a5a98bbef
+              repository: ghcr.io/home-operations/home-assistant
+              tag: 2025.4.2@sha256:a0da02d5929788d34e589f0d7e185f9263204c7406ec64fae3a792223906e511
             env:
               TZ: "${TIMEZONE}"
             envFrom:
