@@ -26,4 +26,4 @@ This is my personal Kubernetes cluster. [Flux](https://github.com/fluxcd/flux2) 
 
 ## :handshake:&nbsp; Inspiration
 
-This cluster is built on the [template cluster](https://github.com/k8s-at-home/template-cluster-k3s) from [onedr0p](https://github.com/onedr0p).
+This cluster is built on the [template cluster](https://github.com/k8s-at-home/template-cluster-k3s) from [onedr0p](https://github.com/onedr0p). Additionally, a huge thank you to all the incredible contributors at the [Kubernetes @Home](https://github.com/k8s-at-home/) community.
