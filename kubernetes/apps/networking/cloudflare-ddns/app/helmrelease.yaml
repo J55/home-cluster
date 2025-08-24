@@ -35,7 +35,6 @@ spec:
     image:
       repository: ghcr.io/larivierec/cloudflare-ddns
       tag: v1.0.8
-    command: ["/bin/bash", "/app/cloudflare-ddns.sh"]
     envFrom:
       - secretRef:
           name: cloudflare-ddns-secret
