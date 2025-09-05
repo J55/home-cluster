@@ -6,6 +6,7 @@ metadata:
   name: &app home-assistant
   namespace: home
 spec:
+  hostNetwork: true
   interval: 30m
   chart:
     spec:
