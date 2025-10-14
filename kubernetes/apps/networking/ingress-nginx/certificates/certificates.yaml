@@ -1,5 +1,5 @@
 ---
-apiVersion: cert-manager.io/v2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "${SECRET_DOMAIN/./-}-production"
@@ -14,7 +14,7 @@ spec:
     - "${SECRET_DOMAIN}"
     - "*.${SECRET_DOMAIN}"
 ---
-apiVersion: cert-manager.io/v2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: "${SECRET_DOMAIN/./-}-staging"
