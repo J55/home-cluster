@@ -11,10 +11,14 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/storage/longhorn/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
   targetNamespace: storage
-  wait: false
+  wait: true
