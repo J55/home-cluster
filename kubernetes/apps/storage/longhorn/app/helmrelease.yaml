@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: longhorn
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: longhorn
+  interval: 1h
+  values:
+    defaultSettings:
+      createDefaultDiskLabeledNodes: true
+      defaultDataLocality: best-effort
+      defaultLonghornStaticStorageClass: longhorn
+      defaultReplicaCount: "3"
+      disableReplicaRebuilding: false
+      replicaAutoBalance: "best-effort"
+      allowVolumeCreationWithDegradedAvailability: false
+      guaranteedEngineManagerCPU: "0.15"
+      guaranteedReplicaManagerCPU: "0.15"
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      orphanAutoDeletion: "true"
+      storageMinimalAvailablePercentage: "1"
+      storageReservedPercentage: 25
+    persistence:
+      defaultClass: true
+      defaultClassReplicaCount: 3
+      reclaimPolicy: Delete
+      migratable: false
+    ingress:
+      enabled: false
+    longhornUI:
+      replicas: 3
+    metrics:
+      serviceMonitor:
+        enabled: true
+
