@@ -5,9 +5,9 @@ name: EPHEMERAL
 provisioning:
   diskSelector:
     match: system_disk  # Keep it on the system disk
-  minSize: 20GiB
-  maxSize: 80GiB        # Limit EPHEMERAL to 80GB
-  grow: false           # Don't auto-grow
+  minSize: 2GB
+  maxSize: 80GB
+  grow: false
 ---
 apiVersion: v1alpha1
 kind: UserVolumeConfig
@@ -15,5 +15,5 @@ name: longhorn
 provisioning:
   diskSelector:
     match: system_disk  # Use the same system disk
-  minSize: 100GiB
-  # maxSize not specified = uses remaining available space
+  minSize: 80GiB
+  maxSize: 100GiB
