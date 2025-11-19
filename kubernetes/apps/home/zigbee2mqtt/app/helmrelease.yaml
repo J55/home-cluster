@@ -87,9 +87,8 @@ spec:
       config:
         existingClaim: *app
       usb:
+        enabled: true
         type: hostPath
         hostPath: /dev/ttyUSB0
-        advancedMounts:
-          main:
-            app:
-            - path: /dev/ttyUSB0
+        globalMounts:
+          - path: /dev/ttyUSB0
