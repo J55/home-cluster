@@ -79,7 +79,7 @@ spec:
     route:
       app:
         hostnames:
-          -   ["zigbee2mqtt.${SECRET_DOMAIN}"]
+          -   "zigbee2mqtt.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: network
