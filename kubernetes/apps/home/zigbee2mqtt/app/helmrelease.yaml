@@ -54,9 +54,9 @@ spec:
                   failureThreshold: 30
                   periodSeconds: 10
             securityContext:
-              priveleged: true
-              readOnlyRootFilesystem: false
-              capabilities: {drop: ["ALL"]}
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
@@ -65,10 +65,11 @@ spec:
     defaultPodOptions:
       nodeSelector:
         sonoff.feature.node.kubernetes.io/zigbee: "true"
-        runAsNonRoot: "true"
-        runAsUser: "1000"
-        runAsGroup: "1000"
-        fsGroup: "1000"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
     service:
       app:
