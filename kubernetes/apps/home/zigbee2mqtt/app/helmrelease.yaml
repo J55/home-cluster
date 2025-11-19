@@ -85,7 +85,12 @@ spec:
             namespace: network
     persistence:
       config:
-        existingClaim: *app
+        enabled: true
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        globalMounts:
+          - path: /config
       usb:
         enabled: true
         type: hostPath
