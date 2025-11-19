@@ -13,6 +13,10 @@ spec:
       namespace: kube-system
   interval: 1h
   path: ./kubernetes/apps/home/zigbee2mqtt/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
