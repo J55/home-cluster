@@ -52,6 +52,10 @@ spec:
               - --port
               - "8888"
               - /config
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 10m
