@@ -21,6 +21,8 @@ spec:
               tag: 2025.11.2
             env:
               TZ: America/New_York
+              HASS_HTTP_TRUSTED_PROXY_1: 192.168.0.0/24
+              HASS_HTTP_TRUSTED_PROXY_2: 10.43.0.0/16
             envFrom:
               - secretRef:
                   name: *app
