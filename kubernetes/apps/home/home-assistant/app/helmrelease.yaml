@@ -50,9 +50,6 @@ spec:
               - --port
               - "8888"
               - /config
-            volumeMounts:
-              - name: config
-                mountPath: /config
             resources:
               requests:
                 cpu: 10m
