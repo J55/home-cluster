@@ -8,7 +8,7 @@ components:
 
 resources:
   - ./namespace.yaml
-  - ./home/home-assistant/ks.yaml
+  - ./home-assistant/ks.yaml
   - ./mosquitto/ks.yaml
   # - ./node-red/ks.yaml
   - ./zigbee2mqtt/ks.yaml
