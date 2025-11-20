@@ -33,6 +33,32 @@ spec:
                 cpu: 10m
               limits:
                 memory: 2Gi
+          code:  # Code-server sidecar
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.105.1
+            env:
+              TZ: America/New_York
+              GIT_SSH_COMMAND: ssh -i /config/.ssh/id_ed25519 -o IdentitiesOnly=yes
+            args:
+              - --auth
+              - none
+              - --user-data-dir
+              - /config/.vscode
+              - --extensions-dir
+              - /config/.vscode
+              - --port
+              - "8888"
+              - /config
+            volumeMounts:
+              - name: config
+                mountPath: /config
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 1Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -46,12 +72,23 @@ spec:
           http:
             appProtocol: kubernetes.io/ws
             port: 8123
+      code:
+        controller: *app
+        ports:
+          http:
+            port: 8888
     route:
       app:
         annotations:
         hostnames: ["hass.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-external
+            namespace: network
+      code:
+        hostnames:
+          - "hass-code.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
             namespace: network
     persistence:
       config:
