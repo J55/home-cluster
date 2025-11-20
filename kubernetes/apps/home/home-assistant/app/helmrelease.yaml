@@ -72,6 +72,7 @@ spec:
             port: 8123
       code:
         controller: *app
+        nameOverride: home-assistant-code
         ports:
           http:
             port: 8888
@@ -81,12 +82,20 @@ spec:
         parentRefs:
           - name: envoy-external
             namespace: network
+        rules:
+          - backendRefs:
+              - name: home-assistant
+                port: 8123
       code:
         hostnames:
           - "hass-code.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: network
+        rules:
+          - backendRefs:
+              - name: home-assistant-code
+                port: 8888
     persistence:
       config:
         enabled: true
