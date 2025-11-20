@@ -76,12 +76,13 @@ spec:
             port: 8888
     route:
       app:
-        annotations:
+        controller: *app
         hostnames: ["hass.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-external
             namespace: network
       code:
+        controller: *app
         hostnames:
           - "hass-code.${SECRET_DOMAIN}"
         parentRefs:
