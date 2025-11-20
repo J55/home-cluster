@@ -5,8 +5,5 @@ kind: Kustomization
 namespace: home
 resources:
   - ./helmrelease.yaml
+  - ./ocirepository.yaml
   - ./secret.sops.yaml
-labels:
-  - pairs:
-      app.kubernetes.io/name: home-assistant
-      app.kubernetes.io/instance: home-assistant

@@ -1,87 +1,63 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app home-assistant
-  namespace: home
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 2.5.0
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
-  install:
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+  chartRef:
+    kind: OCIRepository
+    name: home-assistant
+  interval: 1h
   values:
     controllers:
-      main:
+      home-assistant:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
-          main:
+          app:
             image:
-              repository: homeassistant/home-assistant
-              tag: 2025.10.2
+              repository: ghcr.io/home-operations/home-assistant
+              tag: 2025.11.2
             env:
-              TZ: "${TIMEZONE}"
+              TZ: America/New_York
             envFrom:
               - secretRef:
                   name: *app
             securityContext:
-              priveleged: true
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
             resources:
               requests:
                 cpu: 10m
               limits:
-                memory: 5Gi
+                memory: 2Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     service:
-      main:
-        type: LoadBalancer
-        loadBalancerIP: ${SVC_HOME_ASSISTANT_ADDR}
-        externalTrafficPolicy: Local
+      app:
         ports:
           http:
+            appProtocol: kubernetes.io/ws
             port: 8123
-    ingress:
-      main:
-        enabled: true
-        className: "nginx"
+    route:
+      app:
         annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: mdi:home-assistant
-          hajimari.io/appName: Hass
-        hosts:
-          - host: &host "hass.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: http
-        tls:
-          - hosts:
-              - *host
+        hostnames: ["hass.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-external
+            namespace: network
     persistence:
       config:
         enabled: true
-        existingClaim: config-home-assistant-0
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 2Gi
         globalMounts:
           - path: /config
