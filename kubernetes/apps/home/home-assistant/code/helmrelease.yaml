@@ -73,6 +73,10 @@ spec:
               - name: *app
                 port: *port
     persistence:
-      config:
+      data:
         enabled: true
-        existingClaim: home-assistant
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 2Gi
+        globalMounts:
+          - path: /data
