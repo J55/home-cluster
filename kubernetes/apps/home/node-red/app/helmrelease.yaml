@@ -1,84 +1,68 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: node-red
-  namespace: home
 spec:
-  interval: 30m
-  chart:
-    spec:
-      chart: app-template
-      version: 2.5.0
-      sourceRef:
-        kind: HelmRepository
-        name: bjw-s
-        namespace: flux-system
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
   install:
-    createNamespace: true
     remediation:
-      retries: 5
+      retries: 3
   upgrade:
+    cleanupOnFail: true
     remediation:
-      retries: 5
-  uninstall:
-    keepHistory: false
+      retries: 3
   values:
     controllers:
-      main:
-        annotations:
-          reloader.stakater.com/auto: "true"
+      node-red:
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: "OnRootMismatch"
         containers:
-          main:
+          app:
             image:
               repository: docker.io/nodered/node-red
-              tag: 4.0.9@sha256:7a3e18f29578feb271bb8daab4379e4ebd355b87ea64b699ce74e6ff49d907aa
+              tag: 4.1.1
             env:
-              TZ: "${TIMEZONE}"
-              FLOWS: flows.json
-              NODE_RED_ENABLE_PROJECTS: "true"
+              TZ: "${TIMEZONE:=Etc/UTC}"
               NODE_RED_ENABLE_SAFE_MODE: "false"
+              NODE_RED_ENABLE_PROJECTS: "true"
             probes:
               liveness:
-                enabled: false
+                enabled: true
               readiness:
-                enabled: false
-              startup:
-                enabled: false
+                enabled: true
             resources:
               requests:
                 cpu: 22m
                 memory: 164M
               limits:
-                cpu: 300m
                 memory: 262M
-            podSecurityContext:
-              privileged: true
     service:
-      main:
+      app:
+        controller: node-red
         ports:
           http:
             port: 1880
-    ingress:
-      main:
-        enabled: true
-        className: "nginx"
-        annotations:
-          hajimari.io/icon: mdi:sitemap
-        hosts:
-          - host: &host "node-red.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: http
-        tls:
-          - hosts:
-              - *host
+    route:
+      app:
+        hostnames: ["hass.${SECRET_DOMAIN}"]
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+            sectionName: https
     persistence:
-      config:
+      data:
         enabled: true
-        existingClaim: config-node-red-0
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 1Gi
         globalMounts:
           - path: /data
