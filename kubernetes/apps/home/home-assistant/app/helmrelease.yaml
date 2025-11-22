@@ -64,10 +64,10 @@ spec:
         size: 2Gi
         globalMounts:
           - path: /config
-      config-cache:
-        existingClaim: "{{ .Release.Name }}-cache"
-        globalMounts:
-          - path: /config/.venv
+      # config-cache:
+      #   existingClaim: "{{ .Release.Name }}-cache"
+      #   globalMounts:
+      #     - path: /config/.venv
       tmp:
         type: emptyDir
       configuration:
