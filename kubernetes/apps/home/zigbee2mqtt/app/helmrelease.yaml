@@ -82,10 +82,14 @@ spec:
     route:
       app:
         hostnames:
-          - zigbee2mqtt.${SECRET_DOMAIN}
+          - zigbee.${SECRET_DOMAIN}
         parentRefs:
           - name: envoy-internal
             namespace: network
+        rules:
+          - backendRefs:
+              - name: *app
+                port: *port
     persistence:
       config:
         enabled: true
