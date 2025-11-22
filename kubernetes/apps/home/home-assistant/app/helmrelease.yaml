@@ -67,6 +67,3 @@ spec:
           - path: /config/.venv
       tmp:
         type: emptyDir
-        existingClaim: "{{ .Release.Name }}-cache"
-        globalMounts:
-          - path: /config/.venv
