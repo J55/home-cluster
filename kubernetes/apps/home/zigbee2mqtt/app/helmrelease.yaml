@@ -40,7 +40,7 @@ spec:
               ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto.home.svc.cluster.local:1883
               ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
               ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
-              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
+              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/ttyUSB0
             envFrom:
               - secretRef:
                   name: *app
@@ -98,4 +98,4 @@ spec:
         hostPath: /dev/ttyUSB0
         hostPathType: CharDevice
         globalMounts:
-          - path: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0a7307af5593eb11baf21b4f3d98b6d1-if00-port0
+          - path: /dev/ttyUSB0
