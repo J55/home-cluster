@@ -50,7 +50,7 @@ spec:
             port: 8123
     route:
       app:
-        hostnames: ["hass.${SECRET_DOMAIN}"]
+        hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
           - hass.${SECRET_DOMAIN}
         parentRefs:
