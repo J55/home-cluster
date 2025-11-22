@@ -70,3 +70,11 @@ spec:
           - path: /config/.venv
       tmp:
         type: emptyDir
+      configuration:
+        enabled: true
+        type: configMap
+        name: home-assistant-config
+        globalMounts:
+          - path: /config/configuration.yaml
+            subPath: configuration.yaml
+            readOnly: true
