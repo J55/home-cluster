@@ -51,18 +51,22 @@ spec:
     route:
       app:
         hostnames: ["hass.${SECRET_DOMAIN}"]
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - hass.${SECRET_DOMAIN}
         parentRefs:
-          - name: envoy-internal
+          - name: envoy-external
             namespace: network
     persistence:
       config:
-        enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 2Gi
+        existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /config
       config-cache:
+        existingClaim: "{{ .Release.Name }}-cache"
+        globalMounts:
+          - path: /config/.venv
+      tmp:
+        type: emptyDir
         existingClaim: "{{ .Release.Name }}-cache"
         globalMounts:
           - path: /config/.venv
