@@ -28,7 +28,7 @@ spec:
                   name: *app
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
+              readOnlyRootFilesystem: fals
               capabilities: {drop: ["ALL"]}
             resources:
               requests:
@@ -64,17 +64,9 @@ spec:
         size: 2Gi
         globalMounts:
           - path: /config
-      # config-cache:
-      #   existingClaim: "{{ .Release.Name }}-cache"
-      #   globalMounts:
-      #     - path: /config/.venv
+      config-cache:
+        existingClaim: "{{ .Release.Name }}-cache"
+        globalMounts:
+          - path: /config/.venv
       tmp:
         type: emptyDir
-      # configuration:
-      #   enabled: true
-      #   type: configMap
-      #   name: home-assistant-config
-      #   globalMounts:
-      #     - path: /config/configuration.yaml
-      #       subPath: configuration.yaml
-      #       readOnly: true
