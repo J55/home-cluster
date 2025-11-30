@@ -31,7 +31,7 @@ spec:
               repository: docker.io/nodered/node-red
               tag: 4.1.1
             env:
-              TZ: "${TIMEZONE:=Etc/UTC}"
+              TZ: "America/New_York"
               NODE_RED_ENABLE_SAFE_MODE: "false"
               NODE_RED_ENABLE_PROJECTS: "true"
             probes:
