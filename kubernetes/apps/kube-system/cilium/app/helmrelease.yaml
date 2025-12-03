@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -9,9 +10,10 @@ spec:
     name: cilium
   interval: 1h
   values:
-    autoDirectNodeRoutes: true
+    masquerade: true
+    autoDirectNodeRoutes: false
     bpf:
-      masquerade: true
+      masquerade: false
       # Ref: https://github.com/siderolabs/talos/issues/10002
       hostLegacyRouting: true
     cni:
@@ -38,13 +40,13 @@ spec:
     ipv4NativeRoutingCIDR: "10.42.0.0/16"
     k8sServiceHost: 127.0.0.1
     k8sServicePort: 7445
-    kubeProxyReplacement: true
+    kubeProxyReplacement: "partial"
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
     l2announcements:
       enabled: true
     loadBalancer:
       algorithm: maglev
-      mode: "dsr"
+      mode: "snat"
     localRedirectPolicy: true
     operator:
       dashboards:
@@ -61,7 +63,7 @@ spec:
         enabled: true
         trustCRDsExist: true
     rollOutCiliumPods: true
-    routingMode: native
+    routingMode: tunnel
     securityContext:
       capabilities:
         ciliumAgent:
