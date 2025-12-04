@@ -14,6 +14,13 @@ spec:
     namespace: flux-system
   targetNamespace: observability
   wait: true
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: grafana-operator
+      namespace: observability
+    - apiVersion: grafana.integreatly.org/v1beta1
+      kind: Grafana
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
