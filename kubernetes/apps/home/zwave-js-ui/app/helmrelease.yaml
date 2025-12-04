@@ -38,6 +38,7 @@ spec:
             securityContext:
               privileged: true
             resources:
+              requests:
                 cpu: 50m
                 memory: 150Mi
               limits:
