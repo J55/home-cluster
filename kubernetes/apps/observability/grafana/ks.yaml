@@ -7,6 +7,10 @@ metadata:
 spec:
   interval: 1h
   path: ./kubernetes/apps/observability/grafana/app
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
@@ -27,6 +31,10 @@ spec:
       namespace: storage
   interval: 1h
   path: ./kubernetes/apps/observability/grafana/instance
+  postBuild:
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
   prune: true
   sourceRef:
     kind: GitRepository
