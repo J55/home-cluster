@@ -116,10 +116,16 @@
     {
       matchUpdateTypes: ["minor"],
       labels: ["type/minor"],
+      "automerge": true,
+      "automergeType": "branch",
+      "platformAutomerge": true
     },
     {
       matchUpdateTypes: ["patch"],
       labels: ["type/patch"],
+      "automerge": true,
+      "automergeType": "branch",
+      "platformAutomerge": true
     },
     {
       matchDatasources: ["docker"],
