@@ -63,8 +63,8 @@ spec:
         ruleSelectorNilUsesHelmValues: false
         scrapeConfigSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
-        retention: 4d
-        retentionSize: 10GB
+        retention: 14d
+        retentionSize: 40GB
         resources:
           requests:
             cpu: 250m
@@ -76,7 +76,7 @@ spec:
               storageClassName: longhorn
               resources:
                 requests:
-                  storage: 12Gi
+                  storage: 50Gi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
     kube-state-metrics:
