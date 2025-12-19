@@ -7,7 +7,7 @@ components:
   - ../../components/sops
 
 resources:
-  - ./pvc.yaml
+  # - ./pvc.yaml
   - ./replicationdestination.yaml
   - ./replicationsource.yaml
   - ./secret.sops.yaml
