@@ -56,16 +56,13 @@ spec:
             port: 3000
     route:
       app:
-        hostnames: ["zwave.${SECRET_DOMAIN}"]
+        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-internal
             namespace: network
     persistence:
       config:
-        enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 1Gi
+        existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /usr/src/app/store
       usb:
