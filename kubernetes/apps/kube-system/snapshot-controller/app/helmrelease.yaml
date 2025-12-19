@@ -14,7 +14,7 @@ spec:
       serviceMonitor:
         create: true
       volumeSnapshotClasses:
-        - name: longhorn
+        - name: longhorn-snapshot
           annotations:
             snapshot.storage.kubernetes.io/is-default-class: "true"
           driver: driver.longhorn.io
