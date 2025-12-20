@@ -60,9 +60,6 @@ spec:
             sectionName: https
     persistence:
       data:
-        enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 1Gi
+        existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /data
