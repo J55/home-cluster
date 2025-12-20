@@ -5,8 +5,8 @@ kind: Kustomization
 metadata:
   name: zigbee
 spec:
-  components:
-    - ../../../../components/volsync
+  # components:
+  #   - ../../../../components/volsync
   dependsOn:
     - name: longhorn
       namespace: storage
@@ -16,9 +16,9 @@ spec:
   interval: 1h
   path: ./kubernetes/apps/home/zigbee2mqtt/app
   postBuild:
-    substitute:
-      APP: zigbee
-      VOLSYNC_CAPACITY: 1Gi
+    # substitute:
+    #   APP: zigbee
+    #   VOLSYNC_CAPACITY: 1Gi
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
