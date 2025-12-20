@@ -4,13 +4,13 @@ kind: Kustomization
 namespace: home
 
 components:
-  - ../../components/alerts
+  # - ../../components/alerts
   - ../../components/sops
 
 resources:
   - ./namespace.yaml
   - ./home-assistant/ks.yaml
   - ./mosquitto/ks.yaml
-  # - ./node-red/ks.yaml
+  - ./node-red/ks.yaml
   - ./zigbee2mqtt/ks.yaml
   - ./zwave-js-ui/ks.yaml
