@@ -17,8 +17,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-assistant/home-assistant
-              tag: 2025.12.4
+              repository: ghcr.io/home-operations/home-assistant
+              tag: 2025.12.3@sha256:711c90c7e6f73268a212806bcd9235b6917ae9f81012041aa2dfc895ec2cc558
             env:
               TZ: America/New_York
               HASS_HTTP_TRUSTED_PROXY_1: 192.168.0.0/24
@@ -97,23 +97,23 @@ spec:
         existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /config
-      # config-cache:
-      #   existingClaim: "{{ .Release.Name }}-cache"
-      #   globalMounts:
-      #     - path: /config/.venv
+      config-cache:
+        existingClaim: "{{ .Release.Name }}-cache"
+        globalMounts:
+          - path: /config/.venv
       tmpfs:
         type: emptyDir
-        # advancedMounts:
-        #   home-assistant:
-        #     app:
-        #       - path: /config/logs
-        #         subPath: logs
-        #       - path: /config/tts
-        #         subPath: tts
-        #       - path: /tmp
-        #         subPath: hass-tmp
-        #     code-server:
-        #       - path: /tmp
-        #         subPath: code-server-tmp
-        #       - path: /nonexistent
-        #         subPath: nonexistent
+        advancedMounts:
+          home-assistant:
+            app:
+              - path: /config/logs
+                subPath: logs
+              - path: /config/tts
+                subPath: tts
+              - path: /tmp
+                subPath: hass-tmp
+            code-server:
+              - path: /tmp
+                subPath: code-server-tmp
+              - path: /nonexistent
+                subPath: nonexistent
