@@ -97,23 +97,23 @@ spec:
         existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /config
-      config-cache:
-        existingClaim: "{{ .Release.Name }}-cache"
-        globalMounts:
-          - path: /config/.venv
+      # config-cache:
+      #   existingClaim: "{{ .Release.Name }}-cache"
+      #   globalMounts:
+      #     - path: /config/.venv
       tmpfs:
         type: emptyDir
-        advancedMounts:
-          home-assistant:
-            app:
-              - path: /config/logs
-                subPath: logs
-              - path: /config/tts
-                subPath: tts
-              - path: /tmp
-                subPath: hass-tmp
-            code-server:
-              - path: /tmp
-                subPath: code-server-tmp
-              - path: /nonexistent
-                subPath: nonexistent
+        # advancedMounts:
+        #   home-assistant:
+        #     app:
+        #       - path: /config/logs
+        #         subPath: logs
+        #       - path: /config/tts
+        #         subPath: tts
+        #       - path: /tmp
+        #         subPath: hass-tmp
+        #     code-server:
+        #       - path: /tmp
+        #         subPath: code-server-tmp
+        #       - path: /nonexistent
+        #         subPath: nonexistent
