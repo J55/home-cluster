@@ -19,13 +19,6 @@ spec:
             image:
               repository: ghcr.io/home-assistant/home-assistant
               tag: 2025.12.4
-            command:
-              - python3
-              - -m
-              - homeassistant
-
-            args:
-              - "--recovery-mode"
             env:
               TZ: America/New_York
               HASS_HTTP_TRUSTED_PROXY_1: 192.168.0.0/24
