@@ -94,10 +94,7 @@ spec:
                 port: *codePort
     persistence:
       config:
-        enabled: true
-        storageClass: longhorn
-        accessMode: ReadWriteOnce
-        size: 10Gi
+        existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /config
       config-cache:
