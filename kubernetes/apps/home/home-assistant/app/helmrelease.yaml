@@ -19,6 +19,11 @@ spec:
             image:
               repository: ghcr.io/home-assistant/home-assistant
               tag: 2025.12.4
+            command:
+              - python3
+              - -m
+              - homeassistant
+
             args:
               - "--recovery-mode"
             env:
