@@ -7,4 +7,5 @@ resources:
   - ./backendtrafficpolicy.yaml
   - ./helmrelease.yaml
   - ./ocirepository.yaml
+  # - ./scaledobject.yaml
   - ./secret.sops.yaml
