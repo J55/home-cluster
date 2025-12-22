@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: storage
 
 components:
+  - ../../components/alerts
   - ../../components/sops
 
 resources:
