@@ -16,13 +16,6 @@ spec:
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  targetNamespace: home
-  wait: false
   patches:
     - target:
         kind: ReplicationSource
@@ -31,3 +24,11 @@ spec:
         - op: replace
           path: /spec/trigger/schedule
           value: "0 2-23/2 * * *"
+
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: home
+  wait: false
