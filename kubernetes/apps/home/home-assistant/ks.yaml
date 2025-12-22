@@ -20,6 +20,7 @@ spec:
     - target:
         kind: ReplicationSource
         name: home-assistant
+        namespace: home
       patch: |-
         - op: replace
           path: /spec/trigger/schedule
