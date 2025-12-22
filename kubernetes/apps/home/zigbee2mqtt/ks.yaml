@@ -8,11 +8,8 @@ spec:
   components:
     - ../../../../components/volsync
   dependsOn:
-    - name: longhorn
-      namespace: storage
-    - name: mosquitto
-    - name: node-feature-discovery
-      namespace: kube-system
+    - name: volsync
+      namespace: volsync-system
   interval: 1h
   path: ./kubernetes/apps/home/zigbee2mqtt/app
   postBuild:

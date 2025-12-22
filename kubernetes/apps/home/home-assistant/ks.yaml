@@ -8,9 +8,6 @@ spec:
   components:
     - ../../../../components/volsync
   dependsOn:
-    - name: longhorn
-      namespace: storage
-    - name: mosquitto
     - name: volsync
       namespace: volsync-system
   interval: 1h

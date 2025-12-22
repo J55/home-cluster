@@ -5,9 +5,6 @@ kind: Kustomization
 metadata:
   name: mosquitto
 spec:
-  dependsOn:
-    - name: longhorn
-      namespace: storage
   interval: 1h
   path: ./kubernetes/apps/home/mosquitto/app
   postBuild:
