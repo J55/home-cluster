@@ -23,4 +23,11 @@ spec:
     namespace: flux-system
   targetNamespace: home
   wait: false
-
+  patches:
+    - target:
+        kind: ReplicationSource
+        name: home-assistant
+      patch: |-
+        - op: replace
+          path: /spec/trigger/schedule
+          value: "0 2-23/2 * * *"
