@@ -5,7 +5,8 @@ kind: Kustomization
 metadata:
   name: mosquitto
 spec:
-  interval: 1h
+  interval: 2h
+  retryInterval: 30m
   path: ./kubernetes/apps/home/mosquitto/app
   postBuild:
     substituteFrom:
