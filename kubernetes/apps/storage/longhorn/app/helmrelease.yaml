@@ -23,12 +23,6 @@ spec:
       orphanAutoDeletion: "true"
       storageMinimalAvailablePercentage: "1"
       storageReservedPercentage: 25
-      snapshotDataIntegrity: "disabled"
-      snapshotDataIntegrityCronjob: "10 3 * * 0"
-      concurrentReplicaRebuildPerNodeLimit: "1"
-      concurrentVolumeBackupRestorePerNodeLimit: "1"
-      backupConcurrentLimit: "1"
-      restoreConcurrentLimit: "1"
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 3
