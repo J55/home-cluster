@@ -7,9 +7,6 @@ metadata:
 spec:
   components:
     - ../../../../components/volsync
-  dependsOn:
-    - name: volsync
-      namespace: volsync-system
   interval: 1h
   path: ./kubernetes/apps/home/zwave-js-ui/app
   postBuild:
