@@ -7,7 +7,8 @@ metadata:
 spec:
   components:
     - ../../../../components/volsync
-  interval: 1h
+  interval: 2h
+  retryInterval: 30m
   path: ./kubernetes/apps/home/zwave-js-ui/app
   postBuild:
     substitute:
