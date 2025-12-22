@@ -18,6 +18,8 @@ spec:
         kind: Secret
   patches:
     - target:
+        group: volsync.backube
+        version: v1alpha1
         kind: ReplicationSource
         name: home-assistant
         namespace: home
