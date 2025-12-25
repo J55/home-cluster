@@ -39,10 +39,8 @@ spec:
               privileged: true
             resources:
               requests:
-                cpu: 50m
-                memory: 150Mi
+                cpu: 10m
               limits:
-                cpu: 500m
                 memory: 512Mi
         pod:
           nodeSelector:
