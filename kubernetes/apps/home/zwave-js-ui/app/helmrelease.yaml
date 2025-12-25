@@ -54,7 +54,8 @@ spec:
             port: 3000
     route:
       app:
-        hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+        hostnames:
+          - "zwave.${SECRET_DOMAIN}"
         parentRefs:
           - name: envoy-internal
             namespace: network
