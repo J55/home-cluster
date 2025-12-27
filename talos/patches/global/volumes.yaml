@@ -5,8 +5,8 @@ name: EPHEMERAL
 provisioning:
   diskSelector:
     match: system_disk  # Keep it on the system disk
-  minSize: 2GB
-  maxSize: 80GB
+  minSize: 2GiB
+  maxSize: 80GiB
   grow: false
 ---
 apiVersion: v1alpha1
