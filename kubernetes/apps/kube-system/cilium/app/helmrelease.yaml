@@ -25,6 +25,7 @@ spec:
       hostRoot: /sys/fs/cgroup
     # NOTE: devices might need to be set if you have more than one active NIC on your hosts
     # devices: eno+ eth+
+    devices: end0
     dashboards:
       enabled: true
     endpointRoutes:
