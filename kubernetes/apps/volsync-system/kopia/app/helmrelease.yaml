@@ -104,7 +104,7 @@ spec:
             subPath: repository.config
       repository:
         type: nfs
-        server: 192.168.30.2
+        server: 192.168.30.3
         path: /volume1/k8s/VolsyncKopia
         globalMounts:
           - path: /repository
