@@ -108,7 +108,7 @@ spec:
               value: Object.spec.template.spec.volumes{
                 name: "repository",
                 nfs: Object.spec.template.spec.volumes.nfs{
-                  server: "JAC1221.local",
+                  server: "192.168.30.2",
                   path: "/volume1/k8s/VolsyncKopia"
                 }
               }
