@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/storage/longhorn/app
+  path: ./kubernetes/apps/longhorn-system/longhorn/app
   postBuild:
     substituteFrom:
       - name: cluster-secrets
@@ -32,7 +32,7 @@ spec:
   dependsOn:
     - name: longhorn
   interval: 1h
-  path: ./kubernetes/apps/storage/longhorn/storageclass
+  path: ./kubernetes/apps/longhorn-system/longhorn/storageclass
   prune: true
   sourceRef:
     kind: GitRepository
