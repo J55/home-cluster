@@ -5,6 +5,9 @@ kind: Kustomization
 metadata:
   name: home-assistant
 spec:
+  dependsOn:
+    - name: volsync
+      namespace: volsync-system
   components:
     - ../../../../components/volsync
   interval: 2h

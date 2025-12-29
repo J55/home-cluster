@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -10,10 +9,9 @@ spec:
     name: cilium
   interval: 1h
   values:
-    masquerade: true
-    autoDirectNodeRoutes: false
+    autoDirectNodeRoutes: true
     bpf:
-      masquerade: false
+      masquerade: true
       # Ref: https://github.com/siderolabs/talos/issues/10002
       hostLegacyRouting: true
     cni:
@@ -25,7 +23,6 @@ spec:
       hostRoot: /sys/fs/cgroup
     # NOTE: devices might need to be set if you have more than one active NIC on your hosts
     # devices: eno+ eth+
-    devices: end0
     dashboards:
       enabled: true
     endpointRoutes:
@@ -47,7 +44,7 @@ spec:
       enabled: true
     loadBalancer:
       algorithm: maglev
-      mode: "snat"
+      mode: "dsr"
     localRedirectPolicy: true
     operator:
       dashboards:
@@ -64,7 +61,7 @@ spec:
         enabled: true
         trustCRDsExist: true
     rollOutCiliumPods: true
-    routingMode: tunnel
+    routingMode: native
     securityContext:
       capabilities:
         ciliumAgent:
@@ -86,4 +83,5 @@ spec:
           - SYS_ADMIN
           - SYS_RESOURCE
     socketLB:
+      enabled: true
       hostNamespaceOnly: true

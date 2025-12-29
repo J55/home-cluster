@@ -28,7 +28,7 @@ spec:
   dependsOn:
     - name: grafana
     - name: longhorn
-      namespace: storage
+      namespace: longhorn-system
   interval: 1h
   path: ./kubernetes/apps/observability/grafana/instance
   postBuild:

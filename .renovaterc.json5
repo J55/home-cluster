@@ -10,7 +10,7 @@
     ":semanticCommits",
   ],
   dependencyDashboard: true,
-  dependencyDashboardTitle: "Renovate Dashboard 🤖",
+  dependencyDashboardTitle: "Renovate Dashboard :robot:",
   schedule: ["every weekend"],
   ignorePaths: ["**/*.sops.*"],
   flux: {
@@ -116,16 +116,14 @@
     {
       matchUpdateTypes: ["minor"],
       labels: ["type/minor"],
-      "automerge": true,
-      "automergeType": "branch",
-      "platformAutomerge": true
     },
     {
       matchUpdateTypes: ["patch"],
       labels: ["type/patch"],
-      "automerge": true,
-      "automergeType": "branch",
-      "platformAutomerge": true
+    },
+    {
+      matchUpdateTypes: ["digest"],
+      labels: ["type/digest"],
     },
     {
       matchDatasources: ["docker"],

@@ -8,12 +8,3 @@ provisioning:
   minSize: 2GiB
   maxSize: 80GiB
   grow: false
----
-apiVersion: v1alpha1
-kind: UserVolumeConfig
-name: longhorn
-provisioning:
-  diskSelector:
-    match: system_disk  # Use the same system disk
-  minSize: 80GiB
-  maxSize: 100GiB
