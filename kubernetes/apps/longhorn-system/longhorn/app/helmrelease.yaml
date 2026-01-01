@@ -24,6 +24,11 @@ spec:
       storageMinimalAvailablePercentage: "1"
       storageReservedPercentage: 25
       taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
+    longhornManager:
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 3
