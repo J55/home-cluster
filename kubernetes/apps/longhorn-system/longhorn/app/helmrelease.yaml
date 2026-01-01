@@ -23,6 +23,7 @@ spec:
       orphanAutoDeletion: "true"
       storageMinimalAvailablePercentage: "1"
       storageReservedPercentage: 25
+      taintToleration: "node-role.kubernetes.io/control-plane:NoSchedule"
     persistence:
       defaultClass: true
       defaultClassReplicaCount: 3
