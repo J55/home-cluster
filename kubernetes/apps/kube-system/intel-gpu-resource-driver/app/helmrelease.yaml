@@ -13,12 +13,5 @@ spec:
     cdi:
       staticPath: /var/cdi/static
       dynamicPath: /var/cdi/dynamic
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: node-role.kubernetes.io/compute-heavy
-                  operator: In
-                  values:
-                    - "true"
+    nodeSelector:
+      kubernetes.io/arch: amd64
