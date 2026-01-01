@@ -13,5 +13,6 @@ spec:
     cdi:
       staticPath: /var/cdi/static
       dynamicPath: /var/cdi/dynamic
-    nodeSelector:
-      kubernetes.io/arch: amd64
+    kubeletPlugin:
+      nodeSelector:
+        node-role.kubernetes.io/compute-heavy: "true"
