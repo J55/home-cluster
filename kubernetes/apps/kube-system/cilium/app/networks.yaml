@@ -9,7 +9,7 @@ spec:
   blocks:
     - cidr: "192.168.20.0/24"
 ---
-# Disabled at the switch to L3
+# To be isabled at the switch to L3
 apiVersion: cilium.io/v2alpha1
 kind: CiliumL2AnnouncementPolicy
 metadata:
@@ -24,23 +24,22 @@ spec:
     matchLabels:
       kubernetes.io/os: linux
 ---
-# To enable after confirming BGP
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cilium.io/ciliumbgpadvertisement_v2.json
-# apiVersion: cilium.io/v2
-# kind: CiliumBGPAdvertisement
-# metadata:
-#   name: l3-bgp-advertisement
-#   labels:
-#     advertise: bgp
-# spec:
-#   advertisements:
-#     - advertisementType: Service
-#       service:
-#         addresses:
-#           - LoadBalancerIP
-#       selector:
-#         matchExpressions:
-#           - {key: somekey, operator: NotIn, values: ["never-used-value"]}
+apiVersion: cilium.io/v2
+kind: CiliumBGPAdvertisement
+metadata:
+  name: l3-bgp-advertisement
+  labels:
+    advertise: bgp
+spec:
+  advertisements:
+    - advertisementType: Service
+      service:
+        addresses:
+          - LoadBalancerIP
+      selector:
+        matchExpressions:
+          - {key: somekey, operator: NotIn, values: ["never-used-value"]}
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/cilium.io/ciliumbgppeerconfig_v2.json
 apiVersion: cilium.io/v2
