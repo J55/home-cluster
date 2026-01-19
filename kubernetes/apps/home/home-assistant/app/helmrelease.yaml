@@ -90,6 +90,11 @@ spec:
       code-server:
         hostnames:
           - hass-code.${SECRET_DOMAIN}
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Home
+          gethomepage.dev/name: Home Assistant Code
+          gethomepage.dev/icon: home-assistant-alt.png
         parentRefs:
           - name: envoy-internal
             namespace: network
