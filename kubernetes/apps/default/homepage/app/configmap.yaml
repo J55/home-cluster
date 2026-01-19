@@ -146,19 +146,14 @@ data:
               type: bazarr
               url: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-        - Profilarr:
-            href: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: profilarr.png
-            description: Profiles
         - Prowlarr:
             href: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             icon: prowlarr.png
             description: Indexer Manager
             widget:
               type: prowlarr
-              url: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              url: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
         - Radarr:
             href: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
@@ -187,16 +182,21 @@ data:
               type: sabnzbd
               url: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
-        - qBitTorrent:
-            href: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: qbittorrent.png
-            description: Torrent Downloader
-            widget:
-              type: qbittorrent
-              url: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+        # - qBitTorrent:
+        #     href: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+        #     siteMonitor: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+        #     icon: qbittorrent.png
+        #     description: Torrent Downloader
+        #     widget:
+        #       type: qbittorrent
+        #       url: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+        #       username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+        #       password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+        - Profilarr:
+            href: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: profilarr.png
+            description: Profiles
     - Calendar:
         - Calendar:
             widget:
