@@ -55,7 +55,12 @@ spec:
     route:
       app:
         hostnames:
-          - "zwave.${SECRET_DOMAIN}"
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: zwavejs2mqtt.png
+          gethomepage.dev/name: Zwave
+          gethomepage.dev/group: Home
         parentRefs:
           - name: envoy-internal
             namespace: network

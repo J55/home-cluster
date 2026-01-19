@@ -75,6 +75,11 @@ spec:
       app:
         hostnames:
           - hass.${SECRET_DOMAIN}
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Home
+          gethomepage.dev/name: Home Assistant
+          gethomepage.dev/icon: home-assistant.png
         parentRefs:
           - name: envoy-external
             namespace: network

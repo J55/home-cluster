@@ -82,7 +82,12 @@ spec:
     route:
       app:
         hostnames:
-          - zigbee.${SECRET_DOMAIN}
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: zigbee2mqtt.png
+          gethomepage.dev/name: Zigbee
+          gethomepage.dev/group: Home
         parentRefs:
           - name: envoy-internal
             namespace: network

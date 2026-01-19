@@ -4,6 +4,12 @@ kind: HTTPRoute
 metadata:
   name: longhorn
   namespace: longhorn-system
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/group: Storage
+    gethomepage.dev/name: Longhorn
+    gethomepage.dev/icon: longhorn.png
+    gethomepage.dev/pod-selector: app.kubernetes.io/name=longhorn
 spec:
   hostnames: ["longhorn.${SECRET_DOMAIN}"]
   parentRefs:
@@ -18,4 +24,3 @@ spec:
       backendRefs:
         - name: longhorn-frontend
           port: 80
-

@@ -10,5 +10,6 @@ components:
 resources:
   - ./namespace.yaml
   - ./echo/ks.yaml
+  - ./homepage/ks.yaml
   - ./plex/ks.yaml
   - ./seerr/ks.yaml

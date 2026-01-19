@@ -1,0 +1,239 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  labels:
+    app.kubernetes.io/name: homepage
+data:
+  kubernetes.yaml: |
+    mode: cluster
+    gateway: true
+    ingress: false
+    traefik: false
+  settings.yaml: |
+    # https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/ICONS.md
+    # https://pictogrammers.com/library/mdi/
+    # https://simpleicons.org/
+    title: Dashboard
+    favicon: https://github.com/walkxcode/dashboard-icons/blob/main/png/heimdall.png
+    theme: dark
+    headerStyle: clean
+    hideVersion: true
+    quicklaunch:
+      searchDescriptions: true
+      hideInternetSearch: true
+      showSearchSuggestions: true
+    layout:
+      Calendar:
+        style: row
+        header: false
+      Home:
+        style: row
+        columns: 2
+        icon: mdi-home-analytics
+      Media:
+        style: row
+        columns: 2
+        icon: mdi-play-circle
+      Downloads:
+        style: row
+        columns: 3
+        icon: mdi-download-circle
+      Observability:
+        style: column
+        icon: mdi-monitor-eye
+      Infrastructure:
+        style: column
+        icon: mdi-server-network
+      Storage:
+        style: column
+        icon: mdi-database
+      System:
+        style: row
+        columns: 4
+        icon: mdi-application
+  custom.css: ""
+  custom.js: ""
+  bookmarks.yaml: |
+    - Social:
+        - Discord:
+            - icon: discord.png
+              href: https://discord.com/app
+        - Gmail:
+            - icon: gmail.png
+              href: http://gmail.com
+        - Reddit:
+            - icon: reddit.png
+              href: https://reddit.com
+        - Twitch:
+            - icon: twitch.png
+              href: https://twitch.tv
+        - YouTube:
+            - icon: youtube.png
+              href: https://youtube.com/feed/subscriptions
+    - Cloud:
+        - CloudFlare:
+            - icon: cloudflare.png
+              href: https://dash.cloudflare.com
+        - AWS Console:
+            - icon: aws.png
+              href: https://aws.amazon.com/console/
+        - Pushover:
+            - icon: pushover.png
+              href: https://client.pushover.net/
+        - UptimeRobot:
+            - icon: si-statuspage
+              href: https://uptimerobot.com/
+        - HealthChecks:
+            - icon: healthchecks.png
+              href: https://healthcheck.io/
+    - Git:
+        - Kubesearch:
+            - icon: kubernetes-dashboard.png
+              description: Helm Chart Search
+              href: https://nanne.dev/k8s-at-home-search/
+        - home-cluster:
+            - icon: github.png
+              description: Renovate Dashboard
+              href: https://github.com/J55/home-cluster/issues/44
+        - Homepage Icons:
+            - icon: si-jpeg
+              href: https://github.com/homarr-labs/dashboard-icons/blob/main/ICONS.md
+        - Homepage MDI:
+            - icon: si-materialdesign
+              href: https://pictogrammers.com/library/mdi/
+        - Homepage SI:
+            - icon: si-simpleicons
+              href: https://simpleicons.org/
+  services.yaml: |
+    - Infrastructure:
+        - Cloudflared:
+            href: https://dash.cloudflare.com/
+            icon: cloudflare-zero-trust.png
+            description: Cloudflared Tunnel
+            widget:
+              type: cloudflared
+              accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUNTID}}
+              tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNELID}}
+              key: {{HOMEPAGE_VAR_CLOUDFLARE_API_TOKEN}}
+    - System:
+        - Unifi:
+            href: http://192.168.0.1
+            icon: unifi.png
+            widget:
+              type: unifi
+              key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
+        - Synology:
+            href: http://JAC1221.local
+            icon: synology.png
+    - Media:
+        - Autobrr:
+            href: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: autobrr.png
+            description: Torrent Automator
+            widget:
+              type: autobrr
+              url: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_AUTOBRR_API_KEY}}
+        - Bazarr:
+            href: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: bazarr.png
+            description: Subtitles
+            widget:
+              type: bazarr
+              url: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
+        - Profilarr:
+            href: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: profilarr.png
+            description: Profiles
+        - Prowlarr:
+            href: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: prowlarr.png
+            description: Indexer Manager
+            widget:
+              type: prowlarr
+              url: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
+        - Radarr:
+            href: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: radarr.png
+            description: Movies
+            widget:
+              type: radarr
+              url: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
+        - Sonarr:
+            href: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: sonarr.png
+            description: TV Shows
+            widget:
+              type: sonarr
+              url: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+        - Sabnzbd:
+            href: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: sabnzbd.png
+            description: NZB Downloader
+            widget:
+              type: sabnzbd
+              url: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
+        - qBitTorrent:
+            href: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: qbittorrent.png
+            description: Torrent Downloader
+            widget:
+              type: qbittorrent
+              url: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+    - Calendar:
+        - Calendar:
+            widget:
+              type: calendar
+              firstDayInWeek: monday
+              view: monthly
+              maxEvents: 10
+              showTime: true
+              timezone: America/New_York
+              integrations:
+                - type: sonarr
+                  service_group: Media
+                  service_name: Sonarr
+                - type: radarr
+                  service_group: Media
+                  service_name: Radarr
+  widgets.yaml: |
+    - search:
+        provider: [google]
+        focus: false
+        target: _blank
+    - kubernetes:
+        cluster:
+          cpu: true
+          label: cluster
+          memory: true
+          show: true
+          showLabel: true
+        nodes:
+          cpu: true
+          memory: true
+          show: true
+          showLabel: true
+    - datetime:
+        text_size: 1
+        format:
+          dateStyle: long
+          timeStyle: short
+          hourCycle: h23
+  docker.yaml: ""
