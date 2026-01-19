@@ -123,6 +123,7 @@ data:
             icon: unifi.png
             widget:
               type: unifi
+              url: http://192.168.0.1
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
         - Synology:
             href: http://JAC1221.local
