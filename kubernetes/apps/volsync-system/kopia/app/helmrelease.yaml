@@ -76,12 +76,12 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
-      annotations:
-        gethomepage.dev/enabled: "true"
-        gethomepage.dev/group: Storage
-        gethomepage.dev/name: Kopia
-        gethomepage.dev/icon: kopia.png
-        gethomepage.dev/pod-selector: app.kubernetes.io/name=kopia
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Storage
+          gethomepage.dev/name: Kopia
+          gethomepage.dev/icon: kopia.png
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=kopia
         parentRefs:
           - name: envoy-internal
             namespace: network
