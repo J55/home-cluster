@@ -22,6 +22,7 @@ spec:
             gethomepage.dev/icon: alertmanager.png
             gethomepage.dev/name: Alert Manager
             gethomepage.dev/group: Observability
+            gethomepage.dev/siteMonitor: http://alertmanager-operated.observability.svc.cluster.local:9093/-/ready
           parentRefs:
             - name: envoy-internal
               namespace: network
@@ -53,6 +54,7 @@ spec:
             gethomepage.dev/icon: prometheus.png
             gethomepage.dev/name: Prometheus
             gethomepage.dev/group: Observability
+            gethomepage.dev/siteMonitor: http://prometheus-operated.observability.svc.cluster.local:9090/-/ready
           parentRefs:
             - name: envoy-internal
               namespace: network

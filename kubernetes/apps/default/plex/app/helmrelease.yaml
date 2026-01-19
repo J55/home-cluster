@@ -75,12 +75,15 @@ spec:
       app:
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: plex.png
-          gethomepage.dev/name: Plex
           gethomepage.dev/group: Media
+          gethomepage.dev/name: Plex
+          gethomepage.dev/icon: plex.png
+          gethomepage.dev/description: Media Player
           gethomepage.dev/widget.type: plex
-          gethomepage.dev/widget.url: http://plex.default.svc.cluster.local:32400
-          gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_PLEX_API_KEY}}" }}'
+          gethomepage.dev/widget.url: http://plex.default:32400
+          gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_PLEX_TOKEN}}` }}"
+          gethomepage.dev/pod-selector: >-
+            app.kubernetes.io/name in (plex)
           # gatus.home-operations.com/endpoint: |-
           #   conditions: ["[STATUS] == 401"]
         hostnames:

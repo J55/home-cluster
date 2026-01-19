@@ -88,6 +88,7 @@ spec:
           gethomepage.dev/icon: zigbee2mqtt.png
           gethomepage.dev/name: Zigbee
           gethomepage.dev/group: Home
+          gethomepage.dev/siteMonitor: http://zigbee.home.svc.cluster.local:8080
         parentRefs:
           - name: envoy-internal
             namespace: network
