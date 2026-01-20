@@ -88,6 +88,12 @@ spec:
       app:
         annotations:
           gatus.home-operations.com/enabled: "false"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: gatus.png
+          gethomepage.dev/name: Status
+          gethomepage.dev/group: System
+          gethomepage.dev/widget.type: gatus
+          gethomepage.dev/widget.url: http://gatus.observability.svc.cluster.local
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
           - status.${SECRET_DOMAIN}
