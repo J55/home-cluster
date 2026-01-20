@@ -82,6 +82,8 @@ spec:
           gethomepage.dev/icon: home-assistant.png
           gethomepage.dev/href: https://hass.${SECRET_DOMAIN}
           gethomepage.dev/pod-selector: app.kubernetes.io/name=home-assistant
+          gatus.home-operations.com/endpoint: |-
+            conditions: ["[STATUS] == 200"]
         parentRefs:
           - name: envoy-external
             namespace: network

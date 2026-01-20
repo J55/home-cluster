@@ -10,7 +10,7 @@ components:
 resources:
   - ./namespace.yaml
   - ./fluent-bit/ks.yaml
-  # - ./gatus/ks.yaml
+  - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./keda/ks.yaml
   - ./kube-prometheus-stack/ks.yaml

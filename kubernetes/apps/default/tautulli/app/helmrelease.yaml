@@ -72,9 +72,9 @@ spec:
           gethomepage.dev/widget.type: tautulli
           gethomepage.dev/widget.url: http://tautulli.default.svc.cluster.local:8181
           gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_TAUTULLI_API_KEY}}" }}'
-          # gatus.home-operations.com/endpoint: |
-          #   conditions:
-          #     - "[STATUS] == 200"
+          gatus.home-operations.com/endpoint: |
+            conditions:
+              - "[STATUS] == 200"
         parentRefs:
           - name: envoy-internal
             namespace: network

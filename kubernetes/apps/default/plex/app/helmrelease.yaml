@@ -74,8 +74,8 @@ spec:
     route:
       app:
         annotations:
-          # gatus.home-operations.com/endpoint: |-
-          #   conditions: ["[STATUS] == 401"]
+          gatus.home-operations.com/endpoint: |-
+            conditions: ["[STATUS] == 401"]
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
         parentRefs:
