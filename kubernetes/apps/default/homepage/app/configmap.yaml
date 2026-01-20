@@ -25,9 +25,6 @@ data:
       hideInternetSearch: true
       showSearchSuggestions: true
     layout:
-      Calendar:
-        style: row
-        header: false
       Home:
         style: row
         columns: 2
@@ -53,6 +50,9 @@ data:
         style: row
         columns: 4
         icon: mdi-application
+      Calendar:
+        style: row
+        header: false
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
