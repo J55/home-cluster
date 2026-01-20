@@ -13,4 +13,4 @@ resources:
   - ./homepage/ks.yaml
   - ./plex/ks.yaml
   - ./seerr/ks.yaml
-  - ./tautulli/ks.yaml
+  # - ./tautulli/ks.yaml
