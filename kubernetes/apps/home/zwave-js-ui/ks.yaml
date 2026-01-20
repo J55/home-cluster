@@ -6,8 +6,6 @@ metadata:
   name: zwave
 spec:
   dependsOn:
-    - name: volsync
-      namespace: volsync-system
     - name: node-feature-discovery
       namespace: kube-system
   components:
