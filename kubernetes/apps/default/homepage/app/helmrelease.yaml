@@ -53,7 +53,7 @@ spec:
         annotations:
           gatus.home-operations.com/endpoint: |
             conditions:
-              - "[STATUS] == 200"
+              - "[STATUS] in [200,304]"
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-internal

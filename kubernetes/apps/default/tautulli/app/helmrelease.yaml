@@ -74,7 +74,7 @@ spec:
           gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_TAUTULLI_API_KEY}}" }}'
           gatus.home-operations.com/endpoint: |
             conditions:
-              - "[STATUS] == 200"
+              - "[STATUS] == [200,304]"
         parentRefs:
           - name: envoy-internal
             namespace: network
