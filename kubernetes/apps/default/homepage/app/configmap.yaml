@@ -142,6 +142,7 @@ data:
     - Media:
         - Plex:
             href: https://plex.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://plex.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             icon: plex.png
             description: Media Server
             widget:
