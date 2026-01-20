@@ -7,10 +7,10 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: onepassword
-      namespace: external-secrets
-  interval: 30m
+  # dependsOn:
+  #   - name: onepassword
+  #     namespace: external-secrets
+  interval: 1h
   path: ./kubernetes/apps/default/homepage/app
   postBuild:
     substitute:
@@ -19,7 +19,6 @@ spec:
       - name: cluster-secrets
         kind: Secret
   prune: true
-  retryInterval: 1m
   sourceRef:
     kind: GitRepository
     name: flux-system
