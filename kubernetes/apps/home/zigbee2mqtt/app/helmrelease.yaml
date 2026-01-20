@@ -76,6 +76,12 @@ spec:
         fsGroupChangePolicy: Always
     service:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: zigbee2mqtt.png
+          gethomepage.dev/name: Zigbee
+          gethomepage.dev/group: Home
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=zigbee
         ports:
           http:
             port: *port
@@ -83,12 +89,6 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: zigbee2mqtt.png
-          gethomepage.dev/name: Zigbee
-          gethomepage.dev/group: Home
-          gethomepage.dev/siteMonitor: http://zigbee.home.svc.cluster.local:8080
         parentRefs:
           - name: envoy-internal
             namespace: network

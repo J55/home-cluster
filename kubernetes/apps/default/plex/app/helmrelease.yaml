@@ -67,13 +67,6 @@ spec:
         type: LoadBalancer
         annotations:
           lbipam.cilium.io/ips: 192.168.20.72
-        externalTrafficPolicy: Cluster
-        ports:
-          http:
-            port: *port
-    route:
-      app:
-        annotations:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/group: Media
           gethomepage.dev/name: Plex
@@ -84,6 +77,13 @@ spec:
           gethomepage.dev/widget.key: "{{ `{{HOMEPAGE_VAR_PLEX_TOKEN}}` }}"
           gethomepage.dev/pod-selector: >-
             app.kubernetes.io/name in (plex)
+        externalTrafficPolicy: Cluster
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        annotations:
           # gatus.home-operations.com/endpoint: |-
           #   conditions: ["[STATUS] == 401"]
         hostnames:

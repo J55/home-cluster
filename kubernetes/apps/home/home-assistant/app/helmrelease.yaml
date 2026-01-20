@@ -81,7 +81,7 @@ spec:
           gethomepage.dev/name: Home Assistant
           gethomepage.dev/icon: home-assistant.png
           gethomepage.dev/href: https://hass.${SECRET_DOMAIN}
-          gethomepage.dev/siteMonitor: http://home-assistant.home.svc.cluster.local:8123/api/config
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=home-assistant
         parentRefs:
           - name: envoy-external
             namespace: network
@@ -97,7 +97,7 @@ spec:
           gethomepage.dev/group: Home
           gethomepage.dev/name: Home Assistant Code
           gethomepage.dev/icon: home-assistant-alt.png
-          gethomepage.dev/siteMonitor: http://hass-code.home.svc.cluster.local:12321
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=home-assistant
         parentRefs:
           - name: envoy-internal
             namespace: network

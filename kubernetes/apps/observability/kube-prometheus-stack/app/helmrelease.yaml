@@ -22,7 +22,9 @@ spec:
             gethomepage.dev/icon: alertmanager.png
             gethomepage.dev/name: Alert Manager
             gethomepage.dev/group: Observability
-            gethomepage.dev/siteMonitor: http://alertmanager-operated.observability.svc.cluster.local:9093/-/ready
+            gethomepage.dev/pod-selector: >-
+              app.kubernetes.io/name=alertmanager,
+              alertmanager=kube-prometheus-stack
           parentRefs:
             - name: envoy-internal
               namespace: network
@@ -54,7 +56,9 @@ spec:
             gethomepage.dev/icon: prometheus.png
             gethomepage.dev/name: Prometheus
             gethomepage.dev/group: Observability
-            gethomepage.dev/siteMonitor: http://prometheus-operated.observability.svc.cluster.local:9090/-/ready
+            gethomepage.dev/pod-selector: >-
+              app.kubernetes.io/name=prometheus,
+              operator.prometheus.io/name=kube-prometheus-stack
           parentRefs:
             - name: envoy-internal
               namespace: network

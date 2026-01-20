@@ -47,6 +47,12 @@ spec:
             aeotec.feature.node.kubernetes.io/zwave: "true"
     service:
       app:
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: zwavejs2mqtt.png
+          gethomepage.dev/name: Zwave
+          gethomepage.dev/group: Home
+          gethomepage.dev/pod-selector: app.kubernetes.io/name=zwave
         ports:
           http:
             port: *port
@@ -56,12 +62,6 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: zwavejs2mqtt.png
-          gethomepage.dev/name: Zwave
-          gethomepage.dev/group: Home
-          gethomepage.dev/siteMonitor: http://zwave.home.svc.cluster.local:80
         parentRefs:
           - name: envoy-internal
             namespace: network
