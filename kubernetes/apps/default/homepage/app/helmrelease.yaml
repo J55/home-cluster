@@ -50,11 +50,6 @@ spec:
             port: &port 3000
     route:
       app:
-        annotations:
-          gatus.home-operations.com/endpoint: |-
-            conditions:
-              - "[STATUS] == 200"
-              - "[STATUS] == 304"
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         parentRefs:
           - name: envoy-internal
