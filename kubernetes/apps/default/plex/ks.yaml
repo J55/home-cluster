@@ -8,9 +8,6 @@ spec:
   components:
     - ../../../../components/nfs-scaler
     - ../../../../components/volsync
-  dependsOn:
-    - name: longhorn
-      namespace: longhorn-system
   interval: 1h
   path: ./kubernetes/apps/default/plex/app
   postBuild:
