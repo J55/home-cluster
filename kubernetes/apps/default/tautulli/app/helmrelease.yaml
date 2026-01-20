@@ -22,10 +22,10 @@ spec:
             env:
               TZ: America/New_York
               TAUTULLI_HTTP_BASE_URL: https://tautulli.${SECRET_DOMAIN}
-              TAUTULLI_HTTP_PORT: &port 80
-            # envFrom:
-            #   - secretRef:
-            #       name: "{{ .Release.Name }}-secret"
+              TAUTULLI_HTTP_PORT: &port 8181
+            envFrom:
+              - secretRef:
+                  name: "{{ .Release.Name }}-secret"
             probes:
               liveness: &probes
                 enabled: true
@@ -64,6 +64,17 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: tautulli.png
+          gethomepage.dev/name: Tautulli
+          gethomepage.dev/group: Media
+          gethomepage.dev/widget.type: tautulli
+          gethomepage.dev/widget.url: http://tautulli.default.svc.cluster.local:8181
+          gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_TAUTULLI_API_KEY}}" }}'
+          # gatus.home-operations.com/endpoint: |
+          #   conditions:
+          #     - "[STATUS] == 200"
         parentRefs:
           - name: envoy-internal
             namespace: network
