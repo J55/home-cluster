@@ -73,9 +73,9 @@ spec:
           gethomepage.dev/icon: jellyseerr.png
           gethomepage.dev/name: Seerr
           gethomepage.dev/group: Media
-          gethomepage.dev/widget.type: jellyseerr
-          gethomepage.dev/widget.url: http://seerr.default.svc.cluster.local:80
-          gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_SEERR_API_KEY}}" }}'
+          # gethomepage.dev/widget.type: jellyseerr
+          # gethomepage.dev/widget.url: http://seerr.default.svc.cluster.local
+          # gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_SEERR_API_KEY}}" }}'
         parentRefs:
           - name: envoy-external
             namespace: network

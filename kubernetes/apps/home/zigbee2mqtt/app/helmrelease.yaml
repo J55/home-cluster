@@ -76,12 +76,6 @@ spec:
         fsGroupChangePolicy: Always
     service:
       app:
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/icon: zigbee2mqtt.png
-          gethomepage.dev/name: Zigbee
-          gethomepage.dev/group: Home
-          gethomepage.dev/pod-selector: app.kubernetes.io/name=zigbee
         ports:
           http:
             port: *port

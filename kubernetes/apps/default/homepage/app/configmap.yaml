@@ -128,7 +128,26 @@ data:
         - Synology:
             href: http://JAC1221.local
             icon: synology.png
+    - Home:
+        - Zigbee:
+            href: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            sitemonitor: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: zigbee2mqtt.png
+            description: Zigbee Coordinator
+        - Zwave:
+            href: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            sitemonitor: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: zwavejs2mqtt.png
+            description: Zwave Coordinator
     - Media:
+        - Plex:
+            href: https://plex.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: plex.png
+            description: Media Server
+            widget:
+              type: plex
+              url: http://plex.default.svc.cluster.local:32400
+              key: {{HOMEPAGE_VAR_PLEX_API_KEY}}
         - Autobrr:
             href: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
