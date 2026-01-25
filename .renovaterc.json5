@@ -79,7 +79,7 @@
         'patch',
         'digest',
       ],
-      minimumReleaseAge: '3 days',
+      minimumReleaseAge: '1 day',
       ignoreTests: true,
     },
     {
