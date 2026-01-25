@@ -11,7 +11,8 @@
   ],
   dependencyDashboard: true,
   dependencyDashboardTitle: "Renovate Dashboard :robot:",
-  schedule: ["every weekend"],
+  timezone: "America/New_York",
+  schedule: ["after 9pm and before 6am every day"],
   ignorePaths: ["**/*.sops.*"],
   flux: {
     managerFilePatterns: ["/(^|/)kubernetes/.+\\.ya?ml(?:\\.j2)?$/"],
