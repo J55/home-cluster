@@ -25,6 +25,9 @@ data:
       hideInternetSearch: true
       showSearchSuggestions: true
     layout:
+      Calendar:
+        style: row
+        header: false
       Home:
         style: row
         columns: 2
@@ -50,9 +53,6 @@ data:
         style: row
         columns: 4
         icon: mdi-application
-      Calendar:
-        style: row
-        header: false
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
@@ -126,19 +126,19 @@ data:
               url: https://192.168.0.1
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
         - Synology:
-            href: http://JAC1221.local
+            href: http://JAC1221.local:5001
             icon: synology.png
-    - Home:
-        - Zigbee:
-            href: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            sitemonitor: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: zigbee2mqtt.png
-            description: Zigbee Coordinator
-        - Zwave:
-            href: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            sitemonitor: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: zwavejs2mqtt.png
-            description: Zwave Coordinator
+    # - Home:
+        # - Zigbee:
+        #     href: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+        #     sitemonitor: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+        #     icon: zigbee2mqtt.png
+        #     description: Zigbee Coordinator
+        # - Zwave:
+        #     href: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+        #     sitemonitor: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+        #     icon: zwavejs2mqtt.png
+        #     description: Zwave Coordinator
     - Media:
         - Plex:
             href: https://plex.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
@@ -218,22 +218,6 @@ data:
             siteMonitor: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             icon: profilarr.png
             description: Profiles
-    - Calendar:
-        - Calendar:
-            widget:
-              type: calendar
-              firstDayInWeek: monday
-              view: monthly
-              maxEvents: 10
-              showTime: true
-              timezone: America/New_York
-              integrations:
-                - type: sonarr
-                  service_group: Media
-                  service_name: Sonarr
-                - type: radarr
-                  service_group: Media
-                  service_name: Radarr
   widgets.yaml: |
     - search:
         provider: [google]

@@ -60,6 +60,11 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: agregarr.png
+          gethomepage.dev/name: Agregarr
+          gethomepage.dev/group: Media
         parentRefs:
           - name: envoy-internal
             namespace: network
