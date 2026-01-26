@@ -131,7 +131,7 @@ data:
             widget:
               type: diskstation
               url: http://nas.internal
-              username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}
+              username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
               password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
     - Media:
         - Autobrr:
