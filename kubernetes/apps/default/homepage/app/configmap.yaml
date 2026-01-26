@@ -130,7 +130,7 @@ data:
             icon: synology.png
             widget:
               type: diskstation
-              url: http://nas.internal
+              url: https://nas.internal:5001
               username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
               password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
     - Media:
