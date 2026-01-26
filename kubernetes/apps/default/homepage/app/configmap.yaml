@@ -126,29 +126,14 @@ data:
               url: https://192.168.0.1
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
         - Synology:
-            href: http://JAC1221.local:5001
+            href: https://nas.internal:5001
             icon: synology.png
-    # - Home:
-        # - Zigbee:
-        #     href: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-        #     sitemonitor: https://zigbee.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-        #     icon: zigbee2mqtt.png
-        #     description: Zigbee Coordinator
-        # - Zwave:
-        #     href: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-        #     sitemonitor: https://zwave.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-        #     icon: zwavejs2mqtt.png
-        #     description: Zwave Coordinator
-    - Media:
-        - Plex:
-            href: https://plex.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://plex.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: plex.png
-            description: Media Server
             widget:
-              type: plex
-              url: http://plex.default.svc.cluster.local:32400
-              key: {{HOMEPAGE_VAR_PLEX_API_KEY}}
+              type: diskstation
+              url: http://nas.internal
+              username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}
+              password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+    - Media:
         - Autobrr:
             href: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
