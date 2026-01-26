@@ -26,7 +26,7 @@ data:
       showSearchSuggestions: true
     layout:
       Calendar:
-        style: row
+        style: column
         header: false
       Home:
         style: row
@@ -34,12 +34,8 @@ data:
         icon: mdi-home-analytics
       Media:
         style: row
-        columns: 2
+        columns: 4
         icon: mdi-play-circle
-      Downloads:
-        style: row
-        columns: 3
-        icon: mdi-download-circle
       Observability:
         style: column
         icon: mdi-monitor-eye
@@ -119,11 +115,11 @@ data:
               key: {{HOMEPAGE_VAR_CLOUDFLARE_API_TOKEN}}
     - System:
         - Unifi:
-            href: http://192.168.0.1
+            href: https://unifi.internal
             icon: unifi.png
             widget:
               type: unifi
-              url: https://192.168.0.1
+              url: https://unifi.internal
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
         - Synology:
             href: https://nas.internal:5001
@@ -133,6 +129,22 @@ data:
               url: https://nas.internal:5001
               username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
               password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+    - Calendar:
+        - Calendar:
+            widget:
+              type: calendar
+              firstDayInWeek: monday
+              view: monthly
+              maxEvents: 10
+              showTime: true
+              timezone: America/New_York
+              integrations:
+                - type: sonarr
+                  service_group: Media
+                  service_name: Sonarr
+                - type: radarr
+                  service_group: Media
+                  service_name: Radarr
     - Media:
         - Autobrr:
             href: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
