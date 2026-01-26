@@ -17,7 +17,7 @@ spec:
         valueFrom:
           secretKeyRef:
             name: &secret cloudflare-dns-secret
-            key: api-token
+            key: CF_API_TOKEN
       - name: &name CF_ZONE_ID
         valueFrom:
           secretKeyRef:
