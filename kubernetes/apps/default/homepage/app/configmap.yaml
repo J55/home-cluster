@@ -110,7 +110,7 @@ data:
             widget:
               type: portainer
               url: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              env: 1
+              env: 3
               key: {{HOMEPAGE_VAR_PORTAINER_TOKEN}}
     - System:
         - Unifi:
