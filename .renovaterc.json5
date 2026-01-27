@@ -11,11 +11,6 @@
   ],
   dependencyDashboard: true,
   dependencyDashboardTitle: 'Renovate Dashboard :robot:',
-  timezone: 'America/New_York',
-  schedule: [
-    'after 9pm',
-    'before 6am',
-  ],
   ignorePaths: [
     '**/*.sops.*',
   ],
@@ -41,6 +36,12 @@
     ],
   },
   packageRules: [
+    {
+    matchDatasources: ['docker', 'helm'],
+    matchUpdateTypes: ['minor', 'patch'],
+    minimumReleaseAge: '0 days',
+    automerge: true,
+    },
     {
       description: 'Override Helmfile Dependency Name',
       matchDatasources: [
