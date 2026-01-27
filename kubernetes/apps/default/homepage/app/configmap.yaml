@@ -104,15 +104,14 @@ data:
               href: https://simpleicons.org/
   services.yaml: |
     - Infrastructure:
-        - Cloudflared:
-            href: https://dash.cloudflare.com/
-            icon: cloudflare-zero-trust.png
-            description: Cloudflared Tunnel
+        - Portainer:
+            href: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: portainer.png
             widget:
-              type: cloudflared
-              accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUNTID}}
-              tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNELID}}
-              key: {{HOMEPAGE_VAR_CLOUDFLARE_API_TOKEN}}
+              type: portainer
+              url: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              env: 1
+              key: {{HOMEPAGE_VAR_PORTAINER_TOKEN}}
     - System:
         - Unifi:
             href: https://unifi.internal
@@ -129,6 +128,15 @@ data:
               url: https://nas.internal:5001
               username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
               password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
+        - Cloudflared:
+            href: https://dash.cloudflare.com/
+            icon: cloudflare-zero-trust.png
+            description: Cloudflared Tunnel
+            widget:
+              type: cloudflared
+              accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUNTID}}
+              tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNELID}}
+              key: {{HOMEPAGE_VAR_CLOUDFLARE_API_TOKEN}}
     - Calendar:
         - Calendar:
             widget:
