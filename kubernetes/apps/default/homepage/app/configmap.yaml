@@ -26,7 +26,8 @@ data:
       showSearchSuggestions: true
     layout:
       Calendar:
-        style: column
+        style: row
+        columns: 2
         header: false
       Home:
         style: row
@@ -148,6 +149,16 @@ data:
                   service_group: Media
                   service_name: Radarr
     - Media:
+        - Qui:
+            href: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: qui.png
+            description: Web Interface for qBittorrent
+            widget:
+              type: qbittorrent
+              url: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
         - Autobrr:
             href: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
@@ -157,24 +168,6 @@ data:
               type: autobrr
               url: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               key: {{HOMEPAGE_VAR_AUTOBRR_API_KEY}}
-        - Bazarr:
-            href: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: bazarr.png
-            description: Subtitles
-            widget:
-              type: bazarr
-              url: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-        - Prowlarr:
-            href: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: prowlarr.png
-            description: Indexer Manager
-            widget:
-              type: prowlarr
-              url: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
         - Radarr:
             href: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
@@ -193,6 +186,24 @@ data:
               type: sonarr
               url: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
+        - Bazarr:
+            href: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: bazarr.png
+            description: Subtitles
+            widget:
+              type: bazarr
+              url: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
+        - Prowlarr:
+            href: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: prowlarr.png
+            description: Indexer Manager
+            widget:
+              type: prowlarr
+              url: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
         - Sabnzbd:
             href: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
@@ -202,16 +213,6 @@ data:
               type: sabnzbd
               url: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
-        - Qui:
-            href: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: qui.png
-            description: Web Interface for qBittorrent
-            widget:
-              type: qbittorrent
-              url: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
         - qBitTorrent-Public:
             href: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
