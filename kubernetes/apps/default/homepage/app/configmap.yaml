@@ -62,9 +62,6 @@ data:
         - Reddit:
             - icon: reddit.png
               href: https://reddit.com
-        - Twitch:
-            - icon: twitch.png
-              href: https://twitch.tv
         - YouTube:
             - icon: youtube.png
               href: https://youtube.com/feed/subscriptions
@@ -72,9 +69,6 @@ data:
         - CloudFlare:
             - icon: cloudflare.png
               href: https://dash.cloudflare.com
-        - AWS Console:
-            - icon: aws.png
-              href: https://aws.amazon.com/console/
         - Pushover:
             - icon: pushover.png
               href: https://client.pushover.net/
@@ -95,7 +89,7 @@ data:
               href: https://github.com/J55/home-cluster/issues/44
         - Homepage Icons:
             - icon: si-jpeg
-              href: https://github.com/homarr-labs/dashboard-icons/blob/main/ICONS.md
+              href: https://dashboardicons.com
         - Homepage MDI:
             - icon: si-materialdesign
               href: https://pictogrammers.com/library/mdi/
@@ -208,16 +202,26 @@ data:
               type: sabnzbd
               url: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
-        - qBitTorrent:
-            href: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: qbittorrent.png
-            description: Torrent Downloader
+        - Qui:
+            href: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: qui.png
+            description: Web Interface for qBittorrent
             widget:
               type: qbittorrent
               url: https://qbittorrent.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
               password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+        - qBitTorrent-Public:
+            href: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: qbittorrent.png
+            description: Torrent Downloader
+        - qBitTorrent-Private:
+            href: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: qbittorrent.png
+            description: Torrent Downloader
         - Profilarr:
             href: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
