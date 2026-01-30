@@ -29,6 +29,10 @@ data:
         style: row
         columns: 2
         header: false
+      System:
+        style: column
+        columns: 2
+        icon: mdi-application
       Home:
         style: row
         columns: 2
@@ -50,10 +54,9 @@ data:
       Storage:
         style: column
         icon: mdi-database
-      System:
-        style: row
-        columns: 4
-        icon: mdi-application
+      Settings:
+        style: column
+        icon: mdi:cogs
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
@@ -227,6 +230,7 @@ data:
             siteMonitor: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             icon: qbittorrent.png
             description: Torrent Downloader
+    - Settings:
         - Profilarr:
             href: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
@@ -249,6 +253,12 @@ data:
           memory: true
           show: true
           showLabel: true
+    - openmeteo:
+        label: Home
+        latitude: {{HOMEPAGE_VAR_LATITUDE}}
+        longitude: {{HOMEPAGE_VAR_LONGITUDE}}
+        units: imperial
+        cache: 5
     - datetime:
         text_size: 1
         format:
