@@ -62,9 +62,10 @@ spec:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
         annotations:
           gethomepage.dev/enabled: "true"
+          gethomepage.dev/description: Plex Collections
           gethomepage.dev/icon: agregarr.png
           gethomepage.dev/name: Agregarr
-          gethomepage.dev/group: Media
+          gethomepage.dev/group: Downloads
         parentRefs:
           - name: envoy-internal
             namespace: network

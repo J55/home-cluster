@@ -35,8 +35,12 @@ data:
         icon: mdi-home-analytics
       Media:
         style: row
-        columns: 4
+        columns: 3
         icon: mdi-play-circle
+      Downloads:
+        style: row
+        columns: 4
+        icon: mdi-download-circle
       Observability:
         style: column
         icon: mdi-monitor-eye
@@ -143,12 +147,12 @@ data:
               timezone: America/New_York
               integrations:
                 - type: sonarr
-                  service_group: Media
+                  service_group: Downloads
                   service_name: Sonarr
                 - type: radarr
-                  service_group: Media
+                  service_group: Downloads
                   service_name: Radarr
-    - Media:
+    - Downloads:
         - Qui:
             href: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
