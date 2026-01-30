@@ -25,14 +25,10 @@ data:
       hideInternetSearch: true
       showSearchSuggestions: true
     layout:
-      Calendar:
+      Overview:
         style: row
         columns: 2
         header: false
-      System:
-        style: column
-        columns: 2
-        icon: mdi-application
       Home:
         style: row
         columns: 2
@@ -45,18 +41,19 @@ data:
         style: row
         columns: 4
         icon: mdi-download-circle
+      Infrastructure:
+        style: row
+        columns:3
+        icon: mdi-server-network
       Observability:
         style: column
         icon: mdi-monitor-eye
-      Infrastructure:
-        style: column
-        icon: mdi-server-network
       Storage:
         style: column
         icon: mdi-database
       Settings:
-        style: column
-        icon: mdi:cogs
+        style: ccolumn
+        icon: mdi-cogs
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
