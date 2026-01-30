@@ -43,7 +43,7 @@ data:
         icon: mdi-download-circle
       Infrastructure:
         style: row
-        columns:3
+        columns: 3
         icon: mdi-server-network
       Observability:
         style: column
