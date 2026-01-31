@@ -65,7 +65,7 @@ spec:
           gethomepage.dev/description: Plex Collections
           gethomepage.dev/icon: agregarr.png
           gethomepage.dev/name: Agregarr
-          gethomepage.dev/group: Downloads
+          gethomepage.dev/group: Settings
         parentRefs:
           - name: envoy-internal
             namespace: network
