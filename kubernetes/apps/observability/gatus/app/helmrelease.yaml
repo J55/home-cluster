@@ -91,7 +91,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: gatus.png
           gethomepage.dev/name: Status
-          gethomepage.dev/group: Overview
+          gethomepage.dev/group: System
           gethomepage.dev/widget.type: gatus
           gethomepage.dev/widget.url: http://gatus.observability.svc.cluster.local
         hostnames:
