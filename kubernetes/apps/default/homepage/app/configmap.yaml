@@ -38,6 +38,10 @@ data:
       Storage:
         style: column
         icon: mdi-database
+      System:
+        style: row
+        columns: 4
+        icon: mdi-application
       Media:
         style: row
         columns: 3
@@ -50,7 +54,8 @@ data:
         style: row
         header: false
       Settings:
-        style: column
+        style: row
+        columns: 3
         icon: mdi-cogs
   custom.css: ""
   custom.js: ""
