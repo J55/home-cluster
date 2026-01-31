@@ -103,21 +103,6 @@ data:
               href: https://simpleicons.org/
   services.yaml: |
     - Overview:
-        - Calendar:
-            widget:
-              type: calendar
-              firstDayInWeek: monday
-              view: monthly
-              maxEvents: 10
-              showTime: true
-              timezone: America/New_York
-              integrations:
-                - type: sonarr
-                  service_group: Downloads
-                  service_name: Sonarr
-                - type: radarr
-                  service_group: Downloads
-                  service_name: Radarr
         - Unifi:
             href: https://unifi.internal
             icon: unifi.png
@@ -142,6 +127,21 @@ data:
               accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUNTID}}
               tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNELID}}
               key: {{HOMEPAGE_VAR_CLOUDFLARE_API_TOKEN}}
+        - Calendar:
+            widget:
+              type: calendar
+              firstDayInWeek: monday
+              view: monthly
+              maxEvents: 10
+              showTime: true
+              timezone: America/New_York
+              integrations:
+                - type: sonarr
+                  service_group: Downloads
+                  service_name: Sonarr
+                - type: radarr
+                  service_group: Downloads
+                  service_name: Radarr
     - Infrastructure:
         - Portainer:
             href: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
