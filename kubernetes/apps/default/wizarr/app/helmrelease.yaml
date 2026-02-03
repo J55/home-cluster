@@ -50,13 +50,13 @@ spec:
           - "join.${SECRET_DOMAIN}"
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Downloads
+          gethomepage.dev/group: Media
           gethomepage.dev/name: Wizarr
           gethomepage.dev/icon: wizarr.png
           gethomepage.dev/description: Plex Invite Management
         parentRefs:
           - name: envoy-internal
-            namespace: networking
+            namespace: network
     persistence:
       data:
         existingClaim: "{{ .Release.Name }}"
