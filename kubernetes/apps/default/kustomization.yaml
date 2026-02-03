@@ -12,6 +12,7 @@ resources:
   - ./agregarr/ks.yaml
   - ./echo/ks.yaml
   - ./homepage/ks.yaml
+  - ./maintainerr/ks.yaml
   - ./plex/ks.yaml
   - ./seerr/ks.yaml
   - ./tautulli/ks.yaml
