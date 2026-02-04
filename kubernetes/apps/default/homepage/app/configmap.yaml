@@ -205,6 +205,16 @@ data:
             siteMonitor: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             icon: qbittorrent.png
             description: Torrent Downloader
+        - Huntarr:
+            href: https://huntarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://huntarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: huntarr.png
+            description: Content and upgrade hunter
+        - Boxarr:
+            href: https://boxarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            siteMonitor: https://boxarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: boxarr.png
+            description: Box office tracker
     - Settings:
         - Profilarr:
             href: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}

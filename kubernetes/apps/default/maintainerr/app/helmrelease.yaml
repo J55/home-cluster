@@ -55,9 +55,9 @@ spec:
         hostnames: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
         annotations:
           gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Downloads
+          gethomepage.dev/group: Settings
           gethomepage.dev/name: Maintainerr
-          gethomepage.dev/icon: https://raw.githubusercontent.com/joryirving/home-ops/main/docs/src/assets/icons/maintainerr.png # Thanks Jory for the icon
+          gethomepage.dev/icon: maintainerr.png
           gethomepage.dev/description: Media Library Management
         parentRefs:
           - name: envoy-internal
