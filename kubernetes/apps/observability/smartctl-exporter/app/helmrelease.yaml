@@ -11,6 +11,8 @@ spec:
   interval: 1h
   values:
     fullnameOverride: *app
+    nodeSelector:
+      node-role.kubernetes.io/compute-heavy: "true"
     serviceMonitor:
       enabled: true
     prometheusRules:
