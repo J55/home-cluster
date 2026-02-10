@@ -15,7 +15,7 @@ resources:
   - ./grafana/ks.yaml
   - ./keda/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
-  # - ./silence-operator/ks.yaml
+  - ./silence-operator/ks.yaml
   - ./smartctl-exporter/ks.yaml
   # - ./snmp-exporter/ks.yaml
   - ./unpoller/ks.yaml
