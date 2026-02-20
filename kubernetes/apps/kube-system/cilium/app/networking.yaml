@@ -58,19 +58,18 @@ spec:
           peerConfigRef:
             name: l3-bgp-peer-config
 ---
-# To be enabled down the line
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: kube-api
-#   annotations:
-#     external-dns.alpha.kubernetes.io/hostname: k8s.${SECRET_DOMAIN}
-#     lbipam.cilium.io/ips: 192.168.20.120
-# spec:
-#   type: LoadBalancer
-#   externalTrafficPolicy: Local
-#   selector:
-#     k8s-app: kube-apiserver
-#     tier: control-plane
-#   ports:
-#     - port: 6443
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-api
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: k8s.${SECRET_DOMAIN}
+    lbipam.cilium.io/ips: 192.168.20.51
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    k8s-app: kube-apiserver
+    tier: control-plane
+  ports:
+    - port: 6443
