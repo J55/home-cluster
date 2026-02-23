@@ -110,7 +110,7 @@ spec:
         existingClaim: "{{ .Release.Name }}"
       media:
         type: nfs
-        server: 192.168.30.11
+        server: galactus.internal
         path: /volume1/Media
         globalMounts:
           - path: /media
