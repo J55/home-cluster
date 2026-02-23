@@ -16,4 +16,5 @@ resources:
   - ./plex/ks.yaml
   - ./seerr/ks.yaml
   - ./tautulli/ks.yaml
+  - ./thelounge/ks.yaml
   - ./wizarr/ks.yaml
