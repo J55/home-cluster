@@ -56,6 +56,12 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/group: Settings
+          gethomepage.dev/name: Thelounge
+          gethomepage.dev/icon: thelounge.png
+          gethomepage.dev/description: Web-based IRC Client
         parentRefs:
           - name: envoy-internal
             namespace: network
