@@ -10,6 +10,7 @@ components:
 resources:
   - ./namespace.yaml
   - ./agregarr/ks.yaml
+  - ./decluttarr/ks.yaml
   - ./echo/ks.yaml
   - ./homepage/ks.yaml
   - ./maintainerr/ks.yaml
