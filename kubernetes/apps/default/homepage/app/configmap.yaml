@@ -138,7 +138,7 @@ data:
             description: Web Interface for qBittorrent
             widget:
               type: qbittorrent
-              url: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              url: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
               password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
         - Autobrr:
