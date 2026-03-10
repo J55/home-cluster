@@ -6,7 +6,7 @@ metadata:
   name: unpackerr
 spec:
   components:
-    - ../../../../components/keda/nfs-scaler
+    - ../../../../components/nfs-scaler
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
