@@ -13,7 +13,7 @@ spec:
   postBuild:
     substitute:
       APP: plex
-      VOLSYNC_CAPACITY: 30Gi
+      VOLSYNC_CAPACITY: 40Gi
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
