@@ -6,8 +6,8 @@ metadata:
   name: tautulli
 spec:
   components:
-    - ../../../../components/nfs-scaler
     - ../../../../components/volsync
+    # - ../../../../components/nfs-scaler
   interval: 1h
   path: ./kubernetes/apps/default/tautulli/app
   postBuild:

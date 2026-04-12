@@ -6,7 +6,7 @@ metadata:
   name: seasonpackerr
 spec:
   components:
-    - ../../../../components/nfs-scaler
+    # - ../../../../components/nfs-scaler
   interval: 1h
   path: ./kubernetes/apps/default/seasonpackerr/app
   postBuild:
