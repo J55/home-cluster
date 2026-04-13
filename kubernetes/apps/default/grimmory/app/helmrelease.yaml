@@ -132,9 +132,9 @@ spec:
           grimmory:
             app:
               - path: /books
-                subPath: books
+                subPath: Books
               - path: /bookdrop
-                subPath: nzb/books
+                subPath: Books/Bookdrop
       mysqld:
         type: emptyDir
         medium: Memory
