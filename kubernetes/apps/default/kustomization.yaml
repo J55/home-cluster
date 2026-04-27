@@ -11,7 +11,7 @@ resources:
   - ./namespace.yaml
   - ./agregarr/ks.yaml
   - ./decluttarr/ks.yaml
-  # - ./dispatcharr/ks.yaml
+  - ./dispatcharr/ks.yaml
   - ./echo/ks.yaml
   - ./grimmory/ks.yaml
   - ./homepage/ks.yaml
