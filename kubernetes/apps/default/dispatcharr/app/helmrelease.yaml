@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dispatcharr
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: dispatcharr
+  values:
+    controllers:
+      dispatcharr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          chown-dbdir:
+            image:
+              repository: docker.io/library/alpine
+              tag: "3.23"
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                mkdir -p /data/db
+                chmod 0750 /data/db
+            securityContext:
+              runAsUser: 0
+        containers:
+          app:
+            image:
+              repository: ghcr.io/dispatcharr/dispatcharr
+              tag: 0.20.2@sha256:116f7f4ffa512afc4d196f2f1649bb5af55a3384097632c33203dd8feb37a91b
+            env:
+              TZ: ${TIMEZONE}
+              CELERY_BROKER_URL: redis://localhost:6379/0
+              DISPATCHARR_ENV: aio
+              DISPATCHARR_LOG_LEVEL: info
+              DISPATCHARR_PORT: &port 9191
+              REDIS_HOST: localhost
+            resources:
+              claims:
+                - name: gpu
+              requests:
+                cpu: 50m
+              limits:
+                memory: 3Gi
+    defaultPodOptions:
+      resourceClaims:
+        - name: gpu
+          resourceClaimTemplateName: dispatcharr
+    service:
+      app:
+        ports:
+          http:
+            port: *port
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+    persistence:
+      config:
+        existingClaim: "{{ .Release.Name }}"
+        advancedMounts:
+          dispatcharr:
+            app:
+              - path: /data
+                subPath: data
+            chown-dbdir:
+              - path: /data
+                subPath: data
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          dispatcharr:
+            app:
+              - path: /tmp
+                subPath: tmp
