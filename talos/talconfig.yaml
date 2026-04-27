@@ -143,6 +143,40 @@ nodes:
           - network: "0.0.0.0/0"
             gateway: "192.168.20.1"
         mtu: 1500
+  - hostname: "nucnode1"
+    ipAddress: "192.168.20.34"
+    installDisk: "/dev/nvme1n1"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "88:ae:dd:74:0c:6c"
+        dhcp: false
+        addresses:
+          - "192.168.20.34/24"
+        routes:
+          - network: "0.0.0.0/0"
+            gateway: "192.168.20.1"
+        mtu: 1500
+  - hostname: "nucnode2"
+    ipAddress: "192.168.20.35"
+    installDisk: "/dev/nvme1n1"
+    machineSpec:
+      secureboot: false
+    talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510
+    controlPlane: false
+    networkInterfaces:
+      - deviceSelector:
+          hardwareAddr: "88:ae:dd:73:a7:56"
+        dhcp: false
+        addresses:
+          - "192.168.20.35/24"
+        routes:
+          - network: "0.0.0.0/0"
+            gateway: "192.168.20.1"
+        mtu: 1500
 
 # Global patches
 patches:
@@ -157,4 +191,3 @@ patches:
 controlPlane:
   patches:
     - "@./patches/controller/cluster.yaml"
-

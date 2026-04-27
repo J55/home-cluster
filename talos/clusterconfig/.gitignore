@@ -5,4 +5,6 @@ kubernetes-rpinode0.yaml
 kubernetes-rpinode1.yaml
 kubernetes-rpinode2.yaml
 kubernetes-nucnode0.yaml
+kubernetes-nucnode1.yaml
+kubernetes-nucnode2.yaml
 talosconfig
