@@ -10,6 +10,9 @@ spec:
     name: victoria-logs
   interval: 1h
   values:
+    global:
+      image:
+        registry: quay.io
     dashboards:
       enabled: true
       grafanaOperator:
