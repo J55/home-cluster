@@ -47,14 +47,14 @@ spec:
               limits:
                 memory: 3Gi
     defaultPodOptions:
-      annotations:
-        k8s.v1.cni.cncf.io/networks: |-
-          [{
-            "name": "vpn",
-            "namespace": "kube-system",
-            "ips": ["192.168.40.20/24"],
-            "mac": "6a:b2:a1:e5:ac:e1"
-          }]
+      # annotations:
+      #   k8s.v1.cni.cncf.io/networks: |-
+      #     [{
+      #       "name": "vpn",
+      #       "namespace": "kube-system",
+      #       "ips": ["192.168.40.20/24"],
+      #       "mac": "6a:b2:a1:e5:ac:e1"
+      #     }]
       resourceClaims:
         - name: gpu
           resourceClaimTemplateName: dispatcharr
