@@ -52,7 +52,8 @@ spec:
           [{
             "name": "vpn",
             "namespace": "kube-system",
-            "ips": ["192.168.40.20/24"]
+            "ips": ["192.168.40.20/24"],
+            "mac": "6a:b2:a1:e5:ac:e1"
           }]
       resourceClaims:
         - name: gpu
