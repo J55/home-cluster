@@ -6,13 +6,13 @@ metadata:
   name: victoria-metrics
 spec:
   interval: 1h
-  path: ./kubernetes/apps/o11y/victoria-metrics/app
+  path: ./kubernetes/apps/observability/victoria-metrics/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: o11y
+  targetNamespace: observability
   wait: true
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
@@ -24,11 +24,11 @@ spec:
   dependsOn:
     - name: victoria-metrics
   interval: 1h
-  path: ./kubernetes/apps/o11y/victoria-metrics/cluster
+  path: ./kubernetes/apps/observability/victoria-metrics/cluster
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
-  targetNamespace: o11y
+  targetNamespace: observability
   wait: false
