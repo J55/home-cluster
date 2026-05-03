@@ -8,8 +8,6 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
-    - name: kube-prometheus-stack
-      namespace: observability
   interval: 1h
   path: ./kubernetes/apps/observability/victoria-logs/app
   postBuild:
