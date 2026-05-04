@@ -24,8 +24,8 @@ spec:
               matchers:
                 - alertname = InfoInhibitor
             - receiver: heartbeat
-              groupWait: 0s
-              repeatInterval: 2m30s
+              group_wait: 0s
+              repeat_interval: 2m30s
               matchers:
                 - name: alertname
                   value: Watchdog
@@ -52,8 +52,8 @@ spec:
         receivers:
           - name: blackhole
           - name: heartbeat
-            webhookConfigs:
-              - urlSecret:
+            webhook_configs:
+              - url_secret:
                   name: vmalertmanager-secret
                   key: ALERTMANAGER_HEARTBEAT_URL
           - name: pushover
