@@ -5,7 +5,7 @@ kind: Grafana
 metadata:
   name: grafana
   labels:
-    grafana.internal/instance: grafana
+    dashboards: grafana
 spec:
   config:
     analytics:
@@ -30,7 +30,6 @@ spec:
       angular_support_enabled: "true"
     server:
       enable_gzip: "true"
-      root_url: https://grafana.${SECRET_DOMAIN}
   deployment:
     spec:
       strategy:
@@ -59,6 +58,13 @@ spec:
             - name: grafana-data
               persistentVolumeClaim:
                 claimName: grafana-pvc
+  httpRoute:
+    spec:
+      hostnames:
+        - grafana.${SECRET_DOMAIN}
+      parentRefs:
+        - name: envoy-internal
+          namespace: network
   persistentVolumeClaim:
     spec:
       accessModes:
