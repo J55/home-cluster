@@ -62,6 +62,12 @@ spec:
     spec:
       hostnames:
         - grafana.${SECRET_DOMAIN}
+      annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/group: Observability
+        gethomepage.dev/name: Grafana
+        gethomepage.dev/icon: grafana.png
+        gethomepage.dev/pod-selector: app=grafana
       parentRefs:
         - name: envoy-internal
           namespace: network
