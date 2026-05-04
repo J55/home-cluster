@@ -27,14 +27,10 @@ spec:
               group_wait: 0s
               repeat_interval: 2m30s
               matchers:
-                - name: alertname
-                  value: Watchdog
-                  matchType: =
+                - alertname = Watchdog
             - receiver: pushover
               matchers:
-                - name: severity
-                  value: critical
-                  matchType: =
+                - severity = critical
           group_by:
             - alertname
             - cluster
