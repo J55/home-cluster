@@ -19,7 +19,12 @@ releases:
     chart: oci://mirror.gcr.io/envoyproxy/gateway-helm
     version: v1.7.2
 
-  - name: kube-prometheus-stack
+  - name: grafana-operator
     namespace: observability
-    chart: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
-    version: 84.4.0
+    chart: oci://ghcr.io/grafana/helm-charts/grafana-operator
+    version: 5.22.2
+
+  - name: prometheus-operator-crds
+    namespace: observability
+    chart: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
+    version: 28.0.1

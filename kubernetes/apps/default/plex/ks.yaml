@@ -6,8 +6,8 @@ metadata:
   name: plex
 spec:
   components:
-    # - ../../../../components/nfs-scaler
     - ../../../../components/volsync
+    - ../../../../components/zeroscaler
   interval: 1h
   path: ./kubernetes/apps/default/plex/app
   postBuild:
