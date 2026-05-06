@@ -17,6 +17,8 @@ router bgp 64513
   neighbor 192.168.20.31 peer-group k8s
   neighbor 192.168.20.32 peer-group k8s
   neighbor 192.168.20.33 peer-group k8s
+  neighbor 192.168.20.34 peer-group k8s
+  neighbor 192.168.20.35 peer-group k8s
 
   address-family ipv4 unicast
     neighbor k8s next-hop-self
