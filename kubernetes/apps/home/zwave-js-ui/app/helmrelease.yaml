@@ -72,9 +72,9 @@ spec:
           - path: /usr/src/app/store
       usb:
         type: hostPath
-        hostPath: /dev/ttyUSB0
+        hostPath: /dev/ttyACM0
         hostPathType: CharDevice
         globalMounts:
-          - path: /dev/ttyUSB0
+          - path: /dev/ttyACM0
       tmp:
         type: emptyDir
