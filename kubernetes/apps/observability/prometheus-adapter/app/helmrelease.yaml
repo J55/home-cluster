@@ -10,6 +10,8 @@ spec:
     name: prometheus-adapter
   interval: 1h
   values:
+    certManager:
+      enabled: false
     prometheus:
       url: http://vmsingle-victoria-metrics.observability.svc.cluster.local
       port: 8428
