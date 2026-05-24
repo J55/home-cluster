@@ -21,5 +21,4 @@ resources:
   - ./tautulli/ks.yaml
   - ./thelounge/ks.yaml
   - ./unpackerr/ks.yaml
-  - ./seasonpackerr/ks.yaml
   - ./wizarr/ks.yaml
