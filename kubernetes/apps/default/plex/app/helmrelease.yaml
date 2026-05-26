@@ -85,7 +85,7 @@ spec:
           gethomepage.dev/widget.url: http://plex.default.svc.cluster.local:32400
           gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_PLEX_API_KEY}}" }}'
           gatus.home-operations.com/endpoint: |-
-            conditions: ["[STATUS] == 401"]
+            path: /identity
         parentRefs:
           - name: envoy-external
             namespace: network
