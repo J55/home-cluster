@@ -13,6 +13,7 @@ resources:
   - ./decluttarr/ks.yaml
   - ./dispatcharr/ks.yaml
   - ./echo/ks.yaml
+  - ./flaresolverr/ks.yaml
   - ./grimmory/ks.yaml
   - ./homepage/ks.yaml
   - ./maintainerr/ks.yaml
