@@ -21,6 +21,7 @@ resources:
   - ./prowlarr/ks.yaml
   - ./radarr/ks.yaml
   - ./seerr/ks.yaml
+  - ./sonarr/ks.yaml
   - ./tautulli/ks.yaml
   - ./thelounge/ks.yaml
   - ./unpackerr/ks.yaml
