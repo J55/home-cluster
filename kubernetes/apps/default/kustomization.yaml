@@ -11,6 +11,7 @@ resources:
   - ./namespace.yaml
   - ./agregarr/ks.yaml
   - ./autobrr/ks.yaml
+  - ./bazarr/ks.yaml
   - ./decluttarr/ks.yaml
   - ./dispatcharr/ks.yaml
   - ./echo/ks.yaml
