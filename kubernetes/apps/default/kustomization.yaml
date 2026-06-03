@@ -19,6 +19,7 @@ resources:
   - ./homepage/ks.yaml
   - ./maintainerr/ks.yaml
   - ./plex/ks.yaml
+  - ./profilarr/ks.yaml
   - ./prowlarr/ks.yaml
   - ./radarr/ks.yaml
   - ./seerr/ks.yaml
