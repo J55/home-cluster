@@ -5,6 +5,8 @@ kind: Kustomization
 metadata:
   name: decluttarr
 spec:
+  components:
+    - ../../../../components/zeroscaler
   interval: 1h
   path: ./kubernetes/apps/default/decluttarr/app
   prune: true
