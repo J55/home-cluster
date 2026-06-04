@@ -130,6 +130,12 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: profilarr.png
+          gethomepage.dev/name: Profilarr
+          gethomepage.dev/group: Settings
+          gethomepage.dev/description: Quality Profile Manager
         parentRefs:
           - name: envoy-internal
             namespace: network

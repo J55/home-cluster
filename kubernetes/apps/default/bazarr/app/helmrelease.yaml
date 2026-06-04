@@ -69,6 +69,15 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: bazarr.png
+          gethomepage.dev/name: Bazarr
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/description: Subtitles
+          gethomepage.dev/widget.type: bazarr
+          gethomepage.dev/widget.url: http://bazarr.default.svc.cluster.local
+          gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_BAZARR_API_KEY}}" }}'
         parentRefs:
           - name: envoy-internal
             namespace: network

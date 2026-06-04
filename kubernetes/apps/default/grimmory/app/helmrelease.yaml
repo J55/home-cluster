@@ -110,6 +110,12 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: grimmory.png
+          gethomepage.dev/name: Grimmory
+          gethomepage.dev/group: Media
+          gethomepage.dev/description: Book Library
         parentRefs:
           - name: envoy-internal
             namespace: network

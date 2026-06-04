@@ -79,6 +79,15 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: prowlarr.png
+          gethomepage.dev/name: Prowlarr
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/description: Indexer Manager
+          gethomepage.dev/widget.type: prowlarr
+          gethomepage.dev/widget.url: http://prowlarr.default.svc.cluster.local
+          gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}" }}'
         parentRefs:
           - name: envoy-internal
             namespace: network

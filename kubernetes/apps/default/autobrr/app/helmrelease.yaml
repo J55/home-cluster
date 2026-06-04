@@ -83,6 +83,15 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: autobrr.png
+          gethomepage.dev/name: Autobrr
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/description: Torrent Automator
+          gethomepage.dev/widget.type: autobrr
+          gethomepage.dev/widget.url: http://autobrr.default.svc.cluster.local
+          gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_AUTOBRR_API_KEY}}" }}'
         parentRefs:
           - name: envoy-internal
             namespace: network

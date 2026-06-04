@@ -74,6 +74,12 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: chaptarr.png
+          gethomepage.dev/name: Chaptarr
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/description: Books & Audiobooks
         parentRefs:
           - name: envoy-internal
             namespace: network

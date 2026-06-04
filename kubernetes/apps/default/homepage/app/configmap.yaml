@@ -131,61 +131,6 @@ data:
               env: 3
               key: {{HOMEPAGE_VAR_PORTAINER_TOKEN}}
     - Downloads:
-        - Qui:
-            href: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://qui.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: qui.png
-            description: Web Interface for qBittorrent
-            widget:
-              type: qbittorrent
-              url: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
-        - Autobrr:
-            href: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: autobrr.png
-            description: Torrent Automator
-            widget:
-              type: autobrr
-              url: https://autobrr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_AUTOBRR_API_KEY}}
-        - Radarr:
-            href: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: radarr.png
-            description: Movies
-            widget:
-              type: radarr
-              url: https://radarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
-        - Sonarr:
-            href: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: sonarr.png
-            description: TV Shows
-            widget:
-              type: sonarr
-              url: https://sonarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
-        - Bazarr:
-            href: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: bazarr.png
-            description: Subtitles
-            widget:
-              type: bazarr
-              url: https://bazarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
-        - Prowlarr:
-            href: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: prowlarr.png
-            description: Indexer Manager
-            widget:
-              type: prowlarr
-              url: https://prowlarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
         - Sabnzbd:
             href: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             siteMonitor: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
@@ -205,17 +150,6 @@ data:
             siteMonitor: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
             icon: qbittorrent.png
             description: Torrent Downloader
-        - Boxarr:
-            href: https://boxarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://boxarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: boxarr.png
-            description: Box office tracker
-    - Settings:
-        - Profilarr:
-            href: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://profilarr.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: profilarr.png
-            description: Profiles
     - System:
         - Adguard:
             href: http://adguard.internal
