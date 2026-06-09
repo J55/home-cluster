@@ -1,0 +1,23 @@
+---
+# containerd customization — RPi leaders (no CDI, that's NUC-only)
+machine:
+  files:
+    - op: create
+      path: /etc/cri/conf.d/20-customization.part
+      content: |
+        [plugins."io.containerd.cri.v1.images"]
+          discard_unpacked_layers = false
+        [plugins."io.containerd.cri.v1.runtime"]
+          device_ownership_from_security_context = true
+  # Allow actions-runner-system and system-upgrade pods to call Talos API
+  features:
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:admin
+      allowedKubernetesNamespaces:
+        - actions-runner-system
+        - system-upgrade
+  # Exclude control-plane nodes from external load balancers
+  nodeLabels:
+    node.kubernetes.io/exclude-from-external-load-balancers: ""

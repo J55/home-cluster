@@ -6,5 +6,5 @@ provisioning:
   diskSelector:
     match: system_disk  # Keep it on the system disk
   minSize: 2GiB
-  maxSize: 80GiB
+  maxSize: 100GiB
   grow: false

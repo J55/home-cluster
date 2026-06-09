@@ -4,10 +4,10 @@ clusterName: kubernetes
 talosVersion: "${talosVersion}"
 kubernetesVersion: "${kubernetesVersion}"
 
-endpoint: https://192.168.20.50:6443
+endpoint: https://k8s.internal:6443
 additionalApiServerCertSans: &sans
   - "127.0.0.1"
-  - "192.168.20.50"
+  - "k8s.internal"
 additionalMachineCertSans: *sans
 
 clusterPodNets: ["10.42.0.0/16"]
@@ -25,18 +25,6 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/f8a903f101ce10f686476024898734bb6b36353cc4d41f348514db9004ec0a9d
     controlPlane: true
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "dc:a6:32:eb:13:6d"
-        dhcp: false
-        addresses:
-          - "192.168.20.20/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
-        vip:
-          ip: "192.168.20.50"
   - hostname: "rpileader1"
     ipAddress: "192.168.20.21"
     installDisk: "/dev/sda"
@@ -44,18 +32,6 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/f8a903f101ce10f686476024898734bb6b36353cc4d41f348514db9004ec0a9d
     controlPlane: true
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "dc:a6:32:eb:13:82"
-        dhcp: false
-        addresses:
-          - "192.168.20.21/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
-        vip:
-          ip: "192.168.20.50"
   - hostname: "rpileader2"
     ipAddress: "192.168.20.22"
     installDisk: "/dev/sda"
@@ -63,18 +39,6 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/f8a903f101ce10f686476024898734bb6b36353cc4d41f348514db9004ec0a9d
     controlPlane: true
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:24:83:49"
-        dhcp: false
-        addresses:
-          - "192.168.20.22/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
-        vip:
-          ip: "192.168.20.50"
   - hostname: "rpinode0"
     ipAddress: "192.168.20.30"
     installDisk: "/dev/sda"
@@ -82,16 +46,6 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/f8a903f101ce10f686476024898734bb6b36353cc4d41f348514db9004ec0a9d
     controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:24:83:d0"
-        dhcp: false
-        addresses:
-          - "192.168.20.30/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
   - hostname: "rpinode1"
     ipAddress: "192.168.20.31"
     installDisk: "/dev/sda"
@@ -99,16 +53,6 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/f8a903f101ce10f686476024898734bb6b36353cc4d41f348514db9004ec0a9d
     controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:f1:63:9d"
-        dhcp: false
-        addresses:
-          - "192.168.20.31/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
   - hostname: "rpinode2"
     ipAddress: "192.168.20.32"
     installDisk: "/dev/sda"
@@ -116,16 +60,6 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/f8a903f101ce10f686476024898734bb6b36353cc4d41f348514db9004ec0a9d
     controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "e4:5f:01:f1:8d:0f"
-        dhcp: false
-        addresses:
-          - "192.168.20.32/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
   - hostname: "nucnode0"
     ipAddress: "192.168.20.33"
     installDisk: "/dev/nvme1n1"
@@ -133,16 +67,10 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510
     controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "88:ae:dd:72:eb:84"
-        dhcp: false
-        addresses:
-          - "192.168.20.33/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
+    patches:
+      - "@./patches/nuc-common.yaml"
+      - "@./patches/nucnode0/network.yaml"
+      - "@./patches/nucnode0/volumes.yaml"
   - hostname: "nucnode1"
     ipAddress: "192.168.20.34"
     installDisk: "/dev/nvme1n1"
@@ -150,16 +78,10 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510
     controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "88:ae:dd:74:0c:6c"
-        dhcp: false
-        addresses:
-          - "192.168.20.34/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
+    patches:
+      - "@./patches/nuc-common.yaml"
+      - "@./patches/nucnode1/network.yaml"
+      - "@./patches/nucnode1/volumes.yaml"
   - hostname: "nucnode2"
     ipAddress: "192.168.20.35"
     installDisk: "/dev/nvme1n1"
@@ -167,22 +89,15 @@ nodes:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510
     controlPlane: false
-    networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "88:ae:dd:73:a7:56"
-        dhcp: false
-        addresses:
-          - "192.168.20.35/24"
-        routes:
-          - network: "0.0.0.0/0"
-            gateway: "192.168.20.1"
-        mtu: 1500
+    patches:
+      - "@./patches/nuc-common.yaml"
+      - "@./patches/nucnode2/network.yaml"
+      - "@./patches/nucnode2/volumes.yaml"
 
 # Global patches
 patches:
-  - "@./patches/global/machine-files.yaml"
+  - "@./patches/global/machine-bond.yaml"
   - "@./patches/global/machine-kubelet.yaml"
-  - "@./patches/global/machine-network.yaml"
   - "@./patches/global/machine-sysctls.yaml"
   - "@./patches/global/machine-time.yaml"
   - "@./patches/global/volumes.yaml"
@@ -191,3 +106,5 @@ patches:
 controlPlane:
   patches:
     - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/machine.yaml"
+    - "@./patches/controller/network.yaml"

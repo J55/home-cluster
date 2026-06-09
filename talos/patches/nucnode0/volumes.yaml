@@ -1,0 +1,19 @@
+---
+# Samsung 990 PRO 1TB — WWID: eui.00253846514058c1
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: longhorn
+provisioning:
+  diskSelector:
+    match: disk.wwid == "eui.00253846514058c1"
+  minSize: 80GiB
+  maxSize: 500GiB
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: local-hostpath
+provisioning:
+  diskSelector:
+    match: disk.wwid == "eui.00253846514058c1"
+  minSize: 10GiB
+  maxSize: 100GiB
