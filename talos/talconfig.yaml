@@ -40,7 +40,7 @@ nodes:
     talosImageURL: factory.talos.dev/installer/f8a903f101ce10f686476024898734bb6b36353cc4d41f348514db9004ec0a9d
     controlPlane: true
   - hostname: "nucnode0"
-    ipAddress: "192.168.20.33"
+    ipAddress: "192.168.20.30"
     installDisk: "/dev/nvme1n1"
     machineSpec:
       secureboot: false
@@ -51,7 +51,7 @@ nodes:
       - "@./patches/nucnode0/network.yaml"
       - "@./patches/nucnode0/volumes.yaml"
   - hostname: "nucnode1"
-    ipAddress: "192.168.20.34"
+    ipAddress: "192.168.20.31"
     installDisk: "/dev/nvme1n1"
     machineSpec:
       secureboot: false
@@ -62,7 +62,7 @@ nodes:
       - "@./patches/nucnode1/network.yaml"
       - "@./patches/nucnode1/volumes.yaml"
   - hostname: "nucnode2"
-    ipAddress: "192.168.20.35"
+    ipAddress: "192.168.20.32"
     installDisk: "/dev/nvme1n1"
     machineSpec:
       secureboot: false
