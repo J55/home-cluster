@@ -6,16 +6,6 @@ name: net0
 selector:
   match: link.driver == "bcmgenet"
 ---
-# RPi leaders only have the system disk (SD card), so volumes go there
-apiVersion: v1alpha1
-kind: UserVolumeConfig
-name: longhorn
-provisioning:
-  diskSelector:
-    match: system_disk
-  minSize: 80GiB
-  maxSize: 110GiB
----
 apiVersion: v1alpha1
 kind: UserVolumeConfig
 name: local-hostpath

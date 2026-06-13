@@ -7,6 +7,9 @@ metadata:
 spec:
   components:
     - ../../../../components/volsync
+  dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
   interval: 2h
   retryInterval: 30m
   path: ./kubernetes/apps/home/node-red/app

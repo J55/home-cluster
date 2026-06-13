@@ -11,6 +11,8 @@ spec:
   interval: 1h
   path: ./kubernetes/apps/default/wizarr/app
   dependsOn:
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
     - name: plex
   postBuild:
     substitute:

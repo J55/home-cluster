@@ -1,19 +1,10 @@
 ---
-# Samsung 990 PRO 1TB — WWID: eui.00253846514058c1
-apiVersion: v1alpha1
-kind: UserVolumeConfig
-name: longhorn
-provisioning:
-  diskSelector:
-    match: disk.wwid == "eui.00253846514058c1"
-  minSize: 80GiB
-  maxSize: 500GiB
----
+# Samsung 990 PRO 1TB (eui.00253846514058c1) is used as a raw block device by Rook-Ceph
 apiVersion: v1alpha1
 kind: UserVolumeConfig
 name: local-hostpath
 provisioning:
   diskSelector:
-    match: disk.wwid == "eui.00253846514058c1"
+    match: system_disk
   minSize: 10GiB
   maxSize: 100GiB

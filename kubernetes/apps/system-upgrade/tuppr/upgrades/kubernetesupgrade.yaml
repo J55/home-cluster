@@ -13,7 +13,7 @@ spec:
       kind: ReplicationSource
       expr: |-
         status.conditions.filter(c, c.type == "Synchronizing").all(c, c.status == "False")
-    - apiVersion: longhorn.io/v1beta2
-      kind: Volume
+    - apiVersion: ceph.rook.io/v1
+      kind: CephCluster
       expr: |-
-        !(status.robustness in ['degraded'])
+        status.ceph.health in ['HEALTH_OK', 'HEALTH_WARN']
