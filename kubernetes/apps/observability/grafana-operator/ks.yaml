@@ -26,7 +26,7 @@ metadata:
   name: grafana-instance
 spec:
   dependsOn:
-    - name: grafana
+    - name: grafana-operator
     - name: longhorn
       namespace: longhorn-system
   interval: 1h
