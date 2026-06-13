@@ -13,7 +13,7 @@ spec:
     certManager:
       enabled: false
     prometheus:
-      url: http://vmsingle-victoria-metrics.observability.svc.cluster.local
+      url: http://prometheus-operated.observability.svc.cluster.local
       port: 8428
     rules:
       default: false
