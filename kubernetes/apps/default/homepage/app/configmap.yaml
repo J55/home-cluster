@@ -130,7 +130,6 @@ data:
               url: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               env: 3
               key: {{HOMEPAGE_VAR_PORTAINER_TOKEN}}
-    - Downloads:
     - System:
         - Adguard:
             href: http://adguard.internal
