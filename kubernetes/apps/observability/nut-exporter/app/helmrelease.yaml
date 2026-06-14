@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app nut-exporter
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: nut-exporter
+  interval: 1h
+  values:
+    controllers:
+      nut-exporter:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/druggeri/nut_exporter
+              tag: 3.3.0
+            env:
+              TZ: America/New_York
+            args:
+              - --nut.vars_enable="battery.charge,battery.charge,battery.runtime,battery.voltage,battery.voltage.nominal,input.voltage,input.voltage.nominal,output.voltage,output.voltage.nominal,ups.realpower,ups.load,ups.status,ups.status"
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+            resources:
+              limits:
+                memory: 200Mi
+    fullnameOverride: *app
+    service:
+      app:
+        ports:
+          metrics:
+            protocol: TCP
+            port: 9199
