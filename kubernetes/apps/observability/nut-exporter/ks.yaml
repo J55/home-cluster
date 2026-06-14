@@ -8,6 +8,7 @@ spec:
   interval: 1h
   dependsOn:
     - name: onepassword
+      namespace: external-secrets
   path: ./kubernetes/apps/observability/nut-exporter/app
   prune: true
   sourceRef:
@@ -16,4 +17,3 @@ spec:
     namespace: flux-system
   targetNamespace: observability
   wait: false
-
