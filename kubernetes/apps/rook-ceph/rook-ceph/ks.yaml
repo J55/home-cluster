@@ -25,6 +25,8 @@ spec:
     - name: rook-ceph
     - name: volsync
       namespace: volsync-system
+    - name: onepassword
+      namespace: external-secrets
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
