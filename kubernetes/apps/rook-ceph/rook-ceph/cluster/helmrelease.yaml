@@ -51,10 +51,6 @@ spec:
           gethomepage.dev/icon: ceph.png
           gethomepage.dev/group: Storage
           gethomepage.dev/description: Ceph Storage Cluster
-          gethomepage.dev/widget.type: ceph
-          gethomepage.dev/widget.url: "http://rook-ceph-mgr-dashboard.rook-ceph.svc.cluster.local:7000"
-          gethomepage.dev/widget.username: '{{ "{{HOMEPAGE_VAR_ROOK_USERNAME}}" }}'
-          gethomepage.dev/widget.password: '{{ "{{HOMEPAGE_VAR_ROOK_PASSWORD}}" }}'
         host:
           name: rook.${SECRET_DOMAIN}
           path: /
