@@ -21,19 +21,17 @@ spec:
               tag: 3.3.0
             env:
               TZ: America/New_York
-              NUT_USERNAME:
+              NUT_EXPORTER_USERNAME:
                 valueFrom:
                   secretKeyRef:
                     name: nut-exporter
                     key: username
-              NUT_PASSWORD:
+              NUT_EXPORTER_PASSWORD:
                 valueFrom:
                   secretKeyRef:
                     name: nut-exporter
                     key: password
             args:
-              - --nut.username=$(NUT_USERNAME)
-              - --nut.password=$(NUT_PASSWORD)
               - --nut.vars_enable="battery.charge,battery.charge,battery.runtime,battery.voltage,battery.voltage.nominal,input.voltage,input.voltage.nominal,output.voltage,output.voltage.nominal,ups.realpower,ups.load,ups.status,ups.status"
             probes:
               liveness:
