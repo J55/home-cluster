@@ -78,6 +78,15 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: SABnzbd
+          gethomepage.dev/icon: sabnzbd.png
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/description: NZB Downloader
+          gethomepage.dev/widget.type: sabnzbd
+          gethomepage.dev/widget.url: "http://sabnzbd.default.svc.cluster.local"
+          gethomepage.dev/widget.key: '{{ "{{HOMEPAGE_VAR_SABNZBD_API_KEY}}" }}'
         parentRefs:
           - name: envoy-internal
             namespace: network

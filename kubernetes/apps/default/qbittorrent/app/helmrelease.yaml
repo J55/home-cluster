@@ -78,6 +78,16 @@ spec:
       app:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: qBittorrent
+          gethomepage.dev/icon: qbittorrent.png
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/description: Torrent Downloader
+          gethomepage.dev/widget.type: qbittorrent
+          gethomepage.dev/widget.url: "http://qbittorrent.default.svc.cluster.local"
+          gethomepage.dev/widget.username: '{{ "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}" }}'
+          gethomepage.dev/widget.password: '{{ "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}" }}'
         parentRefs:
           - name: envoy-internal
             namespace: network

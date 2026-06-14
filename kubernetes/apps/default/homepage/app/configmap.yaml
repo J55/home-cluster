@@ -130,40 +130,7 @@ data:
               url: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
               env: 3
               key: {{HOMEPAGE_VAR_PORTAINER_TOKEN}}
-        - Gluetun:
-            icon: gluetun.png
-            description: VPN Gateway
-            widget:
-              type: gluetun
-              url: http://galactus.internal:8000
-              key: {{HOMEPAGE_VAR_GLUETUN_API_KEY}}
-        - Speedtest Tracker:
-            icon: speedtest-tracker.png
-            description: VPN Speed Monitor
-            widget:
-              type: speedtest
-              url: http://galactus.internal:8900
-              key: {{HOMEPAGE_VAR_SPEEDTEST_API_KEY}}
     - Downloads:
-        - Sabnzbd:
-            href: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: sabnzbd.png
-            description: NZB Downloader
-            widget:
-              type: sabnzbd
-              url: https://sabnzbd.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              key: {{HOMEPAGE_VAR_SABNZBD_API_KEY}}
-        - qBitTorrent-Public:
-            href: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://qbit-public.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: qbittorrent.png
-            description: Torrent Downloader
-        - qBitTorrent-Private:
-            href: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            siteMonitor: https://qbit-private.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: qbittorrent.png
-            description: Torrent Downloader
     - System:
         - Adguard:
             href: http://adguard.internal

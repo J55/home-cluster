@@ -4,10 +4,11 @@ clusterName: kubernetes
 talosVersion: "${talosVersion}"
 kubernetesVersion: "${kubernetesVersion}"
 
-endpoint: https://192.168.20.50:6443
+endpoint: https://k8s.internal:6443
 additionalApiServerCertSans: &sans
   - "127.0.0.1"
-  - "192.168.20.50"
+  - "k8s.internal"
+
 additionalMachineCertSans: *sans
 
 clusterPodNets: ["10.42.0.0/16"]
@@ -41,7 +42,7 @@ nodes:
     controlPlane: true
   - hostname: "nucnode0"
     ipAddress: "192.168.20.30"
-    installDisk: "/dev/nvme1n1"
+    installDisk: "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4b9f7b5f"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510
@@ -52,7 +53,7 @@ nodes:
       - "@./patches/nucnode0/volumes.yaml"
   - hostname: "nucnode1"
     ipAddress: "192.168.20.31"
-    installDisk: "/dev/nvme1n1"
+    installDisk: "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4ba4acd7"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510
@@ -63,7 +64,7 @@ nodes:
       - "@./patches/nucnode1/volumes.yaml"
   - hostname: "nucnode2"
     ipAddress: "192.168.20.32"
-    installDisk: "/dev/nvme1n1"
+    installDisk: "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b41c281be"
     machineSpec:
       secureboot: false
     talosImageURL: factory.talos.dev/installer/8d37fcc01bb9173406853e7fd97ad9eda40732043f88e09dafe55e53fcf4b510

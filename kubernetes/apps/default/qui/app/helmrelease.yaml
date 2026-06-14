@@ -89,7 +89,7 @@ spec:
           gethomepage.dev/group: Downloads
           gethomepage.dev/description: Web Interface for qBittorrent
           gethomepage.dev/widget.type: qbittorrent
-          gethomepage.dev/widget.url: "https://qbit-private.${SECRET_DOMAIN}"
+          gethomepage.dev/widget.url: "http://qbittorrent.default.svc.cluster.local"
           gethomepage.dev/widget.username: '{{ "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}" }}'
           gethomepage.dev/widget.password: '{{ "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}" }}'
         parentRefs:
