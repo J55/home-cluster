@@ -23,7 +23,7 @@ function wait_for_nodes() {
     done
 }
 
-# Namespaces to be applied before the SOPS secrets are installed
+# Namespaces to be applied before the helmfile charts are installed
 function apply_namespaces() {
     log debug "Applying namespaces"
 
@@ -53,35 +53,23 @@ function apply_namespaces() {
     done
 }
 
-# SOPS secrets to be applied before the helmfile charts are installed
-function apply_sops_secrets() {
-    log debug "Applying secrets"
+# Bootstrap the 1Password Connect secret so external-secrets can start
+function apply_onepassword_secret() {
+    log debug "Applying 1Password Connect secret"
 
-    local -r secrets=(
-        "${ROOT_DIR}/bootstrap/github-deploy-key.sops.yaml"
-        "${ROOT_DIR}/bootstrap/sops-age.sops.yaml"
-        "${ROOT_DIR}/kubernetes/components/sops/cluster-secrets.sops.yaml"
-    )
+    if kubectl get secret onepassword-secret --namespace external-secrets &>/dev/null; then
+        log info "Secret resource is up-to-date" "resource=onepassword-secret"
+        return
+    fi
 
-    for secret in "${secrets[@]}"; do
-        if [ ! -f "${secret}" ]; then
-            log warn "File does not exist" "file=${secret}"
-            continue
-        fi
+    kubectl create secret generic onepassword-secret \
+        --namespace external-secrets \
+        --from-literal=1password-credentials.json="$(op item get '1password' --vault Kubernetes --field 'OP_CREDENTIALS_JSON')" \
+        --from-literal=token="$(op item get '1password' --vault Kubernetes --field 'OP_CONNECT_TOKEN')" \
+        --dry-run=client --output=yaml \
+        | kubectl apply --server-side --filename - &>/dev/null
 
-        # Check if the secret resources are up-to-date
-        if sops exec-file "${secret}" "kubectl --namespace flux-system diff --filename {}" &>/dev/null; then
-            log info "Secret resource is up-to-date" "resource=$(basename "${secret}" ".sops.yaml")"
-            continue
-        fi
-
-        # Apply secret resources
-        if sops exec-file "${secret}" "kubectl --namespace flux-system apply --server-side --filename {}" &>/dev/null; then
-            log info "Secret resource applied successfully" "resource=$(basename "${secret}" ".sops.yaml")"
-        else
-            log error "Failed to apply secret resource" "resource=$(basename "${secret}" ".sops.yaml")"
-        fi
-    done
+    log info "Secret resource applied successfully" "resource=onepassword-secret"
 }
 
 # CRDs to be applied before the helmfile charts are installed
@@ -129,12 +117,12 @@ function sync_helm_releases() {
 
 function main() {
     check_env KUBECONFIG TALOSCONFIG
-    check_cli helmfile kubectl kustomize sops talhelper yq
+    check_cli helmfile kubectl kustomize op talhelper yq
 
     # Apply resources and Helm releases
     wait_for_nodes
     apply_namespaces
-    apply_sops_secrets
+    apply_onepassword_secret
     apply_crds
     sync_helm_releases
 
