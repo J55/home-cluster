@@ -113,7 +113,7 @@
       matchUpdateTypes: ["digest"],
       matchPackageNames: ["/home-operations/"],
       automerge: true,
-      automergeType: "pr",
+      automergeType: "branch",
       ignoreTests: false,
     },
     {
@@ -225,9 +225,6 @@
       labels: [
         'type/minor',
       ],
-      automerge: true,
-      automergeType: 'branch',
-      platformAutomerge: true,
     },
     {
       matchUpdateTypes: [
@@ -236,9 +233,6 @@
       labels: [
         'type/patch',
       ],
-      automerge: true,
-      automergeType: 'branch',
-      platformAutomerge: true,
     },
     {
       matchUpdateTypes: [
