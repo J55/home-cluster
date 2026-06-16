@@ -38,7 +38,6 @@
     {
       matchDatasources: ['docker', 'helm'],
       matchUpdateTypes: ['minor', 'patch', 'digest'],
-      minimumReleaseAge: '3 hours',
       automerge: true,
     },
     {
