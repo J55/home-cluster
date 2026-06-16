@@ -3,11 +3,11 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: gatus
+  name: gatus-sidecar
 spec:
   chartRef:
     kind: OCIRepository
-    name: gatus
+    name: gatus-sidecar
   interval: 1h
   values:
     deploymentAnnotations:
@@ -46,7 +46,7 @@ spec:
         gethomepage.dev/group: Infrastructure
         gethomepage.dev/href: "https://status.${SECRET_DOMAIN}"
         gethomepage.dev/widget.type: gatus
-        gethomepage.dev/widget.url: http://gatus.observability.svc.cluster.local
+        gethomepage.dev/widget.url: http://gatus-sidecar.observability.svc.cluster.local
       parentRefs:
         - name: envoy-external
           namespace: network
