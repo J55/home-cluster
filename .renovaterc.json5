@@ -4,7 +4,6 @@
     'config:recommended',
     'docker:enableMajor',
     'helpers:pinGitHubActionDigestsToSemver',
-    ':automergeBranch',
     ':dependencyDashboard',
     ':disableRateLimiting',
     ':semanticCommits',
@@ -92,7 +91,6 @@
         '/kube-prometheus-stack/',
       ],
       automerge: true,
-      automergeType: 'branch',
       schedule: [
         'before 6am on Monday',
       ],
@@ -103,7 +101,7 @@
       matchPackageNames: ["/^actions\\//", "/^renovatebot\\//"],
       matchUpdateTypes: ["minor", "patch", "digest"],
       automerge: true,
-      automergeType: "branch",
+      automergeType: "pr",
       minimumReleaseAge: "1 minute",
       ignoreTests: true,
     },
@@ -113,7 +111,7 @@
       matchUpdateTypes: ["digest"],
       matchPackageNames: ["/home-operations/"],
       automerge: true,
-      automergeType: "branch",
+      automergeType: "pr",
       ignoreTests: false,
     },
     {
@@ -121,7 +119,7 @@
       matchDatasources: ["custom.grafana-dashboards"],
       matchUpdateTypes: ["major"],
       automerge: true,
-      automergeType: "branch",
+      automergeType: "pr",
       ignoreTests: true,
     },
     {
@@ -129,7 +127,7 @@
       matchManagers: ["renovate-config"],
       matchUpdateTypes: ["minor", "patch"],
       automerge: true,
-      automergeType: "branch",
+      automergeType: "pr",
       ignoreTests: true,
     },
     {
@@ -138,7 +136,7 @@
         'mise',
       ],
       automerge: true,
-      automergeType: 'branch',
+      automergeType: 'pr',
       matchUpdateTypes: [
         'minor',
         'patch',
