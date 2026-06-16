@@ -15,7 +15,7 @@ spec:
     gatus:
       env:
         TZ: America/New_York
-      delayStartSeconds: 5
+      delayStartSeconds: "5"
     sidecar:
       kinds:
         httproute:
