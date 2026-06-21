@@ -51,6 +51,7 @@ spec:
           gethomepage.dev/icon: ceph.png
           gethomepage.dev/group: Storage
           gethomepage.dev/description: Ceph Storage Cluster
+          gethomepage.dev/pod-selector: "app=rook-ceph-mgr"
         host:
           name: rook.${SECRET_DOMAIN}
           path: /
