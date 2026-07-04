@@ -14,11 +14,32 @@ spec:
       bazarr:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          patch-migrations:
+            image:
+              repository: ghcr.io/home-operations/bazarr
+              tag: 1.6.0@sha256:cd63bbd0986c93e238eb8b9442604d249f0d4080099b389f822abe2062044417
+            command:
+              - /bin/sh
+              - -c
+            args:
+              - |
+                cp -r /app/bin/migrations/versions/. /migrations-patch/
+                chmod -R 755 /migrations-patch/
+                sed -i 's/bind = op.get_context().bind//' /migrations-patch/7e9a2b1c4d5f_.py
+                sed -i 's/insp = sa.inspect(bind)//' /migrations-patch/7e9a2b1c4d5f_.py
+                sed -i 's/    columns = insp.get_columns(table_name)/    insp = sa.inspect(op.get_bind())\n    columns = insp.get_columns(table_name)/' /migrations-patch/7e9a2b1c4d5f_.py
+                sed -i 's/bind = op.get_context().bind//' /migrations-patch/0124f9e278fb_.py
+                sed -i 's/def upgrade():/def upgrade():\n    bind = op.get_bind()/' /migrations-patch/0124f9e278fb_.py
+            securityContext:
+              runAsUser: 0
+              runAsNonRoot: false
+              runAsGroup: 0
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/bazarr
-              tag: 1.5.6@sha256:80cb090162b47ea1bfb499d742b45a460b282f17ffefa4c01d518a5c8d52a5a4
+              tag: 1.6.0@sha256:cd63bbd0986c93e238eb8b9442604d249f0d4080099b389f822abe2062044417
             env:
               BAZARR__PORT: &port 80
               TZ: America/New_York
@@ -92,3 +113,11 @@ spec:
           - path: /media
       tmp:
         type: emptyDir
+      migrations:
+        type: emptyDir
+        advancedMounts:
+          bazarr:
+            patch-migrations:
+              - path: /migrations-patch
+            app:
+              - path: /app/bin/migrations/versions
