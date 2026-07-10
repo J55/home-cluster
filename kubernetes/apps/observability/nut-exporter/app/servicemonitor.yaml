@@ -18,7 +18,7 @@ spec:
       app.kubernetes.io/instance: nut-exporter
       app.kubernetes.io/name: nut-exporter
   endpoints:
-    - interval: 30s
+    - interval: 60s
       path: /ups_metrics
       port: metrics
       scheme: http
