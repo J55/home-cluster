@@ -11,7 +11,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - galactus.internal
+        - galacta.internal
         - nas.internal
   metricRelabelings:
     - targetLabel: service
@@ -31,7 +31,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - galactus.internal:2049
+        - galacta.internal:2049
   metricRelabelings:
     - targetLabel: service
       replacement: blackbox-exporter-lan

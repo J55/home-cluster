@@ -110,7 +110,7 @@ spec:
             subPath: repository.config
       repository:
         type: nfs
-        server: galactus.internal
+        server: galacta.internal
         path: /volume1/k8s/VolsyncKopia
         globalMounts:
           - path: /repository
