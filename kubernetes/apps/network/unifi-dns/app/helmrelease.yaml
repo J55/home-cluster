@@ -25,6 +25,8 @@ spec:
               secretKeyRef:
                 name: &secret unifi-dns-secret
                 key: UNIFI_API_KEY
+          - name: UNIFI_SKIP_TLS_VERIFY
+            value: "true"
         livenessProbe:
           httpGet:
             path: /healthz
