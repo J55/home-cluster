@@ -25,8 +25,6 @@ spec:
               secretKeyRef:
                 name: &secret unifi-dns-secret
                 key: UNIFI_API_KEY
-          - name: UNIFI_SKIP_TLS_VERIFY
-            value: "true"
         livenessProbe:
           httpGet:
             path: /healthz
@@ -39,6 +37,8 @@ spec:
             port: http-webhook
           initialDelaySeconds: 10
           timeoutSeconds: 5
+    extraArgs:
+      - --webhook-provider-read-timeout=30s
     triggerLoopOnEvent: true
     policy: sync
     sources:
