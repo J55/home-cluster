@@ -158,11 +158,11 @@ data:
             href: http://galactus.internal
             icon: truenas.png
             widget:
-               type: truenas
-                url: http://galactus.internal
-                version: 2
-                key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
-                enablePools: true
+              type: truenas
+              url: http://galactus.internal
+              version: 2
+              key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
+              enablePools: true
         - Cloudflared:
             href: https://dash.cloudflare.com/
             icon: cloudflare-zero-trust.png
