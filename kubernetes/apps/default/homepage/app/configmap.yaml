@@ -159,7 +159,7 @@ data:
             icon: truenas.png
             widget:
               type: truenas
-              url: http://galactus.internal
+              url: https://galactus.internal
               version: 2
               key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
               enablePools: true
