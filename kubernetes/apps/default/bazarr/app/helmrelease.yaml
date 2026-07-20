@@ -107,8 +107,8 @@ spec:
         existingClaim: "{{ .Release.Name }}"
       media:
         type: nfs
-        server: galacta.internal
-        path: /volume1/Media
+        server: galactus.internal
+        path: /mnt/uatu/Media
         globalMounts:
           - path: /media
       tmp:

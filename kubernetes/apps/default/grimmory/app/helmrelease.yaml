@@ -132,8 +132,8 @@ spec:
                 subPath: mysql
       media:
         type: nfs
-        server: galacta.internal
-        path: /volume1/Media
+        server: galactus.internal
+        path: /mnt/uatu/Media
         advancedMounts:
           grimmory:
             app:

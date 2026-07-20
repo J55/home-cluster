@@ -100,7 +100,7 @@ spec:
         existingClaim: "{{ .Release.Name }}"
       media:
         type: nfs
-        server: transition.internal
+        server: galactus.internal
         path: /mnt/uatu/Media
         globalMounts:
           - path: /media

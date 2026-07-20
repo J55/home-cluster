@@ -44,8 +44,8 @@ spec:
               value: Object.spec.template.spec.volumes{
                 name: "repository",
                 nfs: Object.spec.template.spec.volumes.nfs{
-                  server: "galacta.internal",
-                  path: "/volume1/k8s/VolsyncKopia"
+                  server: "galactus.internal",
+                  path: "/mnt/uatu/k8s/VolsyncKopia"
                 }
               }
             },
