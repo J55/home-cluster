@@ -42,7 +42,9 @@ spec:
               ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto.home.svc.cluster.local:1883
               ZIGBEE2MQTT_CONFIG_MQTT_VERSION: 5
               ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
-              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/ttyUSB0
+              ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
+              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: tcp://slzb-ultima.internal:6638
+              ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: ezsp
             envFrom:
               - secretRef:
                   name: *app
@@ -57,23 +59,21 @@ spec:
                   failureThreshold: 30
                   periodSeconds: 10
             securityContext:
-              runAsUser: 0
-              runAsGroup: 0
-              runAsNonRoot: false
-              privileged: true
-              allowPrivilegeEscalation: true
-              readOnlyRootFilesystem: false
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
             resources:
               requests:
                 cpu: 10m
               limits:
                 memory: 1Gi
     defaultPodOptions:
-      nodeSelector:
-        sonoff.feature.node.kubernetes.io/zigbee: "true"
       securityContext:
-        fsGroup: 0
-        fsGroupChangePolicy: Always
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     service:
       app:
         ports:
@@ -97,10 +97,3 @@ spec:
         existingClaim: "{{ .Release.Name }}"
         globalMounts:
           - path: /config
-      usb:
-        enabled: true
-        type: hostPath
-        hostPath: /dev/ttyUSB0
-        hostPathType: CharDevice
-        globalMounts:
-          - path: /dev/ttyUSB0

@@ -5,4 +5,3 @@ kind: Kustomization
 resources:
   - ./aeotec-zwave-device.yaml
   - ./google-coral-device.yaml
-  - ./sonoff-zigbee-device.yaml

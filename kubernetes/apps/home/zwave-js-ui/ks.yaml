@@ -12,6 +12,7 @@ spec:
       namespace: kube-system
   components:
     - ../../../../components/volsync
+    - ../../../../components/zeroscaler
   interval: 2h
   retryInterval: 30m
   path: ./kubernetes/apps/home/zwave-js-ui/app
@@ -19,6 +20,7 @@ spec:
     substitute:
       APP: zwave
       VOLSYNC_CAPACITY: 1Gi
+      ZEROSCALER_JOB_NAME: slzb_ultima_probe
     substituteFrom:
       - name: cluster-secrets
         kind: Secret
