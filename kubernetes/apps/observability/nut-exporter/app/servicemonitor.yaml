@@ -24,7 +24,7 @@ spec:
       scheme: http
       scrapeTimeout: 30s
       params:
-        server: ["nas.internal"]
+        server: ["galactus.internal"]
         ups: ["ups"]
       metricRelabelings:
         - action: replace
@@ -32,7 +32,7 @@ spec:
           sourceLabels: [instance]
           targetLabel: instance
         - action: replace
-          replacement: nas.internal
+          replacement: galactus.internal
           sourceLabels: [server]
           targetLabel: server
         - action: labeldrop
