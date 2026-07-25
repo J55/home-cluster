@@ -121,15 +121,6 @@ data:
                 - type: radarr
                   service_group: Downloads
                   service_name: Radarr
-    - Infrastructure:
-        - Portainer:
-            href: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-            icon: portainer.png
-            widget:
-              type: portainer
-              url: https://portainer.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
-              env: 3
-              key: {{HOMEPAGE_VAR_PORTAINER_TOKEN}}
     - System:
         - Adguard:
             href: http://adguard.internal
@@ -146,21 +137,13 @@ data:
               type: unifi
               url: https://unifi.internal
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
-        - Synology:
-            href: https://nas.internal:5001
-            icon: synology.png
-            widget:
-              type: diskstation
-              url: https://nas.internal:5001
-              username: {{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}
-              password: {{HOMEPAGE_VAR_SYNOLOGY_PASSWORD}}
         - Truenas:
             href: http://galactus.internal
             icon: truenas.png
             widget:
               type: truenas
               url: https://galactus.internal
-              version: 2
+              version: 1
               key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
               enablePools: true
         - Cloudflared:
