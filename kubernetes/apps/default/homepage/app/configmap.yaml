@@ -143,7 +143,7 @@ data:
             widget:
               type: truenas
               url: https://galactus.internal
-              version: 1
+              version: 2
               key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
               enablePools: true
         - Cloudflared:
