@@ -14,6 +14,7 @@ resources:
   - ./bazarr/ks.yaml
   - ./chaptarr/ks.yaml
   - ./decluttarr/ks.yaml
+  - ./deduparr/ks.yaml
   - ./dispatcharr/ks.yaml
   - ./echo/ks.yaml
   - ./grimmory/ks.yaml

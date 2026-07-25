@@ -1,0 +1,12 @@
+---
+schedule: service
+action: remove
+remove_from_client: false
+radarr:
+  - name: radarr
+    url: https://radarr.{{ .DOMAIN }}
+    enabled: true
+sonarr:
+  - name: sonarr
+    url: https://sonarr.{{ .DOMAIN }}
+    enabled: true
