@@ -2,6 +2,17 @@
 # NUC-specific containerd customization — includes CDI spec dirs for Intel GPU (i915)
 machine:
   files:
+    - op: overwrite
+      path: /etc/nfsmount.conf
+      permissions: 0o644
+      content: |
+        [ NFSMount_Global_Options ]
+        nfsvers=4.2
+        hard=True
+        nconnect=8
+        noatime=True
+        rsize=1048576
+        wsize=1048576
     - op: create
       path: /etc/cri/conf.d/20-customization.part
       content: |

@@ -15,6 +15,8 @@ kubeconfig
 talosconfig
 # Misc.
 ./mc.yaml
+/nas-down.sh
+/nas-up.sh
 .private/
 .task/
 .venv/
