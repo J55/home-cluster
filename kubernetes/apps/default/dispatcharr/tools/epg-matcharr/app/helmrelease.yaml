@@ -1,0 +1,73 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app epg-matcharr
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: epg-matcharr
+  interval: 1h
+  values:
+    controllers:
+      epg-matcharr:
+        containers:
+          app:
+            image:
+              repository: ghcr.io/jstevenscl/epgmatcharr
+              tag: v0.3.09@sha256:062b507bf4eb604652d56c0f09862713620cfe29df01d5d0fcf1d471bd638b35
+            env:
+              TZ: America/New_York
+              DISPATCHARR_URL: http://dispatcharr.default.svc:9191
+            envFrom:
+              - secretRef:
+                  name: epg-matcharr-secret
+            probes:
+              liveness:
+                enabled: false
+              readiness:
+                enabled: false
+              startup:
+                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 4Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    service:
+      app:
+        ports:
+          http:
+            port: &port 8281
+    route:
+      app:
+        hostnames:
+          - "{{ .Release.Name }}.${SECRET_DOMAIN}"
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: mdi-television-guide
+          gethomepage.dev/name: EPG Matcharr
+          gethomepage.dev/group: Media
+          gethomepage.dev/description: Automatic EPG Matcher
+        parentRefs:
+          - name: envoy-internal
+            namespace: network
+    persistence:
+      config:
+        existingClaim: "{{ .Release.Name }}"
+        globalMounts:
+          - path: /app/data
+      tmp:
+        type: emptyDir

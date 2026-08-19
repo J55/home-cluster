@@ -28,3 +28,63 @@ spec:
     namespace: flux-system
   targetNamespace: default
   wait: false
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: teamarr
+spec:
+  components:
+    - ../../../../components/volsync
+  dependsOn:
+    - name: dispatcharr
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  interval: 1h
+  path: ./kubernetes/apps/default/dispatcharr/tools/teamarr/app
+  postBuild:
+    substitute:
+      APP: teamarr
+      VOLSYNC_CAPACITY: 1Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: default
+  wait: false
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: epg-matcharr
+spec:
+  components:
+    - ../../../../components/volsync
+  dependsOn:
+    - name: dispatcharr
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+    - name: onepassword
+      namespace: external-secrets
+  interval: 1h
+  path: ./kubernetes/apps/default/dispatcharr/tools/epg-matcharr/app
+  postBuild:
+    substitute:
+      APP: epg-matcharr
+      VOLSYNC_CAPACITY: 2Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: default
+  wait: false
