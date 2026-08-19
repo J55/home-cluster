@@ -65,7 +65,7 @@ metadata:
   name: epg-matcharr
 spec:
   components:
-    - ../../../../components/volsync
+    - ../../../../../../components/volsync
   dependsOn:
     - name: dispatcharr
     - name: rook-ceph-cluster
