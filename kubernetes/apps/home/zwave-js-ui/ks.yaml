@@ -8,8 +8,6 @@ spec:
   dependsOn:
     - name: rook-ceph-cluster
       namespace: rook-ceph
-    - name: node-feature-discovery
-      namespace: kube-system
   components:
     - ../../../../components/volsync
     - ../../../../components/zeroscaler
