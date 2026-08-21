@@ -80,6 +80,7 @@
         commitMessageTopic: '{{{groupName}}} group',
       },
       minimumGroupSize: 2,
+      dependencyDashboardApproval: true,
     },
     {
       description: 'Kube-Prometheus-Stack weekly schedule',
