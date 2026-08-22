@@ -27,6 +27,23 @@ spec:
                 chmod 0750 /data/db
             securityContext:
               runAsUser: 0
+          patch-proxy-config:
+            image:
+              repository: ghcr.io/dispatcharr/dispatcharr
+              tag: 0.29.0@sha256:df768adcb9993b58f5e67010cc802c8659b7f964cb1213ab7ff9bb9384db9145
+            command:
+              - python3
+              - -c
+              - |
+                import re
+                path = '/app/apps/proxy/config.py'
+                with open(path, 'r') as f:
+                    content = f.read()
+                content = re.sub(r'(INITIAL_BEHIND_CHUNKS\s*=\s*)\d+', r'\g<1>24', content)
+                content = re.sub(r'(HEALTH_CHECK_INTERVAL\s*=\s*)\d+', r'\g<1>1', content)
+                content = re.sub(r'(CONNECTION_TIMEOUT\s*=\s*)\d+', r'\g<1>3', content)
+                with open(path, 'w') as f:
+                    f.write(content)
         containers:
           app:
             image:
