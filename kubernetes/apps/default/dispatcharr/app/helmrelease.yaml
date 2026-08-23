@@ -36,13 +36,12 @@ spec:
               - -c
               - |
                 import re
-                path = '/app/apps/proxy/config.py'
-                with open(path, 'r') as f:
+                with open('/app/apps/proxy/config.py', 'r') as f:
                     content = f.read()
                 content = re.sub(r'(INITIAL_BEHIND_CHUNKS\s*=\s*)\d+', r'\g<1>24', content)
                 content = re.sub(r'(HEALTH_CHECK_INTERVAL\s*=\s*)\d+', r'\g<1>1', content)
                 content = re.sub(r'(CONNECTION_TIMEOUT\s*=\s*)\d+', r'\g<1>3', content)
-                with open(path, 'w') as f:
+                with open('/proxy-config/config.py', 'w') as f:
                     f.write(content)
         containers:
           app:
@@ -108,6 +107,15 @@ spec:
             chown-dbdir:
               - path: /data
                 subPath: data
+      proxy-config-patch:
+        type: emptyDir
+        advancedMounts:
+          dispatcharr:
+            patch-proxy-config:
+              - path: /proxy-config
+            app:
+              - path: /app/apps/proxy/config.py
+                subPath: config.py
       tmpfs:
         type: emptyDir
         advancedMounts:
