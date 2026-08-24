@@ -27,6 +27,44 @@ spec:
                 chmod 0750 /data/db
             securityContext:
               runAsUser: 0
+          gluetun:
+            image:
+              repository: ghcr.io/qdm12/gluetun
+              tag: v3.40.0
+            restartPolicy: Always
+            env:
+              VPN_SERVICE_PROVIDER: airvpn
+              VPN_TYPE: wireguard
+              SERVER_COUNTRIES: "United Kingdom"
+              FIREWALL_INPUT_PORTS: "9191"
+              FIREWALL_OUTBOUND_SUBNETS: "10.42.0.0/16,10.43.0.0/16"
+              HEALTH_TARGET_ADDRESSES: "1.1.1.1:443,8.8.8.8:443"
+              LOG_LEVEL: info
+              TZ: America/New_York
+            envFrom:
+              - secretRef:
+                  name: dispatcharr-vpn-secret
+            probes:
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command: ["/gluetun-entrypoint", "healthcheck"]
+                  initialDelaySeconds: 10
+                  periodSeconds: 10
+                  timeoutSeconds: 5
+                  failureThreshold: 30
+            securityContext:
+              capabilities:
+                add: ["NET_ADMIN"]
+              runAsUser: 0
+            resources:
+              requests:
+                cpu: 5m
+                memory: 128Mi
+              limits:
+                memory: 256Mi
         containers:
           app:
             image:
@@ -47,13 +85,6 @@ spec:
               limits:
                 memory: 3Gi
     defaultPodOptions:
-      # annotations:
-      #   k8s.v1.cni.cncf.io/networks: |-
-      #     [{
-      #       "name": "vpn",
-      #       "namespace": "kube-system",
-      #       "ips": ["192.168.40.20/24"]
-      #     }]
       resourceClaims:
         - name: gpu
           resourceClaimTemplateName: dispatcharr
