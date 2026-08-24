@@ -11,6 +11,9 @@ spec:
   interval: 1h
   values:
     cephClusterSpec:
+      cephConfig:
+        mon:
+          auth_allowed_ciphers: aes256k
       cleanupPolicy:
         wipeDevicesFromOtherClusters: true
       crashCollector:
