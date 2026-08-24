@@ -35,10 +35,11 @@ spec:
             env:
               VPN_SERVICE_PROVIDER: airvpn
               VPN_TYPE: wireguard
-              SERVER_COUNTRIES: "United Kingdom"
+              SERVER_HOSTNAMES: "europe3.vpn.airdns.org"
               FIREWALL_INPUT_PORTS: "9191"
               FIREWALL_OUTBOUND_SUBNETS: "10.42.0.0/16,10.43.0.0/16"
               HEALTH_TARGET_ADDRESSES: "1.1.1.1:443,8.8.8.8:443"
+              DOT: "off"
               LOG_LEVEL: info
               TZ: America/New_York
             envFrom:
