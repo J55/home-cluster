@@ -138,7 +138,7 @@ data:
               url: https://unifi.internal
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
         - Truenas:
-            href: http://galactus.internal:81
+            href: https://galactus.internal:8443
             icon: truenas.png
             widget:
               type: truenas
