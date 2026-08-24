@@ -138,11 +138,11 @@ data:
               url: https://unifi.internal
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
         - Truenas:
-            href: http://galactus.internal
+            href: http://galactus.internal:81
             icon: truenas.png
             widget:
               type: truenas
-              url: https://galactus.internal
+              url: https://galactus.internal:8443
               version: 2
               key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
               enablePools: true
