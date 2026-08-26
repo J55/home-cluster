@@ -16,7 +16,7 @@ spec:
           app:
             image:
               repository: ghcr.io/pharaoh-labs/teamarr
-              tag: 2.13.0
+              tag: 2.13.1
             env:
               TZ: America/New_York
               TEAMARR_LOG_LEVEL: INFO
