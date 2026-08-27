@@ -66,6 +66,24 @@
       minimumGroupSize: 2,
     },
     {
+      description: 'Kubernetes Group - manual review required',
+      groupName: 'kubernetes',
+      matchDatasources: ['docker'],
+      matchPackageNames: [
+        '/siderolabs/kubelet/',
+        '/siderolabs/installer/',
+        '/kube-apiserver/',
+        '/kube-controller-manager/',
+        '/kube-proxy/',
+        '/kube-scheduler/',
+      ],
+      automerge: false,
+      reviewers: ['J55'],
+      group: {
+        commitMessageTopic: '{{{groupName}}} group',
+      },
+    },
+    {
       description: 'Rook-Ceph Group',
       groupName: 'rook-ceph',
       matchDatasources: [
