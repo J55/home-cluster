@@ -59,7 +59,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: mdi-television-guide
           gethomepage.dev/name: EPG Matcharr
-          gethomepage.dev/group: Media
+          gethomepage.dev/group: Settings
           gethomepage.dev/description: Automatic EPG Matcher
         parentRefs:
           - name: envoy-internal

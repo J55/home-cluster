@@ -67,7 +67,7 @@ spec:
           gethomepage.dev/enabled: "true"
           gethomepage.dev/icon: mdi-television-play
           gethomepage.dev/name: Teamarr
-          gethomepage.dev/group: Media
+          gethomepage.dev/group: Settings
           gethomepage.dev/description: Sports Channel Manager
         parentRefs:
           - name: envoy-internal
