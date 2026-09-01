@@ -20,9 +20,9 @@ spec:
             env:
               TZ: America/New_York
               SLSKD_APP_DIR: /config
-              SLSKD_DOWNLOADS_DIR: /media/Downloads/Soulseek/Complete
-              SLSKD_INCOMPLETE_DIR: /media/Downloads/Soulseek/Incomplete
-              SLSKD_SHARED_DIR: /media/Downloads/soulseek/shared
+              SLSKD_DOWNLOADS_DIR: /Media/Downloads/Soulseek/Complete
+              SLSKD_INCOMPLETE_DIR: /Media/Downloads/Soulseek/Incomplete
+              SLSKD_SHARED_DIR: /Media/Downloads/Soulseek/Shared
               SLSKD_SLSK_LISTEN_PORT: 39036
               SLSKD_HTTP_AUTHENTICATION: "true"
               SLSKD_REMOTE_CONFIGURATION: "true"
