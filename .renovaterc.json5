@@ -66,12 +66,24 @@
       minimumGroupSize: 2,
     },
     {
+      description: 'Talos Group - manual review required',
+      groupName: 'talos',
+      matchDatasources: ['docker'],
+      matchPackageNames: [
+        '/siderolabs/installer/',
+      ],
+      automerge: false,
+      reviewers: ['J55'],
+      group: {
+        commitMessageTopic: '{{{groupName}}} group',
+      },
+    },
+    {
       description: 'Kubernetes Group - manual review required',
       groupName: 'kubernetes',
       matchDatasources: ['docker'],
       matchPackageNames: [
         '/siderolabs/kubelet/',
-        '/siderolabs/installer/',
         '/kube-apiserver/',
         '/kube-controller-manager/',
         '/kube-proxy/',
