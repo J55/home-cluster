@@ -20,3 +20,16 @@ extraArgs:
 apiVersion: v1alpha1
 kind: KubeProxyConfig
 enabled: false
+---
+apiVersion: v1alpha1
+kind: KubeEtcdEncryptionConfig
+config:
+  resources:
+    - providers:
+        - secretbox:
+            keys:
+              - name: key2
+                secret: orzHg8A3x4zUKUelKwmabvmMw1AZieLloJEQoRux87M=
+        - identity: {}
+      resources:
+        - secrets
