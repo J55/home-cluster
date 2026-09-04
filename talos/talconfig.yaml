@@ -86,5 +86,6 @@ patches:
 controlPlane:
   patches:
     - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/kube-components.yaml"
     - "@./patches/controller/machine.yaml"
     - "@./patches/controller/network.yaml"
