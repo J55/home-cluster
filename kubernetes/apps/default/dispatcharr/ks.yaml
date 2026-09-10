@@ -88,3 +88,32 @@ spec:
     namespace: flux-system
   targetNamespace: default
   wait: false
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: game-thumbs
+spec:
+  components:
+    - ../../../../../../components/volsync
+  dependsOn:
+    - name: dispatcharr
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+  interval: 1h
+  path: ./kubernetes/apps/default/dispatcharr/tools/game-thumbs/app
+  postBuild:
+    substitute:
+      APP: game-thumbs
+      VOLSYNC_CAPACITY: 2Gi
+    substituteFrom:
+      - name: cluster-secrets
+        kind: Secret
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  targetNamespace: default
+  wait: false
