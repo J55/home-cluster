@@ -127,6 +127,7 @@ spec:
   tcpKeepalive: {}
   timeout:
     http:
+      connectionIdleTimeout: 30s
       requestTimeout: 0s
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
@@ -152,6 +153,7 @@ spec:
   tcpKeepalive: {}
   timeout:
     http:
+      idleTimeout: 120s
       requestReceivedTimeout: 0s
   tls:
     minVersion: "1.2"
