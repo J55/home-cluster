@@ -47,6 +47,7 @@ metadata:
   name: envoy-external
   annotations:
     external-dns.alpha.kubernetes.io/target: external.${SECRET_DOMAIN}
+    external-dns.kubernetes.io/target: external.${SECRET_DOMAIN}
     gatus.home-operations.com/endpoint: |-
       client:
         dns-resolver: tcp://1.1.1.1:53
@@ -56,6 +57,7 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: external.${SECRET_DOMAIN}
+      external-dns.kubernetes.io/hostname: external.${SECRET_DOMAIN}
       lbipam.cilium.io/ips: "192.168.20.90"
   listeners:
     - name: http
@@ -81,6 +83,7 @@ metadata:
   name: envoy-internal
   annotations:
     external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+    external-dns.kubernetes.io/target: internal.${SECRET_DOMAIN}
     gatus.home-operations.com/endpoint: |-
       group: internal
       guarded: true
@@ -92,6 +95,7 @@ spec:
   infrastructure:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: internal.${SECRET_DOMAIN}
+      external-dns.kubernetes.io/hostname: internal.${SECRET_DOMAIN}
       lbipam.cilium.io/ips: "192.168.20.70"
   listeners:
     - name: http
@@ -165,6 +169,7 @@ metadata:
   name: https-redirect
   annotations:
     external-dns.alpha.kubernetes.io/controller: none
+    external-dns.kubernetes.io/controller: none
 spec:
   parentRefs:
     - name: envoy-external
