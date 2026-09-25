@@ -34,6 +34,11 @@ spec:
         osd:
           limits:
             memory: 8Gi # Required for bootstrap
+      security:
+        cephx:
+          daemon:
+            keyRotationPolicy: KeyGeneration
+            keyGeneration: 2
       storage:
         devicePathFilter: /dev/disk/by-id/nvme-Samsung_SSD_990_PRO_.*
         useAllDevices: false
