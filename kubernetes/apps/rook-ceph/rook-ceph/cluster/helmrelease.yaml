@@ -36,6 +36,7 @@ spec:
             memory: 8Gi # Required for bootstrap
       security:
         cephx:
+          allowedCiphers: [aes256k]
           daemon:
             keyRotationPolicy: KeyGeneration
             keyGeneration: 2
