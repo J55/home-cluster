@@ -134,7 +134,7 @@ spec:
   path: ./kubernetes/apps/default/dispatcharr/tools/enhancedchannelmanager/app
   postBuild:
     substitute:
-      APP: ecm
+      APP: enhancedchannelmanager
       VOLSYNC_CAPACITY: 2Gi
     substituteFrom:
       - name: cluster-secrets
