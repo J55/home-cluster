@@ -76,7 +76,6 @@
       },
       minimumGroupSize: 2,
     },
-    },
     {
       description: 'Kubernetes Group - manual review required',
       groupName: 'kubernetes',
