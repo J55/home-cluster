@@ -66,16 +66,15 @@
       minimumGroupSize: 2,
     },
     {
-      description: 'Talos Group',
-      groupName: 'talos',
-      matchDatasources: ['docker'],
-      matchPackageNames: ['/siderolabs/installer/'],
-      automerge: false,
-      versioning: 'semver',
-      minimumReleaseAge: '0 days',
+      // Unites the factory installer image and the tuppr upgrade version
+      description: "Talos Group",
+      groupName: "talos",
+      matchPackageNames: ["siderolabs/talos"],
       group: {
-        commitMessageTopic: '{{{groupName}}} group',
+        commitMessageTopic: "{{{groupName}}} group",
       },
+      minimumGroupSize: 2,
+    },
     },
     {
       description: 'Kubernetes Group - manual review required',
