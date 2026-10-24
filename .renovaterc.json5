@@ -7,6 +7,7 @@
     ':dependencyDashboard',
     ':disableRateLimiting',
     ':semanticCommits',
+    'github>home-operations/renovate-presets//apps/talosFactory.json5#10.0.1',
   ],
   dependencyDashboard: true,
   dependencyDashboardTitle: 'Renovate Dashboard :robot:',
