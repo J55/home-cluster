@@ -21,6 +21,7 @@ spec:
               tag: 2026.10.3@sha256:3a5bf87bb8192cbef21a2e44383477a48a227c2dd19c2383ada2cb229981c127
             env:
               TZ: America/New_York
+              PYTHONPATH: /opt/patches # pylutron-caseta#217: loads sitecustomize.py (see persistence.patches)
             envFrom:
               - secretRef:
                   name: "{{ .Release.Name }}-secret"
@@ -122,6 +123,15 @@ spec:
         existingClaim: "{{ .Release.Name }}-cache"
         globalMounts:
           - path: /config/.venv
+      patches:
+        type: configMap
+        name: home-assistant-patches
+        advancedMounts:
+          home-assistant:
+            app:
+              - path: /opt/patches/sitecustomize.py
+                subPath: sitecustomize.py
+                readOnly: true
       tmpfs:
         type: emptyDir
         advancedMounts:
