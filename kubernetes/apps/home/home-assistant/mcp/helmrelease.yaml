@@ -80,12 +80,6 @@ spec:
         hostnames:
           - "{{ .Release.Name }}.${SECRET_DOMAIN}"
           - hass-mcp.${SECRET_DOMAIN}
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/group: Home
-          gethomepage.dev/name: Home Assistant MCP
-          gethomepage.dev/icon: home-assistant-dark.png
-          gethomepage.dev/pod-selector: app.kubernetes.io/name=home-assistant-mcp
         parentRefs:
           - name: envoy-internal
             namespace: network
