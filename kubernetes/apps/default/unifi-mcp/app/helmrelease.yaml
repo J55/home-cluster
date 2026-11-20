@@ -22,7 +22,6 @@ spec:
             env:
               TZ: America/New_York
               UNIFI_HOST: 192.168.0.1
-              # Read-only: deny every create/update/delete tool at the server
               UNIFI_POLICY_CREATE: "false"
               UNIFI_POLICY_UPDATE: "false"
               UNIFI_POLICY_DELETE: "false"
@@ -33,7 +32,6 @@ spec:
             envFrom:
               - secretRef:
                   name: "{{ .Release.Name }}-secret"
-            # TCP probes: HTTP probes get a 401 without the bearer token and a 421 for the kubelet Host header
             probes:
               liveness:
                 enabled: true
