@@ -33,4 +33,5 @@ resources:
   - ./tautulli/ks.yaml
   - ./thelounge/ks.yaml
   - ./qui/ks.yaml
+  - ./unifi-mcp/ks.yaml
   - ./wizarr/ks.yaml
