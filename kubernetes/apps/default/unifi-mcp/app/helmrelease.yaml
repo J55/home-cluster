@@ -21,7 +21,7 @@ spec:
               tag: 0.50.0@sha256:86ccf7729ec8a89e47fe08cf3a2904d4d0aba1543202ba061222d89638b494b6
             env:
               TZ: America/New_York
-              UNIFI_HOST: 192.168.0.1
+              UNIFI_HOST: unifi.internal
               UNIFI_POLICY_CREATE: "false"
               UNIFI_POLICY_UPDATE: "false"
               UNIFI_POLICY_DELETE: "false"
