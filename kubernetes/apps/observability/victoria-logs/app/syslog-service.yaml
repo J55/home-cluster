@@ -1,0 +1,25 @@
+---
+# yaml-language-server: $schema=https://k8s-schemas.home-operations.com/v1/service_v1.json
+# Syslog ingest for the UDM (Activity Logging -> SIEM Server 192.168.20.73:5140).
+# Separate from the chart's headless service, which can't become a LoadBalancer in place.
+apiVersion: v1
+kind: Service
+metadata:
+  name: victoria-logs-syslog
+  annotations:
+    lbipam.cilium.io/ips: 192.168.20.73
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  selector:
+    app.kubernetes.io/instance: victoria-logs
+    app.kubernetes.io/name: victoria-logs-single
+  ports:
+    - name: syslog-udp
+      port: 5140
+      targetPort: 5140
+      protocol: UDP
+    - name: syslog-tcp
+      port: 5140
+      targetPort: 5140
+      protocol: TCP

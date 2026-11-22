@@ -23,7 +23,15 @@ spec:
         enabled: true
         storageClassName: ceph-block
         size: 20Gi
-      retentionPeriod: 14d
+      retentionPeriod: 30d
+      # Syslog from the UDM (Activity Logging -> SIEM Server), exposed by service.yaml
+      syslog:
+        udp:
+          - name: syslog-udp
+            value: :5140
+        tcp:
+          - name: syslog-tcp
+            value: :5140
       route:
         enabled: true
         hostnames:

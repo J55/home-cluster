@@ -18,3 +18,6 @@ spec:
       enabled: true
     remoteWrite:
       - url: http://victoria-logs.observability.svc.cluster.local:9428
+        maxDiskUsagePerURL: 3GB
+    extraArgs:
+      "kubernetesCollector.decolorizeFields": _msg
