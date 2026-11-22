@@ -26,12 +26,15 @@ spec:
       retentionPeriod: 30d
       # Syslog from the UDM (Activity Logging -> SIEM Server), exposed by service.yaml
       syslog:
+        # The UDM sends RFC3164 local time with no timezone (5h off in UTC), so use arrival time
         udp:
           - name: syslog-udp
             value: :5140
+            useLocalTimestamp: true
         tcp:
           - name: syslog-tcp
             value: :5140
+            useLocalTimestamp: true
       route:
         enabled: true
         hostnames:
