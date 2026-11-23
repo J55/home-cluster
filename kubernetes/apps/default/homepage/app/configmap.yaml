@@ -38,6 +38,10 @@ data:
       Storage:
         style: column
         icon: mdi-database
+      TrueNAS:
+        style: row
+        columns: 4
+        icon: mdi-nas
       System:
         style: row
         columns: 4
@@ -137,15 +141,6 @@ data:
               type: unifi
               url: https://unifi.internal
               key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
-        - Truenas:
-            href: https://galactus.internal:8443
-            icon: truenas.png
-            widget:
-              type: truenas
-              url: https://galactus.internal:8443
-              version: 2
-              key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
-              enablePools: true
         - Cloudflared:
             href: https://dash.cloudflare.com/
             icon: cloudflare-zero-trust.png
@@ -155,6 +150,36 @@ data:
               accountid: {{HOMEPAGE_VAR_CLOUDFLARE_ACCOUNTID}}
               tunnelid: {{HOMEPAGE_VAR_CLOUDFLARE_TUNNELID}}
               key: {{HOMEPAGE_VAR_CLOUDFLARE_API_TOKEN}}
+    - TrueNAS:
+        - Truenas:
+            href: https://galactus.internal:8443
+            icon: truenas.png
+            widget:
+              type: truenas
+              url: https://galactus.internal:8443
+              version: 2
+              key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
+              enablePools: true
+        - Dockhand:
+            href: https://dockhand.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: dockhand.png
+            description: TrueNAS Docker hosts
+            widget:
+              type: dockhand
+              url: https://dockhand.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+              username: {{HOMEPAGE_VAR_DOCKHAND_USERNAME}}
+              password: {{HOMEPAGE_VAR_DOCKHAND_PASSWORD}}
+        - Scrutiny:
+            href: https://scrutiny.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: scrutiny.png
+            description: TrueNAS disk health
+            widget:
+              type: scrutiny
+              url: http://galactus.internal:8080
+        - Kopia (TrueNAS):
+            href: https://truenas-kopia.{{HOMEPAGE_VAR_SECRET_DOMAIN}}
+            icon: kopia.png
+            description: TrueNAS backups
   widgets.yaml: |
     - search:
         provider: [google]
